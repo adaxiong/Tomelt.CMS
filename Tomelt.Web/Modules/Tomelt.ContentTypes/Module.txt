@@ -1,0 +1,10 @@
+﻿Name: ContentTypes
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: ContentTypes modules enables the creation and alteration of content types not based on code.
+Dependencies: Contents
+Category: Content
+

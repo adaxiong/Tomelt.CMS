@@ -1,0 +1,14 @@
+﻿@using Tomelt.DisplayManagement.Shapes
+@using Tomelt.Layouts.Helpers
+@{
+    // Only render the surrounding div if there are any attributes to be rendered.
+    var commonAttributes = (IDictionary<string, object>)TagBuilderExtensions.GetCommonElementAttributes(Model);
+    var tagBuilder = commonAttributes.Any() ? new TomeltTagBuilder("div") : default(TomeltTagBuilder);
+
+    if (tagBuilder != null) {
+        tagBuilder.MergeAttributes(commonAttributes);
+    }
+}
+@if (tagBuilder != null) { @tagBuilder.StartElement }
+@Html.Raw(Model.ProcessedContent)
+@if (tagBuilder != null) { @tagBuilder.EndElement }

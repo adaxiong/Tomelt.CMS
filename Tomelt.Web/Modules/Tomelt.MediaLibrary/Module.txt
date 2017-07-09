@@ -1,0 +1,13 @@
+﻿Name: Media Library
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Provides enhanced Media management tools.
+Features:
+    Tomelt.MediaLibrary:
+        Name: Media Library
+        Description: Provides enhanced Media management tools.
+        Dependencies: Title, Tomelt.MediaProcessing, Tomelt.Tokens, Tomelt.Resources
+        Category: Media

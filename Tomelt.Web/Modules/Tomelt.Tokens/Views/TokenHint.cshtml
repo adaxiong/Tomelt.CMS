@@ -1,0 +1,13 @@
+﻿@{
+    Script.Require("jQueryUI");
+    Script.Include("Tomelt-tokens-admin.js").AtFoot();
+    Style.Include("Tomelt-tokens-admin.css");
+}   
+
+@using(Script.Head()) {
+<script type="text/javascript">
+//<![CDATA[
+    var tokensUrl = '@Url.Action("Tokens", "Admin", new { area = "Tomelt.Tokens" })';
+//]]>
+</script>
+}

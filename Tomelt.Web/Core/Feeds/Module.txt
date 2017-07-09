@@ -1,0 +1,9 @@
+﻿Name: Feeds
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: The Feeds module is providing RSS feeds to content items.
+FeatureDescription: RSS feeds for content items.
+Category: Syndication

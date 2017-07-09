@@ -1,0 +1,9 @@
+﻿Name: XmlRpc
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: The XmlRpc module enables creation of contents from client applications such as LiveWriter.
+FeatureDescription: XML-RPC opt-in implementation.
+Category: Content Publishing

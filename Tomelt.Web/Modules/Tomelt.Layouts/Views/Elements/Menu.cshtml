@@ -1,0 +1,8 @@
+﻿@using Tomelt.Layouts.Helpers
+@{
+    var tagBuilder = TagBuilderExtensions.CreateElementTagBuilder(Model);
+    tagBuilder.AddCssClass("group");
+}
+@tagBuilder.StartElement
+@Display(Model.Menu)
+@tagBuilder.EndElement

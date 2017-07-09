@@ -1,0 +1,45 @@
+@using Tomelt.UI.Resources;
+@{
+    //Script.Require("ShapesBase");
+    //Style.Include("site.css");
+    //RegisterLink(new LinkEntry { Condition = "lte IE 6", Rel = "stylesheet", Type="text/css", Href = Href("../Styles/ie6.css")}.AddAttribute("media", "screen, projection"));
+    Script.Require("jQueryEasyUI");
+    Script.Require("jQueryEasyUILocale");
+    Style.Require("Bootstrap");
+    Style.Require("jQueryEasyUI");
+    Style.Require("jQueryEasyUI_icon");
+    Style.Require("jQueryEasyUI_color");
+    Style.Include("public.css");
+    if (!string.IsNullOrEmpty(WorkContext.CurrentSite.SuperUser)) {
+        WorkContext.Layout.Footer.Add(New.User(), "10"); // Login and dashboard links
+    }
+}
+<div id="header">
+    <div id="branding">
+        <h1 style="text-align: center;">@T("欢迎使用TOMELT内容管理系统")</h1>
+    </div>
+</div>
+
+@if (Model.Navigation != null) {
+<div id="layout-navigation" class="group">
+    @Display(Model.Navigation)
+</div>
+}
+
+@if (Model.Messages != null) {
+<div id="messages">
+    @Display(Model.Messages)
+</div>
+}
+
+<div id="main">
+@if (Model.Content != null) {
+    @Display(Model.Content)
+}
+</div>
+
+@if (Model.Footer != null) {
+<div id="footer" role="contentinfo">
+    @Display(Model.Footer)
+</div>
+}

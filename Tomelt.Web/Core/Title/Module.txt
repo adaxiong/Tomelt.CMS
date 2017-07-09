@@ -1,0 +1,9 @@
+﻿Name: Title
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: The title module enables content items to have titles.
+FeatureDescription: Title content part.
+Category: Core

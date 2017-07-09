@@ -1,0 +1,9 @@
+﻿@using Tomelt.Layouts.Helpers
+@{
+    var tagBuilder = TagBuilderExtensions.CreateElementTagBuilder(Model);
+}
+@tagBuilder.StartElement
+@foreach (var contentItem in Model.ContentItems) {
+    @Display(contentItem)
+}
+@tagBuilder.EndElement

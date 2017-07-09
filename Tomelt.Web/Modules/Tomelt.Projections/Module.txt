@@ -1,0 +1,9 @@
+Name: Projector
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Provides methods to control how lists of content items are filtered and displayed
+Category: Content
+Dependencies: Tomelt.Tokens, Tomelt.Forms, Feeds, Title

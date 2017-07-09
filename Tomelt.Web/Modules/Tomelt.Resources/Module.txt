@@ -1,0 +1,13 @@
+﻿Name: Resources
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.10
+Description: Provides a variety of third-party client-side libraries (stylesheets and scripts) used by other modules.
+Priority: 5
+Features:
+	Tomelt.Resources:
+		Name: Resources
+		Description: Provides a variety of third-party client-side libraries (stylesheets and scripts) used by other modules.
+		Category: Core

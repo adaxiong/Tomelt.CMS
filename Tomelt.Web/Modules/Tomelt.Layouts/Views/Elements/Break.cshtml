@@ -1,0 +1,5 @@
+﻿@using Tomelt.Layouts.Helpers
+@{
+    var tagBuilder = TagBuilderExtensions.CreateElementTagBuilder(Model, "hr");
+}
+@tagBuilder.ToHtmlString()

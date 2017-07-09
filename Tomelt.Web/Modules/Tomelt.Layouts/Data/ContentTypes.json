@@ -1,0 +1,50 @@
+﻿{
+    "createContentUrl":  "/Modules/Tomelt.Layouts/Controller/Create/{contentTypeId}",
+    "editContentUrl":  "/Modules/Tomelt.Layouts/Controller/Edit/{contentTypeId}",
+    "categories": [
+        {
+            "name": "Content",
+            "contentTypes": [
+                { "label": "Content Item", "id": "Tomelt.Layouts.Elements.ContentItem" },
+                { "label": "Html", "id": "Tomelt.Layouts.Elements.Html" },
+                { "label": "Paragraph", "id": "Tomelt.Layouts.Elements.Paragraph" },
+                { "label": "Text", "id": "Tomelt.Layouts.Elements.Text" }
+            ]
+        },
+        {
+            "name": "Media",
+            "contentTypes": [
+                { "label": "Image", "id": "Tomelt.Layouts.Elements.Image" },
+                { "label": "Media Item", "id": "Tomelt.Layouts.Elements.MediaItem" },
+                { "label": "Vector Image", "id": "Tomelt.Layouts.Elements.VectorImage" }
+            ]
+        },
+        {
+            "name": "Parts",
+            "contentTypes": [
+                { "label": "CommonPart", "id": "CommonPart" },
+                { "label": "TitlePart", "id": "TitlePart" }
+            ]
+        },
+        {
+            "name": "Forms",
+            "contentTypes": [
+                { "label": "Button", "id": "Tomelt.DynamicForms.Elements.Button" },
+                { "label": "Check Box", "id": "Tomelt.DynamicForms.Elements.CheckBox" },
+                { "label": "Email Field", "id": "Tomelt.DynamicForms.Elements.EmailField" },
+                { "label": "Enumeration", "id": "Tomelt.DynamicForms.Elements.Enumeration" },
+                { "label": "Form", "id": "Tomelt.DynamicForms.Elements.Form" },
+                { "label": "Hidden Field", "id": "Tomelt.DynamicForms.Elements.HiddenField" },
+                { "label": "Ip Address Field", "id": "Tomelt.DynamicForms.Elements.IpAddressField" },
+                { "label": "Label", "id": "Tomelt.DynamicForms.Elements.Label" },
+                { "label": "Password Field", "id": "Tomelt.DynamicForms.Elements.PasswordField" },
+                { "label": "Radio Button", "id": "Tomelt.DynamicForms.Elements.RadioButton" },
+                { "label": "Text Area", "id": "Tomelt.DynamicForms.Elements.TextArea" },
+                { "label": "Text Field", "id": "Tomelt.DynamicForms.Elements.TextField" },
+                { "label": "User Name Field", "id": "Tomelt.DynamicForms.Elements.UserNameField" },
+                { "label": "Validation Message", "id": "Tomelt.DynamicForms.Elements.ValidationMessage" },
+                { "label": "Validation Summary", "id": "Tomelt.DynamicForms.Elements.ValidationSummary" }
+            ]
+        }
+    ]
+}

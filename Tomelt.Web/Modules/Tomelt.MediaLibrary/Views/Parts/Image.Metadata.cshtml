@@ -1,0 +1,10 @@
+﻿@using Tomelt.ContentManagement
+@using Tomelt.MediaLibrary.Models
+@{
+    ImagePart imagePart = Model.ContentPart;
+}           
+
+<div class="image-dimensions">
+    <em>@T("Dimensions:")</em>
+    <span>@imagePart.Width x @imagePart.Height</span>
+</div>

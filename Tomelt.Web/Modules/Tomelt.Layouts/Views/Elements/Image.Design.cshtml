@@ -1,0 +1,18 @@
+﻿@using Tomelt.ContentManagement
+@using Tomelt.DisplayManagement.Shapes
+@using Tomelt.MediaLibrary.Models
+@{
+    var tagBuilder = new TomeltTagBuilder("img");
+    var imagePart = (ImagePart)Model.ImagePart;
+    var mediaPart = imagePart != null ? imagePart.As<MediaPart>() : default(MediaPart);
+    var url = mediaPart != null ? mediaPart.MediaUrl : default(string);
+
+    if (mediaPart != null) {
+        tagBuilder.Attributes["src"] = url;
+        tagBuilder.Attributes["alt"] = mediaPart.AlternateText;
+    }
+    else {
+        tagBuilder.Attributes["alt"] = T("Image not found").Text;
+    }
+}
+@tagBuilder.ToHtmlString(TagRenderMode.SelfClosing)

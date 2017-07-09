@@ -1,0 +1,39 @@
+﻿Name: Layouts
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Category: Layout
+Description: Provides tools to create layouts.
+Features:
+    Tomelt.Layouts:
+        Name: Layouts
+        Description: Provides tools to create layouts.
+        Dependencies: Common, Tomelt.Alias, Tomelt.Forms, Tomelt.Tokens, Tomelt.MediaLibrary, Tomelt.Conditions, Tomelt.Resources
+        Category: Layout
+    Tomelt.Layouts.Snippets:
+        Name: Layout Snippets
+        Description: Enables support for adding elements based on shapes in the current theme.
+        Category: Layout
+        Dependencies: Tomelt.Layouts, Tomelt.Themes
+    Tomelt.Layouts.Markdown:
+        Name: Markdown Element
+        Description: Adds a Markdown element to the system.
+        Category: Layout
+        Dependencies: Tomelt.Layouts, Markdown
+    Tomelt.Layouts.Projections:
+        Name: Projection Element
+        Description: Adds a Projection element to the system.
+        Category: Layout
+        Dependencies: Tomelt.Layouts, Tomelt.Projections
+    Tomelt.Layouts.Tokens:
+        Name: Element Tokens
+        Description: Provides an element token provider that enables elements to be rendered using a token and enables tokens to be used inside of various elements such as Html, Text and Paragraph.
+        Category: Layout
+        Dependencies: Tomelt.Layouts, Tomelt.Tokens
+    Tomelt.Layouts.UI:
+        Name: UI Elements
+        Description: Adds UI elements to the system, such as Notifications and Menu.
+        Category: Layout
+        Dependencies: Tomelt.Layouts

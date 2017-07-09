@@ -1,0 +1,9 @@
+﻿Name: Dashboard
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: The dashboard module is providing the dashboard screen of the admininstration UI of the application.
+FeatureDescription: Standard admin dashboard.
+Category: Core

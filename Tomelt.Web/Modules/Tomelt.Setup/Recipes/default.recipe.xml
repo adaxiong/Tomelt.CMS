@@ -1,0 +1,61 @@
+﻿<?xml version="1.0"?>
+<Tomelt>
+    <Recipe>
+        <Name>Default</Name>
+        <Description>默认的安装模式，适用于网站，博客等，安装自定义内容类型、评论、标签、小部件和基本的导航模块.</Description>
+        <Author>The Tomelt Team</Author>
+        <WebSite>http://www.tomelt.com</WebSite>
+        <Category>Default</Category>
+        <Tags></Tags>
+        <Version>1.0</Version>
+        <IsSetupRecipe>true</IsSetupRecipe>
+    </Recipe>
+
+    <Feature enable="Tomelt.Blogs,Tomelt.Comments,Tomelt.Tags,Tomelt.Alias,Tomelt.Autoroute,
+                   TinyMce,Tomelt.MediaLibrary,Tomelt.ContentPicker,Tomelt.PublishLater,
+                   Tomelt.Resources,Tomelt.Widgets,Tomelt.ContentTypes,
+                   Tomelt.Scripting,Tomelt.Scripting.Lightweight,PackagingServices,Tomelt.Packaging,
+                   Tomelt.Projections,Tomelt.Fields,Tomelt.OutputCache,Tomelt.Taxonomies,Tomelt.Workflows,
+                   Tomelt.Layouts,Tomelt.Layouts.Tokens,
+                   TheThemeMachine" />
+
+    <ContentDefinition>
+        <Types>
+            <Page ContentTypeSettings.Draftable="True" TypeIndexing.Indexes="Search">
+                <TagsPart />
+                <LocalizationPart />
+                <TitlePart/>
+                <AutoroutePart />
+                <MenuPart />
+            </Page>
+            <BlogPost ContentTypeSettings.Draftable="True" TypeIndexing.Indexes="Search">
+                <CommentsPart />
+                <TagsPart />
+                <LocalizationPart />
+                <TitlePart/>
+                <AutoroutePart />
+            </BlogPost>
+        </Types>
+        <Parts>
+            <BodyPart BodyPartSettings.FlavorDefault="html" />
+        </Parts>
+    </ContentDefinition>
+
+    <Settings />
+
+    <Migration features="*" />
+
+    <Command>
+        layer create Default /LayerRule:"true" /Description:"The widgets in this layer are displayed on all pages"
+        layer create Authenticated /LayerRule:"authenticated" /Description:"The widgets in this layer are displayed when the user is authenticated"
+        layer create Anonymous /LayerRule:"not authenticated" /Description:"The widgets in this layer are displayed when the user is anonymous"
+        layer create Disabled /LayerRule:"false" /Description:"The widgets in this layer are never displayed"
+        layer create TheHomepage /LayerRule:"url '~/'" /Description:"The widgets in this layer are displayed on the home page"
+        site setting set baseurl
+        menu create /MenuName:"Main Menu"
+        page create /Slug:"welcome-to-tomelt" /Title:"Welcome to Tomelt!" /Path:"welcome-to-tomelt" /Homepage:true /Publish:true /UseWelcomeText:true
+        menuitem create /MenuPosition:"0" /MenuText:"Home" /Url:"~/" /MenuName:"Main Menu"
+        widget create MenuWidget /Title:"Main Menu" /RenderTitle:false /Zone:"Navigation" /Position:"1" /Layer:"Default" /Identity:"MenuWidget1" /MenuName:"Main Menu"
+        theme activate "The Theme Machine"
+    </Command>
+</Tomelt>

@@ -1,0 +1,175 @@
+﻿@model Tomelt.Setup.ViewModels.SetupViewModel
+@using Tomelt.Recipes.Models;
+@using Tomelt.Setup.ViewModels
+@{
+//Script.Require("jQuery");
+//Script.Require("ShapesBase");
+//Script.Include("setup.js");
+}
+@{
+    var groupedRecipes = Model.Recipes.Where(x => !String.IsNullOrWhiteSpace(x.Category)).GroupBy(x => x.Category);
+    var unspecifiedCategoryRecipes = Model.Recipes.Where(x => String.IsNullOrWhiteSpace(x.Category)).ToList();
+    var groupCount = groupedRecipes.Count() + unspecifiedCategoryRecipes.Count();
+}
+@helper RenderRecipeOptions(IEnumerable<Recipe> recipes)
+{
+foreach (var recipe in recipes)
+{
+    var optionAttributes = new RouteValueDictionary { { "data-recipe-description", recipe.Description } };
+    if (Model.Recipe == null && recipe.Name == "Default")
+    {
+        optionAttributes["selected"] = "selected";
+    }
+    @Html.SelectOption(Model.Recipe, recipe.Name, recipe.Name, optionAttributes)
+}
+}
+
+<div class="container-fluid text-center">
+    <div class="easyui-panel" title="@T("安装向导").ToString()" style="width:100%;max-width:800px;padding:30px 30px;">
+
+        @using (Html.BeginFormAntiForgeryPost())
+        {
+            @Html.ValidationSummary()
+            <h3 style="text-align: center">@T("站点基本配置")</h3>
+            <hr/>
+        
+            <div style="margin-bottom:20px">
+
+                @Html.EasyUIFor(svm => svm.SiteName, "easyui-textbox", new
+                {
+                    width = 500,
+                    prompt = T("请输入站点名称"),
+                    label = T("站点名称"),
+                    required = true
+                })
+
+            </div>
+            <div style="margin-bottom:20px">
+                @Html.EasyUIFor(svm => svm.AdminUsername, "easyui-textbox", new
+                {
+                    width = 500,
+                    prompt = T("请输入管理员账号"),
+                    label = T("管理员账号"),
+                    required = true
+                })
+            </div>
+            <div style="margin-bottom:20px">
+
+                @Html.EasyUIFor(svm => svm.AdminPassword, "easyui-passwordbox", new
+                {
+                    width = 500,
+                    prompt = T("请输入登陆密码"),
+                    label = T("登陆密码"),
+                    required = true
+                })
+            </div>
+            <div style="margin-bottom:20px">
+                @Html.EasyUIFor(svm => svm.ConfirmPassword, "easyui-passwordbox", new
+                {
+                    width = 500,
+                    prompt = T("请再次输入登陆密码"),
+                    label = T("确认密码"),
+                    required = true
+                })
+            </div>
+     
+            if (!Model.DatabaseIsPreconfigured)
+            {
+           
+                <h3 style="text-align: center">@T("选择数据库类型")</h3>
+                <hr/>
+                @Html.ValidationMessage("DatabaseOptions", "Unable to setup data storage.")
+                <div>
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.Builtin.ToString(), new { id = "builtin" })
+                    <label for="builtin" class="forcheckbox">@T("精简版数据库 (SQL Server Compact)")</label>
+                </div>
+                <div>
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.SqlServer.ToString(), new { id = "sqlserver" })
+                    <label for="sqlserver" class="forcheckbox">@T("SQL Server, SQL Express 数据库")</label>
+                </div>
+                <div>
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.MySql.ToString(), new { id = "mysql" })
+                    <label for="mysql" class="forcheckbox">@T("MySql数据库")</label>
+                </div>
+                <div>
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.PostgreSql.ToString(), new { id = "postgresql" })
+                    <label for="postgresql" class="forcheckbox">@T("PostgreSQL 数据库")</label>
+                </div>
+                <div data-controllerid="builtin" data-defaultstate="hidden">
+
+                    @Html.EasyUIFor(svm => svm.DatabaseConnectionString, "easyui-textbox", new
+                    {
+                        width = 600,
+                        prompt = T("请输入数据库连接字符串"),
+                        label = T("数据库连接字符串"),
+                        labelWidth = 120
+
+                    })
+
+                    <span data-controllerid="sqlserver" class="hint databaseTypeHint">
+                        @T("Data Source=sqlServerName;Initial Catalog=dbName;User ID=userName;Password=password")
+                    </span>
+                    <span data-controllerid="mysql" class="hint databaseTypeHint">
+                        @T("Data Source=serverName;Database=dbName;User Id=userName;Password=password")
+                    </span>
+                    <span data-controllerid="postgresql" class="hint databaseTypeHint">
+                        @T("Server=serverName;Port=5432;Database=dbName;User Id=userName;Password=password")
+                    </span>
+                    <br /><br />
+
+                    @Html.EasyUIFor(svm => svm.DatabaseTablePrefix, "easyui-textbox", new
+                    {
+                        width = 500,
+                        prompt = T("请输入数据库表前缀"),
+                        label = T("数据库表前缀")
+
+                    })
+                </div>
+            
+            }
+        
+            <h3 style="text-align: center">@T("选择安装模式")</h3>
+            <hr/>
+            <p>@T("选择不同的模式，将安装不同的功能模块")</p>
+            <div>
+                <select id="@Html.FieldIdFor(m => m.Recipe)" name="@Html.FieldNameFor(m => m.Recipe)" class="easyui-combobox" data-options="panelHeight:'auto',width:300,editable:false">
+                    @foreach (var recipeGroup in groupedRecipes.OrderBy(x => x.Key))
+                    {
+                        if (groupCount > 1)
+                        {
+                            <optgroup label="@recipeGroup.Key"></optgroup>
+                        }
+                        @RenderRecipeOptions(recipeGroup.OrderBy(x => x.Name))
+                    }
+                    @if (unspecifiedCategoryRecipes.Any())
+                    {
+                        if (groupCount > 1)
+                        {
+                            <optgroup label="@T("Unspecified")"></optgroup>
+                        }
+                        @RenderRecipeOptions(unspecifiedCategoryRecipes.OrderBy(x => x.Name))
+                    }
+                </select>
+            </div>
+            <div id="recipedescription">@Model.RecipeDescription</div>
+        
+        @*<div id="throbber">
+            <div class="curtain"></div>
+            <div class="curtain-content">
+                <div>
+                    <h1 id="setUpHeader">@T("正在安装配置中 ...")</h1>
+                    <p>
+                        <img src="@Href("../../content/synchronizing.gif")" alt="" />
+                    </p>
+                </div>
+            </div>
+        </div>*@
+            <div style="text-align:center;padding:5px 0">
+                <button class="easyui-linkbutton c6" type="submit" data-options="iconCls:'icon-save',size:'large',width:150">@T("确认安装")</button>
+            </div>
+
+        }
+    </div>
+</div>
+
+

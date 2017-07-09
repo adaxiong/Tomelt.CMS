@@ -1,0 +1,9 @@
+﻿Name: Recipes
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Provides Tomelt Recipes.
+FeatureDescription: Implementation of Tomelt recipes.
+Category: Core

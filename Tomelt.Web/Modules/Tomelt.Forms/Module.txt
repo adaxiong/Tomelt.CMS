@@ -1,0 +1,12 @@
+Name: Forms
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: https://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Provides a system to publish and alter html forms.
+Features:
+    Tomelt.Forms:
+        Name: Forms
+        Description: Provides a system to publish and alter html forms.
+        Category: Developer

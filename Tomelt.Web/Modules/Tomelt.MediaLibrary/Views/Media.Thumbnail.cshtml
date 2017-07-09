@@ -1,0 +1,11 @@
+﻿@using Tomelt.ContentManagement
+@using Tomelt.MediaLibrary.Models
+@using Tomelt.Utility.Extensions
+@model dynamic
+           
+@{
+    ContentItem contentItem = Model.ContentItem;
+    var media = contentItem.As<MediaPart>();
+}
+
+<div class="media-thumbnail media-thumbnail-@contentItem.ContentType.HtmlClassify() mime-type-@media.MimeType.HtmlClassify()"></div>

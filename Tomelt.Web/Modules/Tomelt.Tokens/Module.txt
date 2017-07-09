@@ -1,0 +1,22 @@
+Name: Tokens
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: https://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Provides a system for performing string replacements with common site values.
+Features:
+    Tomelt.Tokens:
+        Name: Tokens
+        Description: Provides a system for performing string replacements with common site values.
+        Category: Content
+    Tomelt.Tokens.Feeds:
+        Name: Feeds Tokens 
+        Description: Provides a content part to customize RSS fields based on tokens.
+        Category: Content
+        Dependencies: Tomelt.Tokens, Feeds
+    Tomelt.Tokens.HtmlFilter:
+        Name: Tokens Html Filter
+        Description: Evaluates tokens in a body.
+        Category: Content
+        Dependencies: Tomelt.Tokens

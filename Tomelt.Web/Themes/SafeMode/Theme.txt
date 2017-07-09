@@ -1,0 +1,6 @@
+﻿Name: SafeMode
+Author: AdaXiong
+Description: 安装主题.
+Version: 1.10.2
+Tags: hidden
+Website: http://www.tomelt.com

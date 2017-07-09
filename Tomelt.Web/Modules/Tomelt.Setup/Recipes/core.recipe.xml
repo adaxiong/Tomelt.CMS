@@ -1,0 +1,37 @@
+﻿<?xml version="1.0"?>
+<Tomelt>
+    <Recipe>
+        <Name>Core</Name>
+        <Description>只安装核心框架和部分资源模块，建议开发者选择此模式.</Description>
+        <Author>The Tomelt Team</Author>
+        <WebSite>http://www.tomelt.com</WebSite>
+        <Category>Default</Category>
+        <Tags>developer</Tags>
+        <Version>1.0</Version>
+        <IsSetupRecipe>true</IsSetupRecipe>
+    </Recipe>
+
+    <Feature disable="Feeds, Containers"
+             enable="Tomelt.Resources,Tomelt.Alias,Tomelt.Autoroute" />
+
+    <ContentDefinition>
+        <Types>
+            <Page ContentTypeSettings.Draftable="True">
+                <BodyPart />
+            </Page>
+        </Types>
+        <Parts>
+            <BodyPart BodyPartSettings.FlavorDefault="html" />
+        </Parts>
+    </ContentDefinition>
+
+    <Settings />
+
+    <Migration features="*" />
+
+    <Command>
+        menu create /MenuName:"Main Menu"
+        page create /Slug:"welcome-to-tomelt" /Title:"Welcome to Tomelt!" /Path:"welcome-to-tomelt" /Homepage:true /Publish:true /Text:"Welcome To Tomelt!"
+        menuitem create /MenuPosition:"0" /MenuText:"Home" /Url:"~/" /MenuName:"Main Menu"
+    </Command>
+</Tomelt>

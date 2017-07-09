@@ -1,0 +1,8 @@
+﻿@using Tomelt.Layouts.Helpers
+@{
+    var tagBuilder = TagBuilderExtensions.CreateElementTagBuilder(Model);
+    tagBuilder.AddCssClass("table");
+}
+@tagBuilder.StartElement
+@DisplayChildren(Model)
+@tagBuilder.EndElement
