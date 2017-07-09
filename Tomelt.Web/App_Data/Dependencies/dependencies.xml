@@ -589,11 +589,6 @@
         <VirtualPath>~/Modules/Tomelt.ContentTypes/bin/Tomelt.ContentTypes.dll</VirtualPath>
       </Reference>
       <Reference>
-        <Name>Tomelt.Forms</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Tomelt.Forms/bin/Tomelt.Forms.dll</VirtualPath>
-      </Reference>
-      <Reference>
         <Name>Tomelt.Localization</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Localization/bin/Tomelt.Localization.dll</VirtualPath>
@@ -819,16 +814,6 @@
     <VirtualPath>~/Modules/Tomelt.Widgets/bin/Tomelt.Widgets.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Markdown</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Markdown.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>MarkdownSharp</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/MarkdownSharp.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Alias</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
