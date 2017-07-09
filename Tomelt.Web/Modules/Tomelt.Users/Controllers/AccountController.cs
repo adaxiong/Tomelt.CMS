@@ -50,7 +50,7 @@ namespace Tomelt.Users.Controllers {
 
             if (currentUser == null) {
                 Logger.Information("Access denied to anonymous request on {0}", returnUrl);
-                var shape = _tomeltServices.New.LogOn().Title(T("Access Denied").Text);
+                var shape = _tomeltServices.New.LogOn().Title(T("系统登录").Text);
                 return new ShapeResult(this, shape); 
             }
 
@@ -83,13 +83,31 @@ namespace Tomelt.Users.Controllers {
             var user = ValidateLogOn(userNameOrEmail, password);
             if (!ModelState.IsValid) {
                 var shape = _tomeltServices.New.LogOn().Title(T("系统登陆").Text);
-                return new ShapeResult(this, shape); 
+                return new ShapeResult(this, shape);
             }
 
             _authenticationService.SignIn(user, rememberMe);
             _userEventHandler.LoggedIn(user);
-
             return this.RedirectLocal(returnUrl);
+        }
+        [HttpPost]
+        [AlwaysAccessible]
+        [ValidateInput(false)]
+        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings",
+            Justification = "Needs to take same parameter type as Controller.Redirect()")]
+        public ActionResult LogOnAjax(string userNameOrEmail, string password, string returnUrl, bool rememberMe = false)
+        {
+            _userEventHandler.LoggingIn(userNameOrEmail, password);
+
+            var user = ValidateLogOn(userNameOrEmail, password);
+            if (!ModelState.IsValid)
+            {
+                return Json(new { State = 0, Msg = "登陆失败" });
+            }
+
+            _authenticationService.SignIn(user, rememberMe);
+            _userEventHandler.LoggedIn(user);
+            return Json(new { State = 1, Msg = returnUrl });
         }
 
         public ActionResult LogOff(string returnUrl) {

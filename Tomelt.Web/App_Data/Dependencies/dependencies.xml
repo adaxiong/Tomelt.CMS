@@ -34,7 +34,13 @@
     <ModuleName>Tomelt.Tokens</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References />
+    <References>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.MediaLibrary</ModuleName>
@@ -45,6 +51,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -67,6 +78,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -128,13 +144,25 @@
     <ModuleName>Tomelt.Alias</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Alias/bin/Tomelt.Alias.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References />
+    <References>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Modules</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Modules/bin/Tomelt.Modules.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References />
+    <References>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Packaging</ModuleName>
@@ -145,6 +173,11 @@
         <Name>Tomelt.Modules</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Modules/bin/Tomelt.Modules.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -162,6 +195,11 @@
         <Name>Tomelt.Packaging</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Packaging/bin/Tomelt.Packaging.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -184,6 +222,11 @@
         <Name>Tomelt.Themes</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Themes/bin/Tomelt.Themes.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -222,13 +265,24 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Scripting</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Scripting/bin/Tomelt.Scripting.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References />
+    <References>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Conditions</ModuleName>
@@ -239,6 +293,11 @@
         <Name>Tomelt.Scripting</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Scripting/bin/Tomelt.Scripting.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -286,6 +345,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -339,13 +403,24 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Forms</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Forms/bin/Tomelt.Forms.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References />
+    <References>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Projections</ModuleName>
@@ -361,6 +436,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -440,6 +520,11 @@
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
       </Reference>
       <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+      <Reference>
         <Name>YamlDotNet.Dynamic</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Layouts/bin/YamlDotNet.Dynamic.dll</VirtualPath>
@@ -465,6 +550,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -528,6 +618,11 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
@@ -555,13 +650,24 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Themes/bin/Tomelt.Themes.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Resources</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Resources/bin/Tomelt.Resources.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References />
+    <References>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
+    </References>
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Workflows</ModuleName>
@@ -577,6 +683,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -599,6 +710,11 @@
         <Name>Tomelt.Workflows</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Workflows/bin/Tomelt.Workflows.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -632,6 +748,11 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Themes/bin/Tomelt.Themes.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
@@ -659,6 +780,11 @@
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
       </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
+      </Reference>
     </References>
   </Dependency>
   <Dependency>
@@ -680,6 +806,11 @@
         <Name>Tomelt.Workflows</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Workflows/bin/Tomelt.Workflows.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
     </References>
   </Dependency>
@@ -762,6 +893,11 @@
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
+      </Reference>
+      <Reference>
+        <Name>YamlDotNet</Name>
+        <LoaderName>PrecompiledExtensionLoader</LoaderName>
+        <VirtualPath>~/Modules/Markdown/bin/YamlDotNet.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>YamlDotNet.Dynamic</Name>

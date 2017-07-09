@@ -1,0 +1,110 @@
+﻿@using Tomelt.ContentManagement
+@{
+    var userCanRegister = WorkContext.CurrentSite.As<Tomelt.Users.Models.RegistrationSettingsPart>().UsersCanRegister;
+    var enableLostPassword = WorkContext.CurrentSite.As<Tomelt.Users.Models.RegistrationSettingsPart>().EnableLostPassword;
+}
+
+<p>
+
+    @if (userCanRegister)
+    { @Html.ActionLink(T("Register").Text, "Register", new { ReturnUrl = Request.QueryString["ReturnUrl"] }) @T(" if you don't have an account.") }
+    @if (enableLostPassword)
+    { <text> </text> @Html.ActionLink(T("忘记密码?").Text, "RequestLostPassword") }
+</p>
+@*@Html.ValidationSummary(T("登陆失败，请重试.").ToString())*@
+@using (Html.BeginFormAntiForgeryPost(Url.Action("LogOnAjax", new { ReturnUrl = Request.QueryString["ReturnUrl"] })))
+{
+
+
+
+
+    <div style="width: 100%; max-width: 450px; padding: 30px 60px;" class="center">
+        
+            <div style="margin-bottom: 30px;" class="text-center">
+               
+                <h2>@Html.TitleForPage((string)Model.Title)</h2>
+                <hr />
+            </div>
+            <div style="margin-bottom: 10px">
+               
+
+                @Html.EasyUI("userNameOrEmail", "", "easyui-textbox", new
+           {
+               prompt = "请输入用户名",
+               iconCls = "icon-man",
+               iconWidth = 38,
+               validateOnCreate = false,
+               missingMessage = "用户名未填写",
+               label = "用户名",
+               required = true,
+               width =300
+           })
+            </div>
+            <div style="margin-bottom: 10px">
+                @Html.EasyUI("password", "", "easyui-passwordbox", new
+           {
+               prompt = "请输入登陆密码",
+               iconWidth = 38,
+               validateOnCreate = false,
+               missingMessage = "密码未填写",
+               label = "密码",
+               required=true,
+                    width =300
+           })
+                
+            </div>
+            <div style="margin-bottom: 10px; display: none;">
+                @Html.CheckBox("rememberMe", new { id = "remember-me" }) <label class="forcheckbox" for="remember-me">@T("记住我")</label>
+            </div>
+            <div style="text-align: center;margin-top: 30px;">
+                <button class="easyui-linkbutton c1" type="button" style="width: 85%;" onclick="subForm();">@T("登陆")</button>
+            </div>
+     
+    </div>
+
+
+
+
+
+}
+
+
+@using (Script.Foot())
+{
+    <style>
+        .center {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width:50%;
+            height: 50%;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+        }
+    </style>
+    <script>
+        $("#footer").hide();
+        function subForm() {
+            $('form').form('submit', {
+                url: this.action,
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    $.messager.progress();	// 显示进度条
+                    if (!isValid) {
+                        $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                    }
+                    return isValid;	// 返回false终止表单提交
+                },
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.State == 1) {
+                        window.location.href = result.Msg;
+                    } else {
+                        $.messager.alert('错误', result.Msg, 'error');
+                    }
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                }
+            });
+        }
+    </script>
+    
+}
