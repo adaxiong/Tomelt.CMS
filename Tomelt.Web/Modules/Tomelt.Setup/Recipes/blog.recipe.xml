@@ -2,7 +2,7 @@
 <Tomelt>
     <Recipe>
         <Name>Blog</Name>
-        <Description>为建立博客站点安装使用.</Description>
+        <Description>适用于博客功能站点</Description>
         <Author>The Tomelt Team</Author>
         <WebSite>http://www.tomelt.com</WebSite>
         <Category>Default</Category>

@@ -2,7 +2,7 @@
 <Tomelt>
     <Recipe>
         <Name>Default</Name>
-        <Description>默认的安装模式，适用于网站，博客等，安装自定义内容类型、评论、标签、小部件和基本的导航模块.</Description>
+        <Description>适用于网站，博客等功能站点</Description>
         <Author>The Tomelt Team</Author>
         <WebSite>http://www.tomelt.com</WebSite>
         <Category>Default</Category>

@@ -2,7 +2,7 @@
 <Tomelt>
     <Recipe>
         <Name>Core</Name>
-        <Description>只安装核心框架和部分资源模块，建议开发者选择此模式.</Description>
+        <Description>适用于开发者模式</Description>
         <Author>The Tomelt Team</Author>
         <WebSite>http://www.tomelt.com</WebSite>
         <Category>Default</Category>

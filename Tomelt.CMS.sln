@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Web", "Tomelt.Web\Tomelt.Web.csproj", "{D013D4CC-AFB3-4DF1-BCFB-92E5A588F130}"
 EndProject
@@ -52,6 +52,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Resources", "Tomelt.Web\Modules\Tomelt.Resources\Tomelt.Resources.csproj", "{7C3A0453-40C0-46E2-944B-8ABDEDE2D790}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Setup", "Tomelt.Web\Modules\Tomelt.Setup\Tomelt.Setup.csproj", "{5E350B9D-5919-440E-9C66-045C4E1FC85C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Workflows", "Tomelt.Web\Modules\Tomelt.Workflows\Tomelt.Workflows.csproj", "{00571AD3-A275-40C7-9FAA-1A26E965E60E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +153,10 @@ Global
 		{5E350B9D-5919-440E-9C66-045C4E1FC85C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E350B9D-5919-440E-9C66-045C4E1FC85C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E350B9D-5919-440E-9C66-045C4E1FC85C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00571AD3-A275-40C7-9FAA-1A26E965E60E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00571AD3-A275-40C7-9FAA-1A26E965E60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00571AD3-A275-40C7-9FAA-1A26E965E60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00571AD3-A275-40C7-9FAA-1A26E965E60E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,5 +180,6 @@ Global
 		{D9E30B38-0F62-4061-B253-F3FAF13E22E0} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 		{7C3A0453-40C0-46E2-944B-8ABDEDE2D790} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 		{5E350B9D-5919-440E-9C66-045C4E1FC85C} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
+		{00571AD3-A275-40C7-9FAA-1A26E965E60E} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 	EndGlobalSection
 EndGlobal

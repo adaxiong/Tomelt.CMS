@@ -1,11 +1,7 @@
 ﻿@model Tomelt.Setup.ViewModels.SetupViewModel
 @using Tomelt.Recipes.Models;
 @using Tomelt.Setup.ViewModels
-@{
-//Script.Require("jQuery");
-//Script.Require("ShapesBase");
-//Script.Include("setup.js");
-}
+
 @{
     var groupedRecipes = Model.Recipes.Where(x => !String.IsNullOrWhiteSpace(x.Category)).GroupBy(x => x.Category);
     var unspecifiedCategoryRecipes = Model.Recipes.Where(x => String.IsNullOrWhiteSpace(x.Category)).ToList();
@@ -15,12 +11,12 @@
 {
 foreach (var recipe in recipes)
 {
-    var optionAttributes = new RouteValueDictionary { { "data-recipe-description", recipe.Description } };
-    if (Model.Recipe == null && recipe.Name == "Default")
+    var optionAttributes = new RouteValueDictionary { { "desc", recipe.Description } };
+    if (Model.Recipe == null && recipe.Name == "Core")
     {
         optionAttributes["selected"] = "selected";
     }
-    @Html.SelectOption(Model.Recipe, recipe.Name, recipe.Name, optionAttributes)
+    @Html.SelectOption(Model.Recipe, recipe.Name, recipe.Description, optionAttributes)
 }
 }
 
@@ -80,22 +76,22 @@ foreach (var recipe in recipes)
                 <hr/>
                 @Html.ValidationMessage("DatabaseOptions", "Unable to setup data storage.")
                 <div>
-                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.Builtin.ToString(), new { id = "builtin" })
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.Builtin.ToString(), new { id = "builtin",data_value=""})
                     <label for="builtin" class="forcheckbox">@T("精简版数据库 (SQL Server Compact)")</label>
                 </div>
                 <div>
-                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.SqlServer.ToString(), new { id = "sqlserver" })
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.SqlServer.ToString(), new { id = "sqlserver", data_value = "Data Source=sqlServerName;Initial Catalog=dbName;User ID=userName;Password=password" })
                     <label for="sqlserver" class="forcheckbox">@T("SQL Server, SQL Express 数据库")</label>
                 </div>
                 <div>
-                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.MySql.ToString(), new { id = "mysql" })
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.MySql.ToString(), new { id = "mysql", data_value = "Data Source=serverName;Database=dbName;User Id=userName;Password=password" })
                     <label for="mysql" class="forcheckbox">@T("MySql数据库")</label>
                 </div>
                 <div>
-                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.PostgreSql.ToString(), new { id = "postgresql" })
+                    @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.PostgreSql.ToString(), new { id = "postgresql", data_value = "Server=serverName;Port=5432;Database=dbName;User Id=userName;Password=password" })
                     <label for="postgresql" class="forcheckbox">@T("PostgreSQL 数据库")</label>
                 </div>
-                <div @*style="display: none;"*@>
+                <div id="dataset" style="display: none;">
 
                     @Html.EasyUIFor(svm => svm.DatabaseConnectionString, "easyui-textbox", new
                     {
@@ -104,17 +100,7 @@ foreach (var recipe in recipes)
                         label = T("连接字符串")
 
                     })
-
-                    <span data-controllerid="sqlserver" class="hint databaseTypeHint">
-                        @T("Data Source=sqlServerName;Initial Catalog=dbName;User ID=userName;Password=password")
-                    </span>
-                    <span data-controllerid="mysql" class="hint databaseTypeHint">
-                        @T("Data Source=serverName;Database=dbName;User Id=userName;Password=password")
-                    </span>
-                    <span data-controllerid="postgresql" class="hint databaseTypeHint">
-                        @T("Server=serverName;Port=5432;Database=dbName;User Id=userName;Password=password")
-                    </span>
-                    
+                    <p id="dec"></p>
                     <div style="margin-bottom:20px">
                         @Html.EasyUIFor(svm => svm.DatabaseTablePrefix, "easyui-textbox", new
                         {
@@ -133,7 +119,7 @@ foreach (var recipe in recipes)
             <hr/>
             @*<p>@T("选择不同的模式，将安装不同的功能模块")</p>*@
             <div>
-                <select id="@Html.FieldIdFor(m => m.Recipe)" name="@Html.FieldNameFor(m => m.Recipe)" class="easyui-combobox" data-options="panelHeight:'auto',width:200,editable:false,label:'安装模式'">
+                <select id="@Html.FieldIdFor(m => m.Recipe)" name="@Html.FieldNameFor(m => m.Recipe)" class="easyui-combobox" data-options="panelHeight:'auto',width:300,editable:false,label:'安装模式'">
                     @foreach (var recipeGroup in groupedRecipes.OrderBy(x => x.Key))
                     {
                         if (groupCount > 1)
@@ -151,7 +137,7 @@ foreach (var recipe in recipes)
                         @RenderRecipeOptions(unspecifiedCategoryRecipes.OrderBy(x => x.Name))
                     }
                 </select>
-                <span id="recipedescription">@Model.RecipeDescription</span>
+               
             </div>
             
         
@@ -167,11 +153,57 @@ foreach (var recipe in recipes)
             </div>
         </div>*@
             <div style="text-align:center; padding: 5px 0;margin-top:20px">
-                <button class="easyui-linkbutton c6" type="submit" data-options="iconCls:'icon-save',size:'large',width:150">@T("确认安装")</button>
+                <button class="easyui-linkbutton c6" type="button" data-options="iconCls:'icon-save',size:'large',width:150" onclick="subForm();">@T("确认安装")</button>
             </div>
 
         }
     </div>
 
+@using (Script.Foot())
+{
+    <style>
+        #dec {
+            margin-left: 80px;
+            color: #999;
+            margin-top: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            //数据库设置
+            $("input[name=DatabaseProvider]").click(function() {
+                var str = $(this).attr("data-value");
+                if (str) {
+                    $("#dec").text(str);
+                    $("#dataset").show();
+                } else {
+                    $("#dataset").hide();
+                }
+            });
+        });
 
+        function subForm() {
+            $('form').form('submit', {
+                url: this.action,
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    $.messager.progress();	// 显示进度条
+                    if (!isValid) {
+                        $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                    }
+                    return isValid;	// 返回false终止表单提交
+                },
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.State == 1) {
+                        $.messager.alert('消息', result.Msg, 'info');
+                    } else {
+                        $.messager.alert('错误', result.Msg, 'error');
+                    }
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                }
+            });
+        }
+    </script>
+}
 

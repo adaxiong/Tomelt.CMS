@@ -88,7 +88,7 @@
     <ExtensionId>Tomelt.Setup</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Setup/bin/Tomelt.Setup.dll</VirtualPath>
-    <Hash>b7c1f90361180e3d</Hash>
+    <Hash>b7c1f92302cf2e7e</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Themes</ExtensionId>
