@@ -37,7 +37,7 @@ foreach (var recipe in recipes)
 
                 @Html.EasyUIFor(svm => svm.SiteName, "easyui-textbox", new
                 {
-                    width = 500,
+                    width = 300,
                     prompt = T("请输入站点名称"),
                     label = T("站点名称"),
                     required = true
@@ -47,7 +47,7 @@ foreach (var recipe in recipes)
             <div style="margin-bottom:20px">
                 @Html.EasyUIFor(svm => svm.AdminUsername, "easyui-textbox", new
                 {
-                    width = 500,
+                    width = 300,
                     prompt = T("请输入管理员账号"),
                     label = T("管理员账号"),
                     required = true
@@ -57,7 +57,7 @@ foreach (var recipe in recipes)
 
                 @Html.EasyUIFor(svm => svm.AdminPassword, "easyui-passwordbox", new
                 {
-                    width = 500,
+                    width = 300,
                     prompt = T("请输入登陆密码"),
                     label = T("登陆密码"),
                     required = true
@@ -66,16 +66,16 @@ foreach (var recipe in recipes)
             <div style="margin-bottom:20px">
                 @Html.EasyUIFor(svm => svm.ConfirmPassword, "easyui-passwordbox", new
                 {
-                    width = 500,
+                    width = 300,
                     prompt = T("请再次输入登陆密码"),
                     label = T("确认密码"),
                     required = true
                 })
             </div>
-     
+            <div style="margin-top:50px"></div>
             if (!Model.DatabaseIsPreconfigured)
             {
-           
+
                 <h3 style="text-align: center">@T("数据库类型设置")</h3>
                 <hr/>
                 @Html.ValidationMessage("DatabaseOptions", "Unable to setup data storage.")
@@ -99,7 +99,7 @@ foreach (var recipe in recipes)
 
                     @Html.EasyUIFor(svm => svm.DatabaseConnectionString, "easyui-textbox", new
                     {
-                        width = 600,
+                        width = 700,
                         prompt = T("请输入数据库连接字符串"),
                         label = T("连接字符串")
 
@@ -118,7 +118,7 @@ foreach (var recipe in recipes)
                     <div style="margin-bottom:20px">
                         @Html.EasyUIFor(svm => svm.DatabaseTablePrefix, "easyui-textbox", new
                         {
-                            width = 600,
+                            width = 300,
                             prompt = T("请输入数据库表前缀"),
                             label = T("数据库表前缀")
 
@@ -128,10 +128,10 @@ foreach (var recipe in recipes)
                 </div>
             
             }
-        
+            <div style="margin-top:50px"></div>
             <h3 style="text-align: center">@T("安装模式设置")</h3>
             <hr/>
-            <p>@T("选择不同的模式，将安装不同的功能模块")</p>
+            @*<p>@T("选择不同的模式，将安装不同的功能模块")</p>*@
             <div>
                 <select id="@Html.FieldIdFor(m => m.Recipe)" name="@Html.FieldNameFor(m => m.Recipe)" class="easyui-combobox" data-options="panelHeight:'auto',width:200,editable:false,label:'安装模式'">
                     @foreach (var recipeGroup in groupedRecipes.OrderBy(x => x.Key))
