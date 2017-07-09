@@ -196,7 +196,7 @@ foreach (var recipe in recipes)
                 success: function (data) {
                     var result = JSON.parse(data);
                     if (result.State == 1) {
-                        $.messager.alert('消息', result.Msg, 'info');
+                        window.href.location = result.Msg;
                     } else {
                         $.messager.alert('错误', result.Msg, 'error');
                     }

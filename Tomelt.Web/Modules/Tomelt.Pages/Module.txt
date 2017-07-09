@@ -1,0 +1,10 @@
+﻿Name: Pages
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Introduces a preconfigured page content type.
+FeatureDescription: A basic page content type.
+Dependencies: Contents, Tomelt.ContentPicker, Tomelt.Autoroute
+Category: Content

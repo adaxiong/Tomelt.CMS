@@ -271,7 +271,7 @@ namespace Tomelt.Setup.Controllers {
                 _viewsBackgroundCompilation.Stop();
 
                 // Redirect to the welcome page.
-                return Json(new { State = 1, Msg = "~/" + _shellSettings.RequestUrlPrefix });
+                return Json(new { State = 1, Msg = "/" + _shellSettings.RequestUrlPrefix });
             }
             catch (Exception ex)
             {

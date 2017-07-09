@@ -1,0 +1,251 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{60DADE75-68DB-43AD-BEA2-BA7F0C7750C8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tomelt.Widgets</RootNamespace>
+    <AssemblyName>Tomelt.Widgets</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\..\TomeltBasicCorrectness.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
+    <Compile Include="Commands\LayerCommands.cs" />
+    <Compile Include="Commands\WidgetCommands.cs" />
+    <Compile Include="Conditions\ContentDisplayedRuleProvider.cs" />
+    <Compile Include="Conditions\LegacyRulesEvaluator.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="ControlWrapper.cs" />
+    <Compile Include="Drivers\LayerPartDriver.cs" />
+    <Compile Include="Drivers\WidgetPartDriver.cs" />
+    <Compile Include="Extensions\WidgetsMetaDataExtensions.cs" />
+    <Compile Include="Filters\WidgetFilter.cs" />
+    <Compile Include="Handlers\DisplayedContentItemHandler.cs" />
+    <Compile Include="Handlers\LayerHintHandler.cs" />
+    <Compile Include="Handlers\LayerPartHandler.cs" />
+    <Compile Include="Handlers\WidgetElementsHandler.cs" />
+    <Compile Include="Handlers\WidgetPartHandler.cs" />
+    <Compile Include="Layouts\Elements\Widget.cs" />
+    <Compile Include="Layouts\Providers\WidgetElementHarvester.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\LayerPart.cs" />
+    <Compile Include="Models\LayerPartRecord.cs" />
+    <Compile Include="Models\WidgetPart.cs" />
+    <Compile Include="Models\WidgetPartRecord.cs" />
+    <Compile Include="Permissions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceManifest.cs" />
+    <Compile Include="Services\DefaultLayerEvaluationService.cs" />
+    <Compile Include="Services\ILayerEvaluationService.cs" />
+    <Compile Include="Services\IRuleManager.cs" />
+    <Compile Include="Services\IRuleProvider.cs" />
+    <Compile Include="Services\IWidgetCommandsService.cs" />
+    <Compile Include="Services\IWidgetsService.cs" />
+    <Compile Include="Services\LayerResolverSelector.cs" />
+    <Compile Include="Services\RuleContext.cs" />
+    <Compile Include="Services\RuleManager.cs" />
+    <Compile Include="Services\WidgetCommandsService.cs" />
+    <Compile Include="Services\WidgetsService.cs" />
+    <Compile Include="Shapes.cs" />
+    <Compile Include="ViewModels\WidgetElementViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Admin\images\edit.png" />
+    <Content Include="Content\Admin\images\movedown.gif" />
+    <Content Include="Content\Admin\images\moveup.gif" />
+    <Content Include="Module.txt" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\widget-element-editor.js" />
+    <Content Include="Styles\images\all-zones-on.gif" />
+    <Content Include="Styles\images\all-zones.gif" />
+    <Content Include="Styles\images\arrows.png" />
+    <Content Include="Styles\images\eye.png" />
+    <Content Include="Styles\images\menu.widgets.png" />
+    <Content Include="Styles\images\widget-zones-on.gif" />
+    <Content Include="Styles\images\widget-zones.gif" />
+    <Content Include="Styles\menu.widgets-admin.css" />
+    <Content Include="Styles\tomelt-widgets-admin.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Tomelt\Tomelt.Framework.csproj">
+      <Project>{4891c1ad-8e36-4707-baaf-b31dd4fa898b}</Project>
+      <Name>Tomelt.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\Tomelt.Core.csproj">
+      <Project>{c5e7c981-ef40-433c-a2ca-02089ec248b8}</Project>
+      <Name>Tomelt.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tomelt.Conditions\Tomelt.Conditions.csproj">
+      <Project>{e8e71442-05dd-4b79-b1f8-a74498f2aae6}</Project>
+      <Name>Tomelt.Conditions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tomelt.Layouts\Tomelt.Layouts.csproj">
+      <Project>{b7f316f5-b73d-4b82-89c6-5cd70bcc32a6}</Project>
+      <Name>Tomelt.Layouts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tomelt.Scripting\Tomelt.Scripting.csproj">
+      <Project>{83f3a0dc-5f78-4658-89de-121282ff338a}</Project>
+      <Name>Tomelt.Scripting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tomelt.Themes\Tomelt.Themes.csproj">
+      <Project>{defa4a4b-921f-4a67-b8da-154c47dabfbf}</Project>
+      <Name>Tomelt.Themes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Web.config" />
+    <Content Include="Placement.info" />
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Styles\Web.config" />
+    <Content Include="Views\Admin\AddLayer.cshtml" />
+    <Content Include="Views\Admin\AddWidget.cshtml" />
+    <Content Include="Views\Admin\ChooseWidget.cshtml" />
+    <Content Include="Views\Admin\EditLayer.cshtml" />
+    <Content Include="Views\Admin\EditWidget.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\EditorTemplates\Elements.Widget.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.Widgets.LayerPart.cshtml" />
+    <Content Include="Views\EditorTemplates\Parts.Widgets.WidgetPart.cshtml" />
+    <Content Include="Views\Elements\Widget.cshtml" />
+    <Content Include="Views\Elements\Widget.Design.cshtml" />
+    <Content Include="Views\Widget.ControlWrapper.cshtml" />
+    <Content Include="Views\Widget.cshtml" />
+    <Content Include="Views\Widget.DeleteButton.cshtml" />
+    <Content Include="Views\Widget.Edit.cshtml" />
+    <Content Include="Views\Widget.Wrapper.cshtml" />
+    <Content Include="Views\WidgetFiltersControl.cshtml" />
+    <Content Include="Views\WidgetLayerVisibility.cshtml" />
+    <Content Include="Views\WidgetPlacement.cshtml" />
+    <Content Include="Views\WidgetPlacement.Orphans.cshtml" />
+    <Content Include="Views\WidgetPlacement.Zones.cshtml" />
+    <Content Include="Views\WidgetSimplePreview.cshtml" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2953</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2953/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此项目引用这台计算机上缺少的 NuGet 程序包。使用 NuGet 程序包还原可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

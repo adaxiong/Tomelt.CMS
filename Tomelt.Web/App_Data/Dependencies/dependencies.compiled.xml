@@ -4,102 +4,156 @@
     <ExtensionId>Markdown</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Markdown/bin/Markdown.dll</VirtualPath>
-    <Hash>24f82887b9ce8590</Hash>
+    <Hash>24f8293467b3e552</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Alias</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Alias/bin/Tomelt.Alias.dll</VirtualPath>
-    <Hash>48fb2e85f73f3631</Hash>
+    <Hash>48fb2ebf84f7ba11</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Autoroute</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Autoroute/bin/Tomelt.Autoroute.dll</VirtualPath>
-    <Hash>11c67e8b184a6b3</Hash>
+    <Hash>11c697b9528412c</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Conditions</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Conditions/bin/Tomelt.Conditions.dll</VirtualPath>
-    <Hash>926a6580197ca7db</Hash>
+    <Hash>926a65f33419cee4</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.ContentPicker</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.ContentPicker/bin/Tomelt.ContentPicker.dll</VirtualPath>
+    <Hash>dd4a0e1ccacaa54c</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.ContentTypes</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.ContentTypes/bin/Tomelt.ContentTypes.dll</VirtualPath>
-    <Hash>251adb4660b21f1d</Hash>
+    <Hash>251adc2c964fa0df</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Forms</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Forms/bin/Tomelt.Forms.dll</VirtualPath>
-    <Hash>48fc1686df49231e</Hash>
+    <Hash>48fc16c06d09bbc7</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Layouts</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Layouts/bin/Tomelt.Layouts.dll</VirtualPath>
-    <Hash>9540cc251fc0b027</Hash>
+    <Hash>9540cf4aef2c10b8</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Localization</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Localization/bin/Tomelt.Localization.dll</VirtualPath>
+    <Hash>93df26ed56a5519e</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.MediaLibrary</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.MediaLibrary/bin/Tomelt.MediaLibrary.dll</VirtualPath>
-    <Hash>9266457bfcab396a</Hash>
+    <Hash>926645ef18a6b59f</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.MediaProcessing</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.MediaProcessing/bin/Tomelt.MediaProcessing.dll</VirtualPath>
+    <Hash>250e8e122cee6a90</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Modules</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Modules/bin/Tomelt.Modules.dll</VirtualPath>
-    <Hash>4902a68d69ebf587</Hash>
+    <Hash>4902a6c6f65f8628</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Packaging</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Packaging/bin/Tomelt.Packaging.dll</VirtualPath>
-    <Hash>925eed7496f1cbb4</Hash>
+    <Hash>925eede7b01c63f9</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Pages</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Pages/bin/Tomelt.Pages.dll</VirtualPath>
+    <Hash>6fea0445c2c808ae</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Projections</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Projections/bin/Tomelt.Projections.dll</VirtualPath>
-    <Hash>dbb4745513781794</Hash>
+    <Hash>dbb47501bd06eb01</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Recipes</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Recipes/bin/Tomelt.Recipes.dll</VirtualPath>
-    <Hash>6e715227c800354e</Hash>
+    <Hash>6e71534792a0408b</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Resources</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Resources/bin/Tomelt.Resources.dll</VirtualPath>
-    <Hash>4909b69480fac27e</Hash>
+    <Hash>4909b6ce0edb5ca3</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Roles</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Roles/bin/Tomelt.Roles.dll</VirtualPath>
+    <Hash>24feac10785e4cf1</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Scripting</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Scripting/bin/Tomelt.Scripting.dll</VirtualPath>
-    <Hash>490976943d91415d</Hash>
+    <Hash>490976cdca19cc06</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Setup</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Setup/bin/Tomelt.Setup.dll</VirtualPath>
-    <Hash>b7c1f92302cf2e7e</Hash>
+    <Hash>b7c1fa6073697d5d</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Templates</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Templates/bin/Tomelt.Templates.dll</VirtualPath>
+    <Hash>6e639339bee838c4</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Themes</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Themes/bin/Tomelt.Themes.dll</VirtualPath>
-    <Hash>dbb23c52d14f56a5</Hash>
+    <Hash>dbb23cff74f515b9</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Tokens</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
-    <Hash>48ff7e8a47a7d53f</Hash>
+    <Hash>48ff7ec3d56ccf73</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Users</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Users/bin/Tomelt.Users.dll</VirtualPath>
+    <Hash>24ff141612c898ca</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Widgets</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Widgets/bin/Tomelt.Widgets.dll</VirtualPath>
+    <Hash>de97a6665380c6c2</Hash>
+  </Dependency>
+  <Dependency>
+    <ExtensionId>Tomelt.Workflows</ExtensionId>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/Tomelt.Workflows/bin/Tomelt.Workflows.dll</VirtualPath>
+    <Hash>dbae64fbaf3f2465</Hash>
   </Dependency>
 </Dependencies>

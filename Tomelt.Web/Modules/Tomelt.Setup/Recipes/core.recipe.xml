@@ -30,8 +30,8 @@
     <Migration features="*" />
 
     <Command>
-        menu create /MenuName:"Main Menu"
-        page create /Slug:"welcome-to-tomelt" /Title:"Welcome to Tomelt!" /Path:"welcome-to-tomelt" /Homepage:true /Publish:true /Text:"Welcome To Tomelt!"
-        menuitem create /MenuPosition:"0" /MenuText:"Home" /Url:"~/" /MenuName:"Main Menu"
+      menu create /MenuName:"Main Menu"
+      page create /Slug:"welcome-to-tomelt" /Title:"欢迎使用江西至融CMS系统!" /Path:"welcome-to-tomelt" /Homepage:true /Publish:true /Text:"欢迎使用江西至融CMS系统!"
+      menuitem create /MenuPosition:"0" /MenuText:"Home" /Url:"~/" /MenuName:"Main Menu"
     </Command>
 </Tomelt>

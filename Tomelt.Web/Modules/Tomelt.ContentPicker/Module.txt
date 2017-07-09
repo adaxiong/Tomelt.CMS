@@ -1,0 +1,17 @@
+Name: Tomelt.ContentPicker
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: UI for selecting Content Items.
+Features:
+    Tomelt.ContentPicker:
+        Description: UI for selecting Content Items.
+        Dependencies: Contents, Navigation
+        Category: Input Editor
+	Tomelt.ContentPicker.LocalizationExtensions:
+		Name: Tomelt.ContentPicker.LocalizationExtensions
+		Description: Provides settings to enable advanced localization behaviours for ContentPickerFields.
+		Dependencies: Tomelt.ContentPicker, Tomelt.Localization, Tomelt.Resources
+		Category: Input Editor

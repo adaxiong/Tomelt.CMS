@@ -1,0 +1,9 @@
+﻿@using Tomelt.Layouts.Helpers
+@{
+    var tagBuilder = TagBuilderExtensions.CreateElementTagBuilder(Model);
+}
+@tagBuilder.StartElement
+@if (Model.WidgetShape != null) {
+    @Display(Model.WidgetShape)
+}
+@tagBuilder.EndElement

@@ -1,0 +1,18 @@
+﻿Name: Tomelt.Templates
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: Provides a Template type that can be used to store template code and used as a shape.
+Features:
+    Tomelt.Templates:
+        Name: Templates
+        Description: Provides a Template type that represents a shape template, stored as a content item.
+        Category: Content
+        Dependencies: Contents, Tomelt.Tokens
+    Tomelt.Templates.Razor:
+        Name: Razor Templates
+        Description: Extends Templates with Razor templates.
+        Category: Content
+        Dependencies: Tomelt.Templates
