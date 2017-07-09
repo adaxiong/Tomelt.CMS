@@ -52,6 +52,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -100,9 +103,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="Tomelt">
-      <HintPath>..\Tools\Tomelt\bin\Debug\Tomelt.exe</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -163,6 +163,10 @@
     <ProjectReference Include="..\Tomelt\Tomelt.Framework.csproj">
       <Project>{4891c1ad-8e36-4707-baaf-b31dd4fa898b}</Project>
       <Name>Tomelt.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tomelt\Tomelt.csproj">
+      <Project>{e4d34268-fd96-4d4f-b9ee-016076b8faa5}</Project>
+      <Name>Tomelt</Name>
     </ProjectReference>
     <ProjectReference Include="Core\Tomelt.Core.csproj">
       <Project>{c5e7c981-ef40-433c-a2ca-02089ec248b8}</Project>

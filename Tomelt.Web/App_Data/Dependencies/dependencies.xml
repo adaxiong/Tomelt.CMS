@@ -34,24 +34,13 @@
     <ModuleName>Tomelt.Tokens</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Tokens/bin/Tomelt.Tokens.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-    </References>
+    <References />
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.MediaLibrary</ModuleName>
     <VirtualPath>~/Modules/Tomelt.MediaLibrary/bin/Tomelt.MediaLibrary.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Tokens</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -68,11 +57,6 @@
         <Name>MarkdownSharp</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Markdown/bin/MarkdownSharp.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>Tomelt.MediaLibrary</Name>
@@ -144,36 +128,19 @@
     <ModuleName>Tomelt.Alias</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Alias/bin/Tomelt.Alias.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-    </References>
+    <References />
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Modules</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Modules/bin/Tomelt.Modules.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-    </References>
+    <References />
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Packaging</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Packaging/bin/Tomelt.Packaging.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Modules</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -186,11 +153,6 @@
     <VirtualPath>~/Modules/Tomelt.Themes/bin/Tomelt.Themes.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Modules</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -208,11 +170,6 @@
     <VirtualPath>~/Modules/Tomelt.ContentTypes/bin/Tomelt.ContentTypes.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Modules</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -235,11 +192,6 @@
     <VirtualPath>~/Modules/Tomelt.Autoroute/bin/Tomelt.Autoroute.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Alias</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -276,24 +228,13 @@
     <ModuleName>Tomelt.Scripting</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Scripting/bin/Tomelt.Scripting.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-    </References>
+    <References />
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Conditions</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Conditions/bin/Tomelt.Conditions.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Scripting</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -305,24 +246,13 @@
     <ModuleName>Tomelt.Forms</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Forms/bin/Tomelt.Forms.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-    </References>
+    <References />
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Projections</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Projections/bin/Tomelt.Projections.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.Forms</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
@@ -349,11 +279,6 @@
         <Name>MarkdownSharp</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Markdown/bin/MarkdownSharp.dll</VirtualPath>
-      </Reference>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
       </Reference>
       <Reference>
         <Name>Tomelt.Alias</Name>
@@ -428,11 +353,6 @@
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
       <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-      <Reference>
         <Name>Tomelt.ContentTypes</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
         <VirtualPath>~/Modules/Tomelt.ContentTypes/bin/Tomelt.ContentTypes.dll</VirtualPath>
@@ -458,24 +378,13 @@
     <ModuleName>Tomelt.Resources</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Resources/bin/Tomelt.Resources.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
-    </References>
+    <References />
   </Dependency>
   <Dependency>
     <ModuleName>Tomelt.Setup</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Setup/bin/Tomelt.Setup.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <References>
-      <Reference>
-        <Name>Microsoft.CodeDom.Providers.DotNetCompilerPlatform</Name>
-        <LoaderName>PrecompiledExtensionLoader</LoaderName>
-        <VirtualPath>~/Modules/Markdown/bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</VirtualPath>
-      </Reference>
       <Reference>
         <Name>Tomelt.ContentTypes</Name>
         <LoaderName>PrecompiledExtensionLoader</LoaderName>
