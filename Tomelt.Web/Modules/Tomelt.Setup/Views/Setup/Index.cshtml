@@ -24,7 +24,7 @@ foreach (var recipe in recipes)
 }
 }
 
-<div class="container-fluid text-center">
+
     <div class="easyui-panel" title="@T("安装向导").ToString()" style="width:100%;max-width:800px;padding:30px 30px;">
 
         @using (Html.BeginFormAntiForgeryPost())
@@ -76,7 +76,7 @@ foreach (var recipe in recipes)
             if (!Model.DatabaseIsPreconfigured)
             {
            
-                <h3 style="text-align: center">@T("选择数据库类型")</h3>
+                <h3 style="text-align: center">@T("数据库类型设置")</h3>
                 <hr/>
                 @Html.ValidationMessage("DatabaseOptions", "Unable to setup data storage.")
                 <div>
@@ -95,14 +95,13 @@ foreach (var recipe in recipes)
                     @Html.RadioButtonFor(svm => svm.DatabaseProvider, SetupDatabaseType.PostgreSql.ToString(), new { id = "postgresql" })
                     <label for="postgresql" class="forcheckbox">@T("PostgreSQL 数据库")</label>
                 </div>
-                <div data-controllerid="builtin" data-defaultstate="hidden">
+                <div @*style="display: none;"*@>
 
                     @Html.EasyUIFor(svm => svm.DatabaseConnectionString, "easyui-textbox", new
                     {
                         width = 600,
                         prompt = T("请输入数据库连接字符串"),
-                        label = T("数据库连接字符串"),
-                        labelWidth = 120
+                        label = T("连接字符串")
 
                     })
 
@@ -115,24 +114,26 @@ foreach (var recipe in recipes)
                     <span data-controllerid="postgresql" class="hint databaseTypeHint">
                         @T("Server=serverName;Port=5432;Database=dbName;User Id=userName;Password=password")
                     </span>
-                    <br /><br />
+                    
+                    <div style="margin-bottom:20px">
+                        @Html.EasyUIFor(svm => svm.DatabaseTablePrefix, "easyui-textbox", new
+                        {
+                            width = 600,
+                            prompt = T("请输入数据库表前缀"),
+                            label = T("数据库表前缀")
 
-                    @Html.EasyUIFor(svm => svm.DatabaseTablePrefix, "easyui-textbox", new
-                    {
-                        width = 500,
-                        prompt = T("请输入数据库表前缀"),
-                        label = T("数据库表前缀")
-
-                    })
+                        })
+                    </div>
+                    
                 </div>
             
             }
         
-            <h3 style="text-align: center">@T("选择安装模式")</h3>
+            <h3 style="text-align: center">@T("安装模式设置")</h3>
             <hr/>
             <p>@T("选择不同的模式，将安装不同的功能模块")</p>
             <div>
-                <select id="@Html.FieldIdFor(m => m.Recipe)" name="@Html.FieldNameFor(m => m.Recipe)" class="easyui-combobox" data-options="panelHeight:'auto',width:300,editable:false">
+                <select id="@Html.FieldIdFor(m => m.Recipe)" name="@Html.FieldNameFor(m => m.Recipe)" class="easyui-combobox" data-options="panelHeight:'auto',width:200,editable:false,label:'安装模式'">
                     @foreach (var recipeGroup in groupedRecipes.OrderBy(x => x.Key))
                     {
                         if (groupCount > 1)
@@ -150,8 +151,9 @@ foreach (var recipe in recipes)
                         @RenderRecipeOptions(unspecifiedCategoryRecipes.OrderBy(x => x.Name))
                     }
                 </select>
+                <span id="recipedescription">@Model.RecipeDescription</span>
             </div>
-            <div id="recipedescription">@Model.RecipeDescription</div>
+            
         
         @*<div id="throbber">
             <div class="curtain"></div>
@@ -164,12 +166,12 @@ foreach (var recipe in recipes)
                 </div>
             </div>
         </div>*@
-            <div style="text-align:center;padding:5px 0">
+            <div style="text-align:center; padding: 5px 0;margin-top:20px">
                 <button class="easyui-linkbutton c6" type="submit" data-options="iconCls:'icon-save',size:'large',width:150">@T("确认安装")</button>
             </div>
 
         }
     </div>
-</div>
+
 
 
