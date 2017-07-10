@@ -1,6 +1,0 @@
-﻿Name: EasyUITheme
-Author: AdaXiong
-Website: http://www.tomelt.com
-Description: 后台主题，EASYUI主题
-Version: 1.0
-Zones: Header, Navigation, AsideLeft, Messages, Content, Footer

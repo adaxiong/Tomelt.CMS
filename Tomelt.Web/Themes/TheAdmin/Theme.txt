@@ -1,7 +1,6 @@
 ﻿Name: The Admin
-Version: 1.10.2
-Author: Jon Wall
-Tags: admin
-Description: The Tomelt admin theme.
+Author: AdaXiong
 Website: http://www.tomelt.com
-Zones: Header, Messages, BeforeContent, LocalNavigation, Content, AfterContent, Footer
+Description: 后台主题，EASYUI主题
+Version: 1.0
+Zones: Header, Navigation, Content, Footer

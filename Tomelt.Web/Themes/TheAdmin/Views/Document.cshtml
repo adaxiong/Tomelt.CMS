@@ -2,7 +2,7 @@
 @using Tomelt.UI.Resources;
 @{
   //注册页面Icon
-  RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Themes/EasyUITheme/Content/tomelt.ico") });
+  RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Themes/TheAdmin/Content/tomelt.ico") });
   //设置页面标题
   var title = (Request.Path.TrimEnd('/') != Request.ApplicationPath && HasText(Model.Title)
                   ? Model.Title + WorkContext.CurrentSite.PageTitleSeparator
@@ -21,7 +21,7 @@
     <title>@title</title>
 </head>
 
-<body class="container-fluid">
+<body class="easyui-layout" style="overflow-y: hidden" scroll="no">
     <!--Layout.cshtml文件中的内容会显示在Body里面，Tail暂时还未发现它的用途-->
     @Display(Model.Body)
     @Display(Model.Tail)

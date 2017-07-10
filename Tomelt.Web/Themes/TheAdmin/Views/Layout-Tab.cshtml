@@ -1,0 +1,34 @@
+﻿@using Tomelt.UI.Resources;
+@{
+    //首先大致讲讲页面的呈现原理
+    //1.根据MVC模型的特性页面上所有的数据都是Model，整个页面的Model是一个动态类型
+    //2.页面中的区域是动态类型中的属性，其本身也是一个动态类型。
+    //3.区域中又可添加若干动态类型属性。如：插入一些小部件，呈现模块内容等等。
+    //4.这些动态类型在页面上都用@Display(x)去呈现，Tomelt会根据动态类型中的内容去找相应呈现模板。
+    //5.呈现模板通常和动态类型的名称同名。
+
+    //注册样式文件，默认调用主题Styles目录的文件
+    Script.Require("jQueryEasyUI");
+    Script.Require("jQueryEasyUILocale");
+    Style.Require("Bootstrap");
+    Style.Require("jQueryEasyUI");
+    Style.Require("jQueryEasyUI_icon");
+    Style.Require("jQueryEasyUI_color");
+    Style.Include("site.css");
+
+    //Zone是Display的别名，帮助我们理解这个地方是显示一个区域的。
+    //在页面中新增一个区域，只用@Zone(Model.区域名)即可
+    Func<dynamic, dynamic> Zone = x => Display(x);
+    Model.Content.Add(Display.Popup());
+
+
+}
+
+
+@* 内容区域，默认展现内容的地方。 *@
+@if (Model.Content != null)
+{
+    <div id="content" class="group">
+        @Zone(Model.Content)
+    </div>
+}

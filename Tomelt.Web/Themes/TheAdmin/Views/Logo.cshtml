@@ -1,0 +1,53 @@
+﻿@model dynamic
+@{
+
+    string userName = string.Empty;
+    if (Model.CurrentUser != null)
+    {
+        userName = Html.ItemDisplayText((Tomelt.ContentManagement.IContent) Model.CurrentUser).ToHtmlString();
+    }
+}
+<div style="padding-top: 7px; display: block; float: left; width: 50%;">
+    <img src="@Url.Content("~/Themes/TheAdmin/Content/Images/logo_header.png")" alt="@WorkContext.CurrentSite.SiteName" style="height: 45px;" />
+    
+</div>
+<span style="float: right; padding-right: 20px; margin-top: 20px;">
+    <a href="#" class="easyui-menubutton" data-options="menu:'#downmenu',iconCls:'icon-man'">@userName</a>
+</span>
+
+<div id="downmenu" style="width: 100px;">
+    @*<div data-options="iconCls:'icon-theme'">
+        <span>切换主题</span>
+        <div>
+            @{
+                List<FieldInfo> allThemes = ViewBag.Themes;
+                foreach (var fieldInfo in allThemes)
+                {
+                    if (ViewBag.CurrentTheme == fieldInfo.Value)
+                    {
+                        <div data-options="iconCls:'icon-ok'" onclick="onChangeTheme('@fieldInfo.Value');">@fieldInfo.Text</div>
+                    }
+                    else
+                    {
+                        <div onclick="onChangeTheme('@fieldInfo.Value');">@fieldInfo.Text</div>
+                    }
+
+                }
+            }
+        </div>
+    </div>*@
+    <div data-options="iconCls:'icon-lock'" onclick="changePwd();">修改密码</div>
+    <div data-options="iconCls:'icon-undo'" onclick="loginOut();">退出登录</div>
+    <div data-options="iconCls:'icon-ok'">
+        <span>关于我们</span>
+        <div class="menu-content" style="padding: 10px; text-align: center">
+            <img src="@Url.Content("~/Themes/TheAdmin/Content/Images/tomelt_mp.jpg")" style="width: 200px; height: 200px">
+            <p>微信[扫一扫]关注我们</p>
+            <div style="margin-top: 10px;"></div>
+            <p style="text-align: left">联系地址：江西省吉安市吉州区商务中心六楼</p>
+            <p style="text-align: left">电子邮箱：897654150@qq.com</p>
+            
+        </div>
+    </div>
+
+</div>

@@ -816,6 +816,7 @@
     <Compile Include="UI\Admin\AdminAttribute.cs" />
     <Compile Include="UI\Admin\AdminFilter.cs" />
     <Compile Include="UI\Admin\AdminThemeSelector.cs" />
+    <Compile Include="UI\Admin\LayoutFilter.cs" />
     <Compile Include="UI\Admin\Notification\INotificationManager.cs" />
     <Compile Include="UI\Admin\Notification\INotificationProvider.cs" />
     <Compile Include="UI\Admin\Notification\NotificationFilter.cs" />

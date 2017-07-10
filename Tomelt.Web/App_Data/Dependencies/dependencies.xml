@@ -25,12 +25,6 @@
     <References />
   </Dependency>
   <Dependency>
-    <ModuleName>EasyUITheme</ModuleName>
-    <VirtualPath>~/Themes/EasyUITheme</VirtualPath>
-    <LoaderName>RawThemeExtensionLoader</LoaderName>
-    <References />
-  </Dependency>
-  <Dependency>
     <ModuleName>Feeds</ModuleName>
     <VirtualPath>~/Core/Feeds</VirtualPath>
     <LoaderName>CoreExtensionLoader</LoaderName>
@@ -115,6 +109,12 @@
   <Dependency>
     <ModuleName>TheAdmin</ModuleName>
     <VirtualPath>~/Themes/TheAdmin</VirtualPath>
+    <LoaderName>RawThemeExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
+  <Dependency>
+    <ModuleName>TheAdminBack</ModuleName>
+    <VirtualPath>~/Themes/TheAdminBack</VirtualPath>
     <LoaderName>RawThemeExtensionLoader</LoaderName>
     <References />
   </Dependency>

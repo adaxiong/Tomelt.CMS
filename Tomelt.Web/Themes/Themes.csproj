@@ -44,6 +44,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -77,18 +78,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EasyUITheme\Assets.json" />
-    <Content Include="EasyUITheme\Assets\Styles.less" />
-    <Content Include="EasyUITheme\Content\tomelt.ico" />
-    <Content Include="EasyUITheme\Styles\Styles.css" />
-    <Content Include="EasyUITheme\Styles\Styles.min.css" />
-    <Content Include="EasyUITheme\Web.config" />
-    <Content Include="EasyUITheme\Scripts\Web.config" />
-    <Content Include="EasyUITheme\Styles\Web.config" />
-    <Content Include="EasyUITheme\Content\Web.config" />
-    <Content Include="EasyUITheme\Theme.txt" />
-    <Content Include="EasyUITheme\Theme.png" />
-    <Content Include="EasyUITheme\Placement.info" />
+    <Content Include="TheAdmin\Content\Images\logo_header.png" />
+    <Content Include="TheAdmin\Content\Images\tomelt_mp.jpg" />
+    <Content Include="TheAdmin\Content\tomelt.ico" />
+    <Content Include="TheAdmin\Styles\site.css" />
+    <Content Include="TheAdmin\Web.config" />
+    <Content Include="TheAdmin\Scripts\Web.config" />
+    <Content Include="TheAdmin\Styles\Web.config" />
+    <Content Include="TheAdmin\Content\Web.config" />
+    <Content Include="TheAdmin\Theme.txt" />
+    <Content Include="TheAdmin\Theme.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SafeMode\Content\tomelt.ico" />
@@ -101,37 +100,6 @@
     <Content Include="SafeMode\Styles\site.css" />
     <Content Include="SafeMode\Theme.png" />
     <Content Include="SafeMode\Theme.txt" />
-    <Content Include="TheAdmin\Scripts\admin.js" />
-    <Content Include="TheAdmin\Styles\ie.css" />
-    <Content Include="TheAdmin\Styles\ie7.css" />
-    <Content Include="TheAdmin\Styles\ie8.css" />
-    <Content Include="TheAdmin\Styles\images\adminNavBackground.gif" />
-    <Content Include="TheAdmin\Styles\images\backgroundGradient.gif" />
-    <Content Include="TheAdmin\Styles\images\backgroundHeader.gif" />
-    <Content Include="TheAdmin\Styles\images\error.gif" />
-    <Content Include="TheAdmin\Styles\images\icon-advisory.png" />
-    <Content Include="TheAdmin\Styles\images\icon-contribute.png" />
-    <Content Include="TheAdmin\Styles\images\icon-docs.png" />
-    <Content Include="TheAdmin\Styles\images\icon-friends.png" />
-    <Content Include="TheAdmin\Styles\images\icon-gallery.png" />
-    <Content Include="TheAdmin\Styles\images\icon-settings.png" />
-    <Content Include="TheAdmin\Styles\images\icons.png" />
-    <Content Include="TheAdmin\Styles\images\info.gif" />
-    <Content Include="TheAdmin\Styles\images\menu-closed.png" />
-    <Content Include="TheAdmin\Styles\images\menu-default.png" />
-    <Content Include="TheAdmin\Styles\images\menu-filter.png" />
-    <Content Include="TheAdmin\Styles\images\menu-glyph.png" />
-    <Content Include="TheAdmin\Styles\images\menu-open.png" />
-    <Content Include="TheAdmin\Styles\images\menuClosed.gif" />
-    <Content Include="TheAdmin\Styles\images\menuClosedHover.gif" />
-    <Content Include="TheAdmin\Styles\images\menuOpen.gif" />
-    <Content Include="TheAdmin\Styles\images\menuOpenHover.gif" />
-    <Content Include="TheAdmin\Styles\images\tomeltLogo.gif" />
-    <Content Include="TheAdmin\Styles\images\tableHeaderBackgroundRed.gif" />
-    <Content Include="TheAdmin\Styles\images\vinesBackgroundBottom.gif" />
-    <Content Include="TheAdmin\Styles\site.css" />
-    <Content Include="TheAdmin\Theme.png" />
-    <Content Include="TheAdmin\Theme.txt" />
     <Content Include="TheThemeMachine\Styles\default-grid.css" />
     <Content Include="TheThemeMachine\Styles\Site.css" />
     <Content Include="TheThemeMachine\Theme.png" />
@@ -159,19 +127,6 @@
     <Content Include="SafeMode\Content\Web.config" />
     <Content Include="SafeMode\Styles\Web.config" />
     <Content Include="SafeMode\Views\Layout.cshtml" />
-    <Content Include="TheAdmin\Scripts\Web.config" />
-    <Content Include="TheAdmin\Styles\images\icons.psd" />
-    <Content Include="TheAdmin\Styles\Web.config" />
-    <Content Include="TheAdmin\Views\AdminCultureSelector.cshtml" />
-    <Content Include="TheAdmin\Views\ErrorPage.cshtml" />
-    <Content Include="TheAdmin\Views\Header.cshtml" />
-    <Content Include="TheAdmin\Views\Layout.cshtml" />
-    <Content Include="TheAdmin\Views\LocalMenu.cshtml" />
-    <Content Include="TheAdmin\Views\Menu.cshtml" />
-    <Content Include="TheAdmin\Views\TomeltVersion.cshtml" />
-    <Content Include="TheAdmin\Views\Pager.cshtml" />
-    <Content Include="TheAdmin\Views\Title.cshtml" />
-    <Content Include="TheAdmin\Views\User.cshtml" />
     <Content Include="TheThemeMachine\Placement.info" />
     <Content Include="TheThemeMachine\Styles\Web.config" />
     <Content Include="TheThemeMachine\Views\BadgeOfHonor.cshtml" />
@@ -185,10 +140,19 @@
     <Content Include="SafeMode\Views\LogOn.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EasyUITheme\Views\Copyright.cshtml" />
-    <Content Include="EasyUITheme\Views\Document.cshtml" />
-    <Content Include="EasyUITheme\Views\Layout.cshtml" />
-    <Content Include="EasyUITheme\Views\Logo.cshtml" />
+    <Content Include="TheAdmin\Views\Copyright.cshtml" />
+    <Content Include="TheAdmin\Views\Document.cshtml" />
+    <Content Include="TheAdmin\Views\Layout.cshtml" />
+    <Content Include="TheAdmin\Views\Logo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Popup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Layout-Tab.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Menu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
