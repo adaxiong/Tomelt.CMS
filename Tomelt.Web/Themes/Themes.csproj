@@ -77,10 +77,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="EasyUITheme\Assets.json" />
+    <Content Include="EasyUITheme\Assets\Styles.less" />
+    <Content Include="EasyUITheme\Content\tomelt.ico" />
+    <Content Include="EasyUITheme\Styles\Styles.css" />
+    <Content Include="EasyUITheme\Styles\Styles.min.css" />
+    <Content Include="EasyUITheme\Web.config" />
+    <Content Include="EasyUITheme\Scripts\Web.config" />
+    <Content Include="EasyUITheme\Styles\Web.config" />
+    <Content Include="EasyUITheme\Content\Web.config" />
+    <Content Include="EasyUITheme\Theme.txt" />
+    <Content Include="EasyUITheme\Theme.png" />
+    <Content Include="EasyUITheme\Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="SafeMode\Content\tomelt.ico" />
     <Content Include="SafeMode\Styles\ie6.css" />
     <Content Include="SafeMode\Styles\images\backgroundHeader.gif" />
     <Content Include="SafeMode\Styles\images\backgroundVines.gif" />
+    <Content Include="SafeMode\Styles\images\tomeltLogo.png" />
     <Content Include="SafeMode\Styles\images\tomeltLogo.gif" />
     <Content Include="SafeMode\Styles\public.css" />
     <Content Include="SafeMode\Styles\site.css" />
@@ -168,6 +183,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SafeMode\Views\LogOn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EasyUITheme\Views\Copyright.cshtml" />
+    <Content Include="EasyUITheme\Views\Document.cshtml" />
+    <Content Include="EasyUITheme\Views\Layout.cshtml" />
+    <Content Include="EasyUITheme\Views\Logo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

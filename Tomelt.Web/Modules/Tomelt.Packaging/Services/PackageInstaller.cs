@@ -18,7 +18,7 @@ namespace Tomelt.Packaging.Services {
     [TomeltFeature("PackagingServices")]
     public class PackageInstaller : IPackageInstaller {
         private const string PackagesPath = "packages";
-        private const string SolutionFilename = "Tomelt.sln";
+        private const string SolutionFilename = "Tomelt.CMS.sln";
 
         private readonly INotifier _notifier;
         private readonly IVirtualPathProvider _virtualPathProvider;

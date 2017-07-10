@@ -1,0 +1,13 @@
+State: Running
+Themes: 
+Modules: 
+Name: Default
+DataProvider: SqlServer
+DataConnectionString: Data Source=.;Initial Catalog=TestDB;User ID=sa;Password=tomelt
+DataTablePrefix: Tomelt
+RequestUrlHost: null
+RequestUrlPrefix: null
+EncryptionAlgorithm: AES
+EncryptionKey: 83B89E43D9EF5E5F055F552E9BC614412B91E3C3E73AAF7525FF48ED8FBD0859
+HashAlgorithm: HMACSHA256
+HashKey: D23EC2326307B27D44DDC320A27F3F94A634E3027C6E2E8D6FF1FC465A26E5A7CB3F9126D4DAD58552FE5071CE92923CA89095A9C6B22B62F5D99A495CA0DCF0

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.26430.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Web", "Tomelt.Web\Tomelt.Web.csproj", "{D013D4CC-AFB3-4DF1-BCFB-92E5A588F130}"
 EndProject
@@ -70,6 +70,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Widgets", "Tomelt.Web\Modules\Tomelt.Widgets\Tomelt.Widgets.csproj", "{60DADE75-68DB-43AD-BEA2-BA7F0C7750C8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.MediaProcessing", "Tomelt.Web\Modules\Tomelt.MediaProcessing\Tomelt.MediaProcessing.csproj", "{47417535-1C68-45FA-A6DE-03864A6C72B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.CodeGeneration", "Tomelt.Web\Modules\Tomelt.CodeGeneration\Tomelt.CodeGeneration.csproj", "{D550E447-08F0-4331-9256-62DF803FF8A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -205,6 +207,10 @@ Global
 		{47417535-1C68-45FA-A6DE-03864A6C72B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47417535-1C68-45FA-A6DE-03864A6C72B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47417535-1C68-45FA-A6DE-03864A6C72B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D550E447-08F0-4331-9256-62DF803FF8A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D550E447-08F0-4331-9256-62DF803FF8A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D550E447-08F0-4331-9256-62DF803FF8A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D550E447-08F0-4331-9256-62DF803FF8A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -237,5 +243,6 @@ Global
 		{1F6BC83F-F2DD-497A-A2BF-C956946A62D3} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 		{60DADE75-68DB-43AD-BEA2-BA7F0C7750C8} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 		{47417535-1C68-45FA-A6DE-03864A6C72B2} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
+		{D550E447-08F0-4331-9256-62DF803FF8A6} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 	EndGlobalSection
 EndGlobal

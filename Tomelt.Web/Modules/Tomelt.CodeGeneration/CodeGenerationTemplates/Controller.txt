@@ -1,0 +1,16 @@
+﻿using System.Web.Mvc;
+using Tomelt.Localization;
+using Tomelt;
+
+namespace $$ModuleName$$.Controllers {
+    public class $$ControllerName$$ : Controller {
+        public ITomeltServices Services { get; set; }
+
+        public $$ControllerName$$(ITomeltServices services) {
+            Services = services;
+            T = NullLocalizer.Instance;
+        }
+
+        public Localizer T { get; set; }
+    }
+}

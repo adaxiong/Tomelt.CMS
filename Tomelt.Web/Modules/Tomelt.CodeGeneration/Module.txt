@@ -1,0 +1,9 @@
+﻿Name: 命令行工具
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Description: 可以通过此工具，建立至融系统组件.
+FeatureDescription: 可以通过此工具，建立至融系统组件.
+Category: Developer

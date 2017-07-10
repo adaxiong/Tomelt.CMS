@@ -1,0 +1,29 @@
+﻿
+@using Tomelt.UI.Resources;
+@{
+  //注册页面Icon
+  RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Themes/EasyUITheme/Content/tomelt.ico") });
+  //设置页面标题
+  var title = (Request.Path.TrimEnd('/') != Request.ApplicationPath && HasText(Model.Title)
+                  ? Model.Title + WorkContext.CurrentSite.PageTitleSeparator
+                  : "") +
+      WorkContext.CurrentSite.SiteName;
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--载入页面Html Head部分的内容。-->
+    @Display(Model.Head)
+    <title>@title</title>
+</head>
+
+<body class="container-fluid">
+    <!--Layout.cshtml文件中的内容会显示在Body里面，Tail暂时还未发现它的用途-->
+    @Display(Model.Body)
+    @Display(Model.Tail)
+</body>
+</html>
