@@ -1,117 +1,210 @@
 ﻿@using Tomelt.Utility.Extensions;
-@{
-    
-    IEnumerable<dynamic> firstLevelMenuItems = Model;
 
-    if (Model.ImageSets != null) {
-        foreach (var imageSet in Model.ImageSets) {
-            RegisterImageSet("menu." + imageSet, Model.MenuName /* style */, 16 /* bounding box */);
-        }
-    }
-
-    Model.Attributes.Add("role", "navigation");
-    Model.Attributes.Add("data-filter-watermark", T("Filter").Text);
-    var tag = Tag(Model, "ul");
-}
-﻿@tag.StartElement
-@foreach(var firstLevelMenuItem in Model) {
-    IEnumerable<dynamic> secondLevelMenuItems = firstLevelMenuItem;
-
-    string sectionHeaderText = firstLevelMenuItem.Text.Text;
-    string sectionHeaderTextHint = firstLevelMenuItem.Text.TextHint;
-    var firstOfTheSecond = secondLevelMenuItems.FirstOrDefault();
-    var firstLevelMenuItemUrl = firstLevelMenuItem.Href;
-
-    var itemClassName = HasText(sectionHeaderTextHint)
-        ? "navicon-" + sectionHeaderTextHint.HtmlClassify()
-        : "navicon";
-    var itemId = HasText(firstLevelMenuItem.IdHint)
-        ? "navicon-" + firstLevelMenuItem.IdHint
-        : null;
-
-    IHtmlString sectionHeaderMarkup;
-    if (firstOfTheSecond != null 
-        && firstLevelMenuItem.LinkToFirstChild 
-        && (
-            firstOfTheSecond.RouteValues != null 
-            || HasText(firstOfTheSecond.Url))) {
-                firstLevelMenuItemUrl = firstOfTheSecond.Href;
-                sectionHeaderMarkup = HasText(itemId)
-                    ? Html.Link(sectionHeaderText, (string)firstOfTheSecond.Href, new { @class = itemClassName, id = itemId })
-                    : Html.Link(sectionHeaderText, (string)firstOfTheSecond.Href, new { @class = itemClassName });
-            }
-    else if (firstLevelMenuItem.RouteValues != null || HasText(firstLevelMenuItem.Url)) {
-        sectionHeaderMarkup = HasText(itemId)
-            ? Html.Link(sectionHeaderText, (string)firstLevelMenuItem.Href, new { @class = itemClassName, id = itemId })
-            : Html.Link(sectionHeaderText, (string)firstLevelMenuItem.Href, new { @class = itemClassName });
-    }
-    else {
-        // if the header isn't linked and there are no children there's no reason for this item in the menu other than to look pretty
-        if (!secondLevelMenuItems.Any()) {
-            continue;
+<div class="easyui-accordion" data-options="fit:true,border:false">
+    @foreach (var firstLevelMenuItem in Model)
+    {
+        IEnumerable<dynamic> secondLevelMenuItems = firstLevelMenuItem;
+        string sectionHeaderTextHint = firstLevelMenuItem.Text.TextHint;
+        var itemClassName = HasText(sectionHeaderTextHint)
+        ? "" + sectionHeaderTextHint.HtmlClassify()
+        : "home";
+        if (firstLevelMenuItem.Href == "/")
+        {
+            firstLevelMenuItem.Href = "/admin";
         }
         
-        sectionHeaderMarkup = HasText(itemId)
-            ? new HtmlString(string.Format(@"<span class=""{1}"" id=""{2}"">{0}</span>", Html.Encode(sectionHeaderText), Html.Encode(itemClassName), Html.Encode(itemId)))
-            : new HtmlString(string.Format(@"<span class=""{1}"">{0}</span>", Html.Encode(sectionHeaderText), Html.Encode(itemClassName)));
-    }
-
-    if (firstLevelMenuItem == firstLevelMenuItems.First()) {
-        firstLevelMenuItem.Classes.Add("first");
-    }
-    if (firstLevelMenuItem == firstLevelMenuItems.Last()) {
-        firstLevelMenuItem.Classes.Add("last");
-    }
-    if (firstLevelMenuItem.Selected) {
-        firstLevelMenuItem.Classes.Add("selected");
-    }
-
-    if (HasText(sectionHeaderTextHint)) {
-        firstLevelMenuItem.Classes.Add("section-" + sectionHeaderTextHint.HtmlClassify());
-    }
-
-    var firstLevelTag = Tag(firstLevelMenuItem, "li");
-    @firstLevelTag.StartElement
-    <h3>@sectionHeaderMarkup</h3>
-    if (secondLevelMenuItems.Count(menuItem => !menuItem.LocalNav) > 1 || !firstLevelMenuItem.LinkToFirstChild) {
-        <ul class="menuItems">
-            @{ var first = true;}    
-            @foreach (var secondLevelMenuItem in secondLevelMenuItems.Where(menuItem => !menuItem.LocalNav)) {
-                if (first && firstLevelMenuItem.LinkToFirstChild && String.Equals(firstLevelMenuItemUrl, secondLevelMenuItem.Href)) {
-                    first = false;
-                    continue;
+        <div title="@firstLevelMenuItem.Text.Text" style="overflow: auto; padding: 5px;">
+            <ul class="easyui-tree menutree">
+                @if (secondLevelMenuItems.Count(menuItem => !menuItem.LocalNav) > 1 || !firstLevelMenuItem.LinkToFirstChild)
+                {
+                    foreach (var secondLevelMenuItem in secondLevelMenuItems.Where(menuItem => !menuItem.LocalNav))
+                    {
+                        
+                        <li>
+                            <span>
+                                <span class="treenode" id="@secondLevelMenuItem.Text.Text" rel="@secondLevelMenuItem.Href">@secondLevelMenuItem.Text.Text</span>
+                            </span>
+                        </li>
+                    }
                 }
-                    
-                string secondLevelTextHint = secondLevelMenuItem.Text.TextHint;
-                var firstOfTheThird = ((IEnumerable<dynamic>)secondLevelMenuItem.Items).FirstOrDefault();
-
-                var secondLevelItemClassName = HasText(secondLevelTextHint)
-                    ? "subnavicon-" + secondLevelTextHint.HtmlClassify()
-                    : "subnavicon";
-                var secondLevelItemId = HasText(secondLevelMenuItem.IdHint)
-                    ? "subnavicon-" + secondLevelMenuItem.IdHint
-                    : null;
-
-                if (secondLevelMenuItem.Selected) {
-                    secondLevelMenuItem.Classes.Add("selected"); 
+                else
+                {
+                    <li>
+                        <span>
+                            <span class="treenode" rel="@firstLevelMenuItem.Href">@firstLevelMenuItem.Text.Text</span>
+                        </span>
+                    </li>
                 }
+            </ul>
+        </div>
 
-                var secondLevelTag = Tag(secondLevelMenuItem, "li");
-                var secondLevelUrl = secondLevelMenuItem.Href;
-                if (firstOfTheThird != null && secondLevelMenuItem.LinkToFirstChild && (firstOfTheThird.RouteValues != null || HasText(firstOfTheThird.Url))) {
-                    secondLevelUrl = firstOfTheThird.Href;
-                }                    
-                @secondLevelTag.StartElement
-                if (HasText(secondLevelItemId)) {
-                    <a href="@secondLevelUrl" class="@secondLevelItemClassName" id="@secondLevelItemId">@secondLevelMenuItem.Text</a>
-                }
-                else {
-                    <a href="@secondLevelUrl" class="@secondLevelItemClassName">@secondLevelMenuItem.Text</a>
-                }
-                @secondLevelTag.EndElement
+    }
+</div>
+<div id="mm" class="easyui-menu" style="width: 150px;">
+    <div id="mm-reload">刷新</div>
+    <div class="menu-sep"></div>
+    <div id="mm-tabclose">关闭</div>
+    <div id="mm-tabcloseall">全部关闭</div>
+    <div id="mm-tabcloseother">除此之外全部关闭</div>
+    <div class="menu-sep"></div>
+    <div id="mm-tabcloseright">当前页右侧全部关闭</div>
+    <div id="mm-tabcloseleft">当前页左侧全部关闭</div>
+    <div class="menu-sep"></div>
+    <div id="mm-exit">退出</div>
+</div>
+
+@using (Script.Foot())
+{
+    <style>
+        .menutree li {
+            margin-top: 8px;
+        }
+    </style>
+    <script>
+        var mainTabTitle = "系统首页";
+        $(function () {
+            $(".treenode").click(function () {
+
+                var tabTitle = $(this).text();
+               
+                var url = $(this).attr("rel");
+                var icon = $(this).attr("icon");
+                var id = $(this).attr("id");
+                addTab(tabTitle, url, icon, id);
+            });
+
+            tabClose();
+            tabCloseEven();
+        });
+
+        //新增TAB
+        function addTab(subtitle, url, icon, id) {
+            if (!$("#tabs").tabs("exists", subtitle)) {
+                $("#tabs").tabs("add", {
+                    title: subtitle,
+                    content: createFrame(url, id),
+                    iconCls: icon||"icon-ok",
+                    closable: true,
+                    width: $("#mainPanle").width() - 10,
+                    height: $("#mainPanle").height() - 25
+                });
+            } else {
+                $("#tabs").tabs("select", subtitle);
             }
-        </ul>
-    }
-    @firstLevelTag.EndElement
+            tabClose();
+        }
+        //创建FRAME
+        function createFrame(url, id) {
+            var s = '<iframe id="' + id + '" scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:99%;" ></iframe>';
+            return s;
+        }
+        //关闭TAB
+        function tabClose() {
+            /*双击关闭TAB选项卡*/
+            $(".tabs-inner").dblclick(function () {
+                var subtitle = $(this).children("span").text();
+                if (subtitle != mainTabTitle) {
+                    $("#tabs").tabs("close", subtitle);
+                }
+
+            });
+
+            $(".tabs-inner").bind("contextmenu", function (e) {
+                $("#mm").menu("show", {
+                    left: e.pageX,
+                    top: e.pageY
+                });
+
+                var subtitle = $(this).children("span").text();
+                $("#mm").data("currtab", subtitle);
+
+                return false;
+            });
+        }
+        //绑定右键菜单事件
+        function tabCloseEven() {
+
+            //关闭当前
+            $("#mm-tabclose").click(function () {
+                var currtabTitle = $("#mm").data("currtab");
+                if (currtabTitle != mainTabTitle) {
+                    $("#tabs").tabs("close", currtabTitle);
+                }
+
+            });
+            //全部关闭
+            $("#mm-tabcloseall").click(function () {
+                $(".tabs-inner span").each(function (i, n) {
+                    var t = $(n).text();
+                    if (t != mainTabTitle) {
+                        $("#tabs").tabs("close", t);
+                    }
+
+                });
+            });
+            //关闭除当前之外的TAB
+            $("#mm-tabcloseother").click(function () {
+                var currtabTitle = $("#mm").data("currtab");
+                $('.tabs-inner span').each(function (i, n) {
+                    var t = $(n).text();
+                    if (t != currtabTitle && t != mainTabTitle) {
+                        $("#tabs").tabs("close", t);
+                    }
+
+                });
+            });
+            //关闭当前右侧的TAB
+            $("#mm-tabcloseright").click(function () {
+                var nextall = $(".tabs-selected").nextAll();
+                if (nextall.length == 0) {
+                    //msgShow('系统提示','后边没有啦~~','error');
+                    //alert('后边没有啦~~');
+                    return false;
+                }
+                nextall.each(function (i, n) {
+                    var t = $("a:eq(0) span", $(n)).text();
+                    if (t != mainTabTitle) {
+                        $("#tabs").tabs("close", t);
+                    }
+                });
+                return false;
+            });
+            //关闭当前左侧的TAB
+            $("#mm-tabcloseleft").click(function () {
+                var prevall = $(".tabs-selected").prevAll();
+                if (prevall.length == 0) {
+                    //alert('到头了，前边没有啦~~');
+                    return false;
+                }
+                prevall.each(function (i, n) {
+                    var t = $("a:eq(0) span", $(n)).text();
+                    if (t != mainTabTitle) {
+                        $("#tabs").tabs("close", t);
+                    }
+                });
+                return false;
+            });
+
+            //退出
+            $("#mm-exit").click(function () {
+                $("#mm").menu("hide");
+            });
+            //刷新
+            $("#mm-reload").click(function () {
+                var currTab = $("#tabs").tabs("getSelected");
+                var url = $(currTab.panel("options").content).attr("src");
+                var id = $(currTab.panel("options").content).attr("id");; //获取id
+                if (url && id) {
+                    $("#tabs").tabs("update", {
+                        tab: currTab,
+                        options: {
+                            content: createFrame(url, id)
+                        }
+                    });
+                }
+
+            });
+        }
+    </script>
+
 }
-@tag.EndElement

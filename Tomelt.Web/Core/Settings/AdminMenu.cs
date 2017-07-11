@@ -17,22 +17,50 @@ namespace Tomelt.Core.Settings {
         public string MenuName { get { return "admin"; } }
         public ITomeltServices Services { get; private set; }
 
-        public void GetNavigation(NavigationBuilder builder) {
-            builder.AddImageSet("settings")
-                .Add(T("Settings"), "99",
-                    menu => menu.Add(T("General"), "0", item => item.Action("Index", "Admin", new { area = "Settings", groupInfoId = "Index" })
-                        .Permission(Permissions.ManageSettings)), new [] {"collapsed"});
+        //public void GetNavigation(NavigationBuilder builder) {
+        //    builder.AddImageSet("settings")
+        //        .Add(T("Settings"), "99",
+        //            menu => menu.Add(T("General"), "0", item => item.Action("Index", "Admin", new { area = "Settings", groupInfoId = "Index" })
+        //                .Permission(Permissions.ManageSettings)), new [] {"collapsed"});
 
-            var site = _siteService.GetSiteSettings();
-            if (site == null)
-                return;
+        //    var site = _siteService.GetSiteSettings();
+        //    if (site == null)
+        //        return;
 
-            foreach (var groupInfo in Services.ContentManager.GetEditorGroupInfos(site.ContentItem)) {
-                GroupInfo info = groupInfo;
-                builder.Add(T("Settings"),
-                    menu => menu.Add(info.Name, info.Position, item => item.Action("Index", "Admin", new { area = "Settings", groupInfoId = info.Id })
-                        .Permission(Permissions.ManageSettings)));
-            }
+        //    foreach (var groupInfo in Services.ContentManager.GetEditorGroupInfos(site.ContentItem)) {
+        //        GroupInfo info = groupInfo;
+        //        builder.Add(T("Settings"),
+        //            menu => menu.Add(info.Name, info.Position, item => item.Action("Index", "Admin", new { area = "Settings", groupInfoId = info.Id })
+        //                .Permission(Permissions.ManageSettings)));
+        //    }
+        //}
+
+        public void GetNavigation(NavigationBuilder builder)
+        {
+            builder.AddImageSet("ok")
+                .Add(T("系统设置"), "99",
+                    menu =>
+                    {
+                        menu.LinkToFirstChild(false);
+                        menu.Add(T("网站设置"), "0", item => item.Action("Index", "Admin", new { area = "Settings", groupInfoId = "Index" })
+                            .Permission(Permissions.ManageSettings));
+
+                        var site = _siteService.GetSiteSettings();
+                        if (site == null)
+                            return;
+
+                        foreach (var groupInfo in Services.ContentManager.GetEditorGroupInfos(site.ContentItem))
+                        {
+                            GroupInfo info = groupInfo;
+                            menu.Add(info.Name, info.Position, item => item.Action("Index", "Admin", new { area = "Settings", groupInfoId = info.Id })
+                                .Permission(Permissions.ManageSettings));
+                        }
+        });
+
+
+
+
+
         }
     }
 }

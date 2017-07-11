@@ -10,13 +10,24 @@ namespace Tomelt.Modules {
             get { return "admin"; }
         }
 
-        public void GetNavigation(NavigationBuilder builder) {
-            builder.AddImageSet("modules")
-                .Add(T("Modules"), "9", menu => menu.Action("Features", "Admin", new {area = "Tomelt.Modules"}).Permission(Permissions.ManageFeatures)
-                    .Add(T("Features"), "0", item => item.Action("Features", "Admin", new {area = "Tomelt.Modules"}).Permission(Permissions.ManageFeatures).LocalNav())
-                    .Add(T("Installed"), "1", item => item.Action("Index", "Admin", new { area = "Tomelt.Modules" }).Permission(StandardPermissions.SiteOwner).LocalNav())
-                    .Add(T("Recipes"), "2", item => item.Action("Recipes", "Admin", new { area = "Tomelt.Modules" }).Permission(StandardPermissions.SiteOwner).LocalNav())
-                    );
+        //public void GetNavigation(NavigationBuilder builder) {
+        //    builder.AddImageSet("modules")
+        //        .Add(T("Modules"), "9", menu => menu.Action("Features", "Admin", new {area = "Tomelt.Modules"}).Permission(Permissions.ManageFeatures)
+        //            .Add(T("Features"), "0", item => item.Action("Features", "Admin", new {area = "Tomelt.Modules"}).Permission(Permissions.ManageFeatures).LocalNav())
+        //            .Add(T("Installed"), "1", item => item.Action("Index", "Admin", new { area = "Tomelt.Modules" }).Permission(StandardPermissions.SiteOwner).LocalNav())
+        //            .Add(T("Recipes"), "2", item => item.Action("Recipes", "Admin", new { area = "Tomelt.Modules" }).Permission(StandardPermissions.SiteOwner).LocalNav())
+        //            );
+        //}
+        public void GetNavigation(NavigationBuilder builder)
+        {
+            builder.AddImageSet("ok")
+                .Add(T("系统功能"), "88", menu =>
+                {
+                    menu.LinkToFirstChild(false);
+                    menu.Add(T("安装模块"), "0",
+                        item => item.Action("Features", "Admin", new { area = "Tomelt.Modules" })
+                            .Permission(Permissions.ManageFeatures));
+                });
         }
     }
 }

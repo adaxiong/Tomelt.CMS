@@ -10,13 +10,30 @@ namespace Tomelt.Alias {
 
         public string MenuName { get { return "admin"; } }
 
-        public void GetNavigation(NavigationBuilder builder) {
-            builder.Add(T("Aliases"), "1.4.1", menu => {
-                menu.LinkToFirstChild(true);
+        //public void GetNavigation(NavigationBuilder builder) {
+        //    builder.Add(T("Aliases"), "1.4.1", menu => {
+        //        menu.LinkToFirstChild(true);
 
-                menu.Add(T("Unmanaged"), "1", item => item.Action("IndexUnmanaged", "Admin", new { area = "Tomelt.Alias" }).Permission(StandardPermissions.SiteOwner).LocalNav());
-                menu.Add(T("Managed"), "2", item => item.Action("IndexManaged", "Admin", new { area = "Tomelt.Alias" }).Permission(StandardPermissions.SiteOwner).LocalNav());
-            });
+        //        menu.Add(T("Unmanaged"), "1", item => item.Action("IndexUnmanaged", "Admin", new { area = "Tomelt.Alias" }).Permission(StandardPermissions.SiteOwner).LocalNav());
+        //        menu.Add(T("Managed"), "2", item => item.Action("IndexManaged", "Admin", new { area = "Tomelt.Alias" }).Permission(StandardPermissions.SiteOwner).LocalNav());
+        //    });
+        //}
+
+        public void GetNavigation(NavigationBuilder builder)
+        {
+            
+
+            builder.AddImageSet("ok")
+                .Add(T("系统设置"), "99", menu =>
+                {
+                    menu.LinkToFirstChild(false);
+                    menu.Add(T("Unmanaged"), "6.1",
+                        item => item.Action("IndexUnmanaged", "Admin", new { area = "Tomelt.Alias" })
+                            .Permission(StandardPermissions.SiteOwner).LocalNav());
+                    menu.Add(T("Managed"), "6.2",
+                        item => item.Action("IndexManaged", "Admin", new { area = "Tomelt.Alias" })
+                            .Permission(StandardPermissions.SiteOwner).LocalNav());
+                });
         }
     }
 }

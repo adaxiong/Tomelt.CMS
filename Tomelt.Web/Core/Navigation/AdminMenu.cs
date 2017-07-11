@@ -14,23 +14,46 @@ namespace Tomelt.Core.Navigation {
             Services = services;
         }
 
-        public void GetNavigation(NavigationBuilder builder) {
+        //public void GetNavigation(NavigationBuilder builder) {
+        //    var user = Services.WorkContext.CurrentUser;
+
+        //    // if the current user cannot manage menus, check if they can manage at least one
+        //    if (!Services.Authorizer.Authorize(Permissions.ManageMenus)) { 
+        //        var menus = Services.ContentManager.Query("Menu").List();
+
+        //        if (!menus.Any(x => Services.Authorizer.Authorize(Permissions.ManageMenus, x))) {
+        //            return;
+        //        }
+        //    }
+
+        //    builder.AddImageSet("navigation")
+        //        .Add(T("Navigation"), "7",
+        //            menu => menu
+        //                .Add(T("Main Menu"), "0", item => item.Action("Index", "Admin", new { area = "Navigation" })
+        //                ));
+        //}
+        public void GetNavigation(NavigationBuilder builder)
+        {
             var user = Services.WorkContext.CurrentUser;
 
             // if the current user cannot manage menus, check if they can manage at least one
-            if (!Services.Authorizer.Authorize(Permissions.ManageMenus)) { 
+            if (!Services.Authorizer.Authorize(Permissions.ManageMenus))
+            {
                 var menus = Services.ContentManager.Query("Menu").List();
 
-                if (!menus.Any(x => Services.Authorizer.Authorize(Permissions.ManageMenus, x))) {
+                if (!menus.Any(x => Services.Authorizer.Authorize(Permissions.ManageMenus, x)))
+                {
                     return;
                 }
             }
 
-            builder.AddImageSet("navigation")
-                .Add(T("Navigation"), "7",
-                    menu => menu
-                        .Add(T("Main Menu"), "0", item => item.Action("Index", "Admin", new { area = "Navigation" })
-                        ));
+            builder.AddImageSet("ok")
+                .Add(T("系统功能"), "88",
+                    menu =>
+                    {
+                        menu.LinkToFirstChild(false);
+                        menu.Add(T("导航菜单"), "98", item => item.Action("Index", "Admin", new {area = "Navigation"}));
+                    });
         }
     }
 }

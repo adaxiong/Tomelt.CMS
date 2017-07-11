@@ -20,7 +20,7 @@
     //在页面中新增一个区域，只用@Zone(Model.区域名)即可
     Func<dynamic, dynamic> Zone = x => Display(x);
     Model.Content.Add(Display.Popup());
-
+    
 
 }
 
@@ -28,7 +28,7 @@
 @* 内容区域，默认展现内容的地方。 *@
 @if (Model.Content != null)
 {
-    <div id="content" class="group">
+    <div id="content" class="container-fluid">
         @Zone(Model.Content)
     </div>
 }

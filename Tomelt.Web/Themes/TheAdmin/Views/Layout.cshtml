@@ -31,49 +31,51 @@
 }
 
 
-    <!--页眉区域-->
-    @if (Model.Header != null)
-    {
-        <div id="header" data-options="region:'north',split:true,border:false" style="overflow: hidden; height: 60px; line-height: 20px; font-family: Verdana, 微软雅黑, 黑体">
-            @Zone(Model.Header)
-        </div>
-    }
+<!--页眉区域-->
+@if (Model.Header != null)
+{
+    <div id="header" data-options="region:'north',split:true,border:false" style="overflow: hidden; height: 60px; line-height: 20px; font-family: Verdana, 微软雅黑, 黑体">
+        @Zone(Model.Header)
+    </div>
+}
 
 
-    <!--菜单是默认加到Navigation区域的-->
-    @if (Model.Navigation != null)
-    {
-        <div id="nav" data-options="region:'west',split:true,title:'导航菜单',width:180">
+<!--菜单是默认加到Navigation区域的-->
+@if (Model.Navigation != null)
+{
+    <div data-options="region:'west',split:true,title:'导航菜单',width:180">
+        <div class="easyui-accordion" data-options="fit:true,border:false">
             @Zone(Model.Navigation)
         </div>
-    }
+    </div>
+}
 
 
-    <div id="main" data-options="region:'center'" style="background: #eee; overflow-y:hidden">
+<div id="mainPanle" data-options="region:'center'" style="background: #eee; overflow-y:hidden">
 
-        <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
-            <div title="系统首页" data-options="iconCls:'icon-ok'" id="index">
-                @* 内容区域，默认展现内容的地方。 *@
-                @if (Model.Content != null)
+    <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
+        <div title="系统首页" data-options="iconCls:'icon-ok'" id="index">
+            @* 内容区域，默认展现内容的地方。 *@
+            @if (Model.Content != null)
             {
-                    <div id="content" class="group">
-                        @Zone(Model.Content)
-                    </div>
-                }
-
-            </div>
+                <div id="content" class="group">
+                    @Zone(Model.Content)
+                </div>
+            }
 
         </div>
-
 
     </div>
 
 
+</div>
 
-    @if (Model.Footer != null)
-    {
-        <div id="footer" data-options="region:'south',split:true" style="height: 30px;">
-            @Zone(Model.Footer)
-        </div>
-    }
+
+
+@if (Model.Footer != null)
+{
+    <div id="footer" data-options="region:'south',split:true" style="height: 30px;">
+        @Zone(Model.Footer)
+    </div>
+}
 

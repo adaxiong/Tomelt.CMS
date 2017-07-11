@@ -8,11 +8,11 @@ namespace Tomelt.Localization {
         public string MenuName { get { return "admin"; } }
 
         public void GetNavigation(NavigationBuilder builder) {
-            builder
-                .Add(T("Settings"), menu => menu
-                    .Add(T("Transliteration"), "10.0", subMenu => subMenu.Action("Index", "TransliterationAdmin", new { area = "Tomelt.Localization" })
-                        .Add(T("Settings"), "10.0", item => item.Action("Index", "TransliterationAdmin", new { area = "Tomelt.Localization" }).LocalNav())
-                    ));
+            //builder
+            //    .Add(T("Settings"), menu => menu
+            //        .Add(T("Transliteration"), "10.0", subMenu => subMenu.Action("Index", "TransliterationAdmin", new { area = "Tomelt.Localization" })
+            //            .Add(T("Settings"), "10.0", item => item.Action("Index", "TransliterationAdmin", new { area = "Tomelt.Localization" }).LocalNav())
+            //        ));
         }
     }
 }
