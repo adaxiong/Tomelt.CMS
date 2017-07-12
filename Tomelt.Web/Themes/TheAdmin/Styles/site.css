@@ -1,8 +1,7 @@
 ﻿body {
-    font-family:verdana,helvetica,arial,sans-serif;
-  
-    font-size:12px;
-    margin:0;
+    font-family: Tahoma,Verdana,微软雅黑,黑体;
+    font-size: 12px;
+    margin: 0;
 }
 h2 {
     font-size:18px;
@@ -50,4 +49,24 @@ h2 {
     padding: 0px;
     line-height: 23px;
     font-weight: bold;
+}
+
+.f15 {
+    font-size: 15px;
+}
+.mt05 {
+    margin-top: 0.5em;
+}
+.umar-l {
+    margin-left: 0.5em;
+}
+fieldset {
+    padding: .3em .35em .3em;
+    margin: 5px 2px;
+    border: 1px solid #95B8E7;
+}
+legend {
+    padding: .5em;
+    border: 0;
+    width: auto;
 }

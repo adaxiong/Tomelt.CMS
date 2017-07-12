@@ -67,6 +67,55 @@
 .icon-more{
 	background:url('icons/more.png') no-repeat center center;
 }
+.icon-menu {
+    background: url('icons/menu.png') no-repeat center center;
+}
+.icon-page {
+    background: url('icons/page.png') no-repeat center center;
+}
+.icon-home {
+    background: url('icons/home.png') no-repeat center center;
+}
+.icon-html {
+    background: url('icons/html.png') no-repeat center center;
+}
+.icon-unchecked {
+    background: url('icons/chk_unchecked.gif') no-repeat center center;
+}
+
+.icon-checked {
+    background: url('icons/chk_checked.gif') no-repeat center center;
+}
+
+.icon-treelist {
+    background: url('icons/node_tree16.png') no-repeat center center;
+}
+
+.icon-datalist {
+    background: url('icons/application_view_list.png') no-repeat center center;
+}
+.icon-delete {
+    background: url('icons/delete.png') no-repeat center center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .icon-mini-add{

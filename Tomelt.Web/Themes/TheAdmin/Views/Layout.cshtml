@@ -15,7 +15,7 @@
     Style.Require("jQueryEasyUI_icon");
     Style.Require("jQueryEasyUI_color");
     Style.Include("site.css");
-
+    Script.Include("base.js");
     //Zone是Display的别名，帮助我们理解这个地方是显示一个区域的。
     //在页面中新增一个区域，只用@Zone(Model.区域名)即可
     Func<dynamic, dynamic> Zone = x => Display(x);
@@ -28,6 +28,7 @@
     Model.Header.Add(Display.Logo(CurrentUser: WorkContext.CurrentUser));
     Model.Footer.Add(Display.Copyright());
     Model.Content.Add(Display.Popup());
+    
 }
 
 
@@ -54,7 +55,7 @@
 <div id="mainPanle" data-options="region:'center'" style="background: #eee; overflow-y:hidden">
 
     <div id="tabs" class="easyui-tabs" data-options="fit:true,border:false">
-        <div title="系统首页" data-options="iconCls:'icon-ok'" id="index">
+        <div title="系统首页" data-options="iconCls:'icon-home'" id="index">
             @* 内容区域，默认展现内容的地方。 *@
             @if (Model.Content != null)
             {

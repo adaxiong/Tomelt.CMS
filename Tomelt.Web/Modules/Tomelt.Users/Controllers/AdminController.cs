@@ -16,13 +16,16 @@ using Tomelt.Users.Services;
 using Tomelt.Users.ViewModels;
 using Tomelt.Mvc.Extensions;
 using System;
+using Tomelt.Mvc.AntiForgery;
 using Tomelt.Settings;
 using Tomelt.UI.Navigation;
 using Tomelt.Utility.Extensions;
 
-namespace Tomelt.Users.Controllers {
+namespace Tomelt.Users.Controllers
+{
     [ValidateInput(false)]
-    public class AdminController : Controller, IUpdateModel {
+    public class AdminController : Controller, IUpdateModel
+    {
         private readonly IMembershipService _membershipService;
         private readonly IUserService _userService;
         private readonly IUserEventHandler _userEventHandlers;
@@ -34,7 +37,8 @@ namespace Tomelt.Users.Controllers {
             IUserService userService,
             IShapeFactory shapeFactory,
             IUserEventHandler userEventHandlers,
-            ISiteService siteService) {
+            ISiteService siteService)
+        {
             Services = services;
             _membershipService = membershipService;
             _userService = userService;
@@ -49,105 +53,148 @@ namespace Tomelt.Users.Controllers {
         public ITomeltServices Services { get; set; }
         public Localizer T { get; set; }
 
-        public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters) {
-            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to list users")))
+        //public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters) {
+        //    if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to list users")))
+        //        return new HttpUnauthorizedResult();
+
+        //    var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
+
+        //    // default options
+        //    if (options == null)
+        //        options = new UserIndexOptions();
+
+        //    var users = Services.ContentManager
+        //        .Query<UserPart, UserPartRecord>();
+
+        //    switch (options.Filter) {
+        //        case UsersFilter.Approved:
+        //            users = users.Where(u => u.RegistrationStatus == UserStatus.Approved);
+        //            break;
+        //        case UsersFilter.Pending:
+        //            users = users.Where(u => u.RegistrationStatus == UserStatus.Pending);
+        //            break;
+        //        case UsersFilter.EmailPending:
+        //            users = users.Where(u => u.EmailStatus == UserStatus.Pending);
+        //            break;
+        //    }
+
+        //    if(!string.IsNullOrWhiteSpace(options.Search)) {
+        //        users = users.Where(u => u.UserName.Contains(options.Search) || u.Email.Contains(options.Search));
+        //    }
+
+        //    var pagerShape = Shape.Pager(pager).TotalItemCount(users.Count());
+
+        //    switch (options.Order) {
+        //        case UsersOrder.Name:
+        //            users = users.OrderBy(u => u.UserName);
+        //            break;
+        //        case UsersOrder.Email:
+        //            users = users.OrderBy(u => u.Email);
+        //            break;
+        //        case UsersOrder.CreatedUtc:
+        //            users = users.OrderBy(u => u.CreatedUtc);
+        //            break;
+        //        case UsersOrder.LastLoginUtc:
+        //            users = users.OrderBy(u => u.LastLoginUtc);
+        //            break;
+        //    }
+
+        //    var results = users
+        //        .Slice(pager.GetStartIndex(), pager.PageSize)
+        //        .ToList();
+
+        //    var model = new UsersIndexViewModel {
+        //        Users = results
+        //            .Select(x => new UserEntry { User = x.Record })
+        //            .ToList(),
+        //            Options = options,
+        //            Pager = pagerShape
+        //    };
+
+        //    // maintain previous route data when generating page links
+        //    var routeData = new RouteData();
+        //    routeData.Values.Add("Options.Filter", options.Filter);
+        //    routeData.Values.Add("Options.Search", options.Search);
+        //    routeData.Values.Add("Options.Order", options.Order);
+
+        //    pagerShape.RouteData(routeData);
+
+        //    return View(model);
+        //}
+        public ActionResult Index()
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限查看用户列表")))
                 return new HttpUnauthorizedResult();
 
-            var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
 
-            // default options
-            if (options == null)
-                options = new UserIndexOptions();
-
-            var users = Services.ContentManager
-                .Query<UserPart, UserPartRecord>();
-
-            switch (options.Filter) {
-                case UsersFilter.Approved:
-                    users = users.Where(u => u.RegistrationStatus == UserStatus.Approved);
-                    break;
-                case UsersFilter.Pending:
-                    users = users.Where(u => u.RegistrationStatus == UserStatus.Pending);
-                    break;
-                case UsersFilter.EmailPending:
-                    users = users.Where(u => u.EmailStatus == UserStatus.Pending);
-                    break;
-            }
-
-            if(!string.IsNullOrWhiteSpace(options.Search)) {
-                users = users.Where(u => u.UserName.Contains(options.Search) || u.Email.Contains(options.Search));
-            }
-
-            var pagerShape = Shape.Pager(pager).TotalItemCount(users.Count());
-
-            switch (options.Order) {
-                case UsersOrder.Name:
-                    users = users.OrderBy(u => u.UserName);
-                    break;
-                case UsersOrder.Email:
-                    users = users.OrderBy(u => u.Email);
-                    break;
-                case UsersOrder.CreatedUtc:
-                    users = users.OrderBy(u => u.CreatedUtc);
-                    break;
-                case UsersOrder.LastLoginUtc:
-                    users = users.OrderBy(u => u.LastLoginUtc);
-                    break;
-            }
-
-            var results = users
-                .Slice(pager.GetStartIndex(), pager.PageSize)
-                .ToList();
-
-            var model = new UsersIndexViewModel {
-                Users = results
-                    .Select(x => new UserEntry { User = x.Record })
-                    .ToList(),
-                    Options = options,
-                    Pager = pagerShape
-            };
-
-            // maintain previous route data when generating page links
-            var routeData = new RouteData();
-            routeData.Values.Add("Options.Filter", options.Filter);
-            routeData.Values.Add("Options.Search", options.Search);
-            routeData.Values.Add("Options.Order", options.Order);
-
-            pagerShape.RouteData(routeData);
-            
-            return View(model);
+            return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult GetList(UserSearch search)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限查看用户列表")))
+                return new HttpUnauthorizedResult();
+            var users = Services.ContentManager.Query<UserPart, UserPartRecord>();
+            if (!string.IsNullOrWhiteSpace(search.UserNameOrEmali))
+            {
+                users = users.Where(u => u.UserName.Contains(search.UserNameOrEmali) || u.Email.Contains(search.UserNameOrEmali));
+            }
+            search.total = users.Count();
+            int page = search.page ?? 1;
+            int rows = search.rows ?? 10;
+            string order = string.IsNullOrWhiteSpace(search.order) ? "desc" : search.order;
+            var list = order == "desc" ? users.OrderByDescending(d => d.Id).Slice((page - 1) * rows, rows).ToList() : users.OrderBy(d => d.Id).Slice((page - 1) * rows, rows).ToList();
+            return Json(new
+            {
+                search.total,
+                rows = list.Select(d => new
+                {
+                    d.UserName,
+                    d.Email,
+                    d.CreatedUtc,
+                    d.LastLoginUtc,
+                    d.RegistrationStatus,
+                    d.Id
+                })
+            });
+        }
         [HttpPost]
         [FormValueRequired("submit.BulkEdit")]
-        public ActionResult Index(FormCollection input) {
+        public ActionResult Index(FormCollection input)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
-            var viewModel = new UsersIndexViewModel {Users = new List<UserEntry>(), Options = new UserIndexOptions()};
+            var viewModel = new UsersIndexViewModel { Users = new List<UserEntry>(), Options = new UserIndexOptions() };
             UpdateModel(viewModel);
 
             var checkedEntries = viewModel.Users.Where(c => c.IsChecked);
-            switch (viewModel.Options.BulkAction) {
+            switch (viewModel.Options.BulkAction)
+            {
                 case UsersBulkAction.None:
                     break;
                 case UsersBulkAction.Approve:
-                    foreach (var entry in checkedEntries) {
+                    foreach (var entry in checkedEntries)
+                    {
                         Approve(entry.User.Id);
                     }
                     break;
                 case UsersBulkAction.Disable:
-                    foreach (var entry in checkedEntries) {
+                    foreach (var entry in checkedEntries)
+                    {
                         Moderate(entry.User.Id);
                     }
                     break;
                 case UsersBulkAction.ChallengeEmail:
-                    foreach (var entry in checkedEntries) {
+                    foreach (var entry in checkedEntries)
+                    {
                         SendChallengeEmail(entry.User.Id);
                     }
                     break;
                 case UsersBulkAction.Delete:
-                    foreach (var entry in checkedEntries) {
+                    foreach (var entry in checkedEntries)
+                    {
                         Delete(entry.User.Id);
                     }
                     break;
@@ -156,7 +203,8 @@ namespace Tomelt.Users.Controllers {
             return RedirectToAction("Index", ControllerContext.RouteData.Values);
         }
 
-        public ActionResult Create() {
+        public ActionResult Create()
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -170,27 +218,33 @@ namespace Tomelt.Users.Controllers {
         }
 
         [HttpPost, ActionName("Create")]
-        public ActionResult CreatePOST(UserCreateViewModel createModel) {
+        public ActionResult CreatePOST(UserCreateViewModel createModel)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
-            if (!string.IsNullOrEmpty(createModel.UserName)) {
-                if (!_userService.VerifyUserUnicity(createModel.UserName, createModel.Email)) {
+            if (!string.IsNullOrEmpty(createModel.UserName))
+            {
+                if (!_userService.VerifyUserUnicity(createModel.UserName, createModel.Email))
+                {
                     AddModelError("NotUniqueUserName", T("User with that username and/or email already exists."));
                 }
             }
-            
-            if (!Regex.IsMatch(createModel.Email ?? "", UserPart.EmailPattern, RegexOptions.IgnoreCase)) {
+
+            if (!Regex.IsMatch(createModel.Email ?? "", UserPart.EmailPattern, RegexOptions.IgnoreCase))
+            {
                 // http://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx    
                 ModelState.AddModelError("Email", T("You must specify a valid email address."));
             }
-            
-            if (createModel.Password != createModel.ConfirmPassword) {
+
+            if (createModel.Password != createModel.ConfirmPassword)
+            {
                 AddModelError("ConfirmPassword", T("Password confirmation must match"));
             }
 
             var user = Services.ContentManager.New<IUser>("User");
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 user = _membershipService.CreateUser(new CreateUserParams(
                                                   createModel.UserName,
                                                   createModel.Password,
@@ -200,7 +254,8 @@ namespace Tomelt.Users.Controllers {
 
             var model = Services.ContentManager.UpdateEditor(user, this);
 
-            if (!ModelState.IsValid) {
+            if (!ModelState.IsValid)
+            {
                 Services.TransactionManager.Cancel();
 
                 var editor = Shape.EditorTemplate(TemplateName: "Parts/User.Create", Model: createModel, Prefix: null);
@@ -214,7 +269,8 @@ namespace Tomelt.Users.Controllers {
             return RedirectToAction("Index");
         }
 
-        public ActionResult Edit(int id) {
+        public ActionResult Edit(int id)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -223,7 +279,7 @@ namespace Tomelt.Users.Controllers {
             if (user == null)
                 return HttpNotFound();
 
-            var editor = Shape.EditorTemplate(TemplateName: "Parts/User.Edit", Model: new UserEditViewModel {User = user}, Prefix: null);
+            var editor = Shape.EditorTemplate(TemplateName: "Parts/User.Edit", Model: new UserEditViewModel { User = user }, Prefix: null);
             editor.Metadata.Position = "2";
             var model = Services.ContentManager.BuildEditor(user);
             model.Content.Add(editor);
@@ -232,7 +288,8 @@ namespace Tomelt.Users.Controllers {
         }
 
         [HttpPost, ActionName("Edit")]
-        public ActionResult EditPOST(int id) {
+        public ActionResult EditPOST(int id)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -246,17 +303,22 @@ namespace Tomelt.Users.Controllers {
             var model = Services.ContentManager.UpdateEditor(user, this);
 
             var editModel = new UserEditViewModel { User = user };
-            if (TryUpdateModel(editModel)) {
-                if (!_userService.VerifyUserUnicity(id, editModel.UserName, editModel.Email)) {
+            if (TryUpdateModel(editModel))
+            {
+                if (!_userService.VerifyUserUnicity(id, editModel.UserName, editModel.Email))
+                {
                     AddModelError("NotUniqueUserName", T("User with that username and/or email already exists."));
                 }
-                else if (!Regex.IsMatch(editModel.Email ?? "", UserPart.EmailPattern, RegexOptions.IgnoreCase)) {
+                else if (!Regex.IsMatch(editModel.Email ?? "", UserPart.EmailPattern, RegexOptions.IgnoreCase))
+                {
                     // http://haacked.com/archive/2007/08/21/i-knew-how-to-validate-an-email-address-until-i.aspx    
                     ModelState.AddModelError("Email", T("You must specify a valid email address."));
                 }
-                else {
+                else
+                {
                     // also update the Super user if this is the renamed account
-                    if (string.Equals(Services.WorkContext.CurrentSite.SuperUser, previousName, StringComparison.Ordinal)) {
+                    if (string.Equals(Services.WorkContext.CurrentSite.SuperUser, previousName, StringComparison.Ordinal))
+                    {
                         _siteService.GetSiteSettings().As<SiteSettingsPart>().SuperUser = editModel.UserName;
                     }
 
@@ -264,7 +326,8 @@ namespace Tomelt.Users.Controllers {
                 }
             }
 
-            if (!ModelState.IsValid) {
+            if (!ModelState.IsValid)
+            {
                 Services.TransactionManager.Cancel();
 
                 var editor = Shape.EditorTemplate(TemplateName: "Parts/User.Edit", Model: editModel, Prefix: null);
@@ -281,7 +344,8 @@ namespace Tomelt.Users.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Delete(int id) {
+        public ActionResult Delete(int id)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -290,13 +354,16 @@ namespace Tomelt.Users.Controllers {
             if (user == null)
                 return HttpNotFound();
 
-            if (string.Equals(Services.WorkContext.CurrentSite.SuperUser, user.UserName, StringComparison.Ordinal)) {
+            if (string.Equals(Services.WorkContext.CurrentSite.SuperUser, user.UserName, StringComparison.Ordinal))
+            {
                 Services.Notifier.Error(T("The Super user can't be removed. Please disable this account or specify another Super user account."));
             }
-            else if (string.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal)) {
+            else if (string.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal))
+            {
                 Services.Notifier.Error(T("You can't remove your own account. Please log in with another account."));
             }
-            else {
+            else
+            {
                 Services.ContentManager.Remove(user.ContentItem);
                 Services.Notifier.Information(T("User {0} deleted", user.UserName));
             }
@@ -305,7 +372,8 @@ namespace Tomelt.Users.Controllers {
         }
 
         [HttpPost]
-        public ActionResult SendChallengeEmail(int id) {
+        public ActionResult SendChallengeEmail(int id)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -316,7 +384,8 @@ namespace Tomelt.Users.Controllers {
 
             var siteUrl = Services.WorkContext.CurrentSite.BaseUrl;
 
-            if (string.IsNullOrWhiteSpace(siteUrl)) {
+            if (string.IsNullOrWhiteSpace(siteUrl))
+            {
                 siteUrl = HttpContext.Request.ToRootUrlString();
             }
 
@@ -328,7 +397,8 @@ namespace Tomelt.Users.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Approve(int id) {
+        public ActionResult Approve(int id)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -345,7 +415,8 @@ namespace Tomelt.Users.Controllers {
         }
 
         [HttpPost]
-        public ActionResult Moderate(int id) {
+        public ActionResult Moderate(int id)
+        {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
                 return new HttpUnauthorizedResult();
 
@@ -354,10 +425,12 @@ namespace Tomelt.Users.Controllers {
             if (user == null)
                 return HttpNotFound();
 
-            if (string.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal)) {
+            if (string.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal))
+            {
                 Services.Notifier.Error(T("You can't disable your own account. Please log in with another account"));
             }
-            else {
+            else
+            {
                 user.As<UserPart>().RegistrationStatus = UserStatus.Pending;
                 Services.Notifier.Information(T("User {0} disabled", user.UserName));
             }
@@ -365,11 +438,13 @@ namespace Tomelt.Users.Controllers {
             return RedirectToAction("Index");
         }
 
-        bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties) {
+        bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties)
+        {
             return TryUpdateModel(model, prefix, includeProperties, excludeProperties);
         }
 
-        public void AddModelError(string key, LocalizedString errorMessage) {
+        public void AddModelError(string key, LocalizedString errorMessage)
+        {
             ModelState.AddModelError(key, errorMessage.ToString());
         }
     }

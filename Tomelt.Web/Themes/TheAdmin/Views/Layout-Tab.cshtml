@@ -15,12 +15,12 @@
     Style.Require("jQueryEasyUI_icon");
     Style.Require("jQueryEasyUI_color");
     Style.Include("site.css");
-
+    Script.Include("base.js");
     //Zone是Display的别名，帮助我们理解这个地方是显示一个区域的。
     //在页面中新增一个区域，只用@Zone(Model.区域名)即可
     Func<dynamic, dynamic> Zone = x => Display(x);
     Model.Content.Add(Display.Popup());
-    
+   
 
 }
 
@@ -28,7 +28,7 @@
 @* 内容区域，默认展现内容的地方。 *@
 @if (Model.Content != null)
 {
-    <div id="content" class="container-fluid">
+    <div id="content">
         @Zone(Model.Content)
     </div>
 }

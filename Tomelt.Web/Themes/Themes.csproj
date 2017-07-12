@@ -81,6 +81,8 @@
     <Content Include="TheAdmin\Content\Images\logo_header.png" />
     <Content Include="TheAdmin\Content\Images\tomelt_mp.jpg" />
     <Content Include="TheAdmin\Content\tomelt.ico" />
+    <Content Include="TheAdmin\Scripts\base.js" />
+    <Content Include="TheAdmin\Scripts\tabs.js" />
     <Content Include="TheAdmin\Styles\site.css" />
     <Content Include="TheAdmin\Web.config" />
     <Content Include="TheAdmin\Scripts\Web.config" />

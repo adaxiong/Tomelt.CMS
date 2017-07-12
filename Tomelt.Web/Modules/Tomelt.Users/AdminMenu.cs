@@ -25,7 +25,7 @@ namespace Tomelt.Users
                         menu.LinkToFirstChild(false);
                         menu.Add(T("用户管理"), "0", subitem => subitem
                                         .Action("Index", "Admin", new { area = "Tomelt.Users" })
-                                        .LocalNav().Permission(Permissions.ManageUsers));
+                                        .Permission(Permissions.ManageUsers));
                     });
         }
     }
