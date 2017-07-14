@@ -1,0 +1,55 @@
+﻿@using Tomelt.EasyUIFields.Settings
+@model Tomelt.EasyUIFields.Fields.TextBoxField
+
+@{
+    var settings = Model.PartFieldDefinition.Settings.GetModel<TextBoxFieldSettings>();
+}
+<div class="col-xs-12">
+<div class="form-group">
+
+    <input class="easyui-textbox" id="@Html.FieldIdFor(m => m.Value)" name="@Html.FieldNameFor(m => m.Value)" value="@Model.Value" data-options="@if (!string.IsNullOrWhiteSpace(settings.Width)){<text>width:'@settings.Width',</text>}else
+           {
+               <text>width:'100%',</text>
+           }
+           @if (settings.Height>0)
+           {
+               <text>height:@settings.Height,</text>
+           }
+           @if (!string.IsNullOrWhiteSpace(settings.Prompt))
+           {
+               <text>prompt:'@settings.Prompt',</text>
+           }
+           
+           @if (!string.IsNullOrWhiteSpace(settings.LabelPosition))
+           {
+               <text>labelPosition:'@settings.LabelPosition',</text>
+           }
+           @if (!string.IsNullOrWhiteSpace(settings.LabelAlign))
+           {
+               <text>labelAlign:'@settings.LabelAlign',</text>
+           }
+           @if (settings.Multiline)
+           {
+               <text>multiline:@settings.Multiline.ToString().ToLower(),</text>
+           }
+           @if (settings.Editable)
+           {
+               <text>editable:@settings.Editable.ToString().ToLower(),</text>
+           }
+           @if (settings.Disabled)
+           {
+                <text>disabled:@settings.Disabled.ToString().ToLower(),</text>
+           }
+           @if (settings.Readonly)
+           {
+                <text>readonly:@settings.Readonly.ToString().ToLower(),</text>
+           }
+           @if (settings.Required)
+           {
+                <text> required:@settings.Required.ToString().ToLower(),</text>
+           }
+           label:'@Model.DisplayName'" />
+    @Html.ValidationMessageFor(m => m.Value)
+
+</div>
+</div>

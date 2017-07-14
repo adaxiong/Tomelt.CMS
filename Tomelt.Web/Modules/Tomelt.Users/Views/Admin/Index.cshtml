@@ -1,14 +1,14 @@
-@*@model Tomelt.Users.ViewModels.UsersIndexViewModel*@
+@model Tomelt.Users.ViewModels.UsersIndexViewModel
 @using Tomelt.Core.Shapes;
 @using Tomelt.Users.Models;
 @using Tomelt.Users.ViewModels;
 
-@model UserSearch
 
 @{
     //var userIndex = 0;
 
     Layout.Title = T("用户管理").ToString();
+    IDictionary<string, string> fields = ViewBag.Fields;
 }
 
 @*@using (Html.BeginFormAntiForgeryPost()) { 
@@ -140,17 +140,42 @@
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').datagrid('reload');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("Create")');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
-    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData();"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
 </div>
 
-<table id="dataGrid" style="width: 100%"></table>
-
+<table id="dataGrid" class="easyui-datagrid" style="width: 100%;"   
+       data-options="url: '@Url.Action("GetList")',
+       title:'@Layout.Title',
+       iconCls: 'icon-datalist',
+       height: 'auto',
+       nowrap: true,
+       striped: true,
+       collapsible: true,
+       sortName: 'Id',
+       sortOrder: 'asc',
+       idField: 'Id',
+       queryParams: {},
+       toolbar: '#tb',
+       singleSelect: true,
+       fitColumns: true,
+       pagination: true,
+       rownumbers: true,
+       onLoadSuccess:onLoadSuccess">   
+    <thead>   
+    <tr>   
+        @foreach (var field in fields)
+        {
+            <th data-options="field:'@field.Key',width:150,align:'center'">@field.Value</th>
+        }
+    </tr>   
+    </thead>   
+</table>  
 @using (Script.Foot())
 {
 
     <script>
         $(function () {
-            loadList();
+            //loadList();
         });
         //加载数据列表
         function loadList() {
@@ -195,7 +220,7 @@
                             formatter: function (value, row, index) {
                                 var ischeck = value == 1 ? "true" : "false";
                                 return "<input id=\""+row.Id+"\" class=\"easyui-switchbutton\" data-options=\"checked:" + ischeck+",onText: '开启',offText: '禁用'\">";
-                                
+
                             }
                         }
                     ]
@@ -204,16 +229,28 @@
                 fitColumns: true,
                 pagination: true, //如果为true，则在DataGrid控件底部显示分页工具栏。
                 rownumbers: true,//如果为true，则显示一个行号列。
-                onLoadSuccess: function () {
-                    $(".easyui-switchbutton").switchbutton({
-                        //readonly: true,
-                        height: 20,
-                        onChange: function(res) {
-                            //alert(this.id);
+                onLoadSuccess: onLoadSuccess
+            });
+        }
 
-                        }
-                    });
-
+        function onLoadSuccess() {
+            $(".easyui-switchbutton").switchbutton({
+                //readonly: true,
+                height: 20,
+                onChange: function (res) {
+                    var url;
+                    if (!res) {
+                        url = "@Url.Action("ModerateAJAX","Admin")";
+                    } else {
+                        url = "@Url.Action("ApproveAJAX", "Admin")";
+                    }
+                    $.post(url,
+                        {id:this.id},
+                        function(data) {
+                            if (data.State==0) {
+                                $.messager.alert('错误', data.Msg, 'error');
+                            }
+                        });
                 }
             });
         }

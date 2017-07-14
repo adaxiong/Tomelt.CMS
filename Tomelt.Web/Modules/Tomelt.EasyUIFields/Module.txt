@@ -1,0 +1,11 @@
+﻿Name: EasyUIFields
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.0
+TomeltVersion: 1.0
+Description: EasyUI字段
+Features:
+    Tomelt.EasyUIFields:
+        Description: Description for feature Tomelt.EasyUIFields.
+		Category: Fields

@@ -1,0 +1,8 @@
+﻿<Placement>
+  <!-- TextBox -->
+  <Place Fields_TextBox_Edit="Content:2.4"/>
+  <Place Fields_TextBox="Content:after"/>
+
+
+
+</Placement>

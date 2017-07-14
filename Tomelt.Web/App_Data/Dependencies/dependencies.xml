@@ -354,6 +354,12 @@
     </References>
   </Dependency>
   <Dependency>
+    <ModuleName>Tomelt.EasyUIFields</ModuleName>
+    <VirtualPath>~/Modules/Tomelt.EasyUIFields/bin/Tomelt.EasyUIFields.dll</VirtualPath>
+    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <References />
+  </Dependency>
+  <Dependency>
     <ModuleName>Tomelt.Forms</ModuleName>
     <VirtualPath>~/Modules/Tomelt.Forms/bin/Tomelt.Forms.dll</VirtualPath>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>

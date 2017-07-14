@@ -59,16 +59,12 @@ function updateData(url, width, height) {
     openWin(newurl + rows[0].Id, "编辑", width || 880, height || 600);
 }
 //删除
-function deleteData(isTree) {
+function deleteData(url,isTree) {
     var rows = $('#dataGrid').datagrid('getSelections');//获取所选择的行
-    if (rows.length > 0) {
-        $.messager.confirm('确认', '您确认想要删除数据吗？', function (r) {
+    if (rows.length == 1) {
+        $.messager.confirm('确认', '您确认想要删除吗？', function (r) {
             if (r) {
-                var arr = [];
-                $.each(rows, function (k, v) {
-                    arr.push(v.Id);
-                });
-                xAjax("Delete", "post", { Ids: arr.join(',') }, function (data) {
+                xAjax(url, "post", { id: rows[0].Id }, function (data) {
                     if (data.State == 1) {
                         $.messager.alert("消息", data.Msg, "info", function () {
                             reloadData(isTree);
@@ -79,9 +75,8 @@ function deleteData(isTree) {
                 });
             }
         });
-
     } else {
-        $.messager.alert("提示", "请选择要删除的数据", "warning");
+        $.messager.alert("提示", "请选择要一条要删除的数据", "warning");
         return;
     }
 }
@@ -178,26 +173,29 @@ function reloadData(isTree) {
 //打开窗口
 function openWin(url, title, width, height) {
     $("#popupWin").dialog({
-        width: width,
-        height: height,
+        //width: width,
+        //height: height,
         modal: true,
         title: title,
-        maximizable: true,
-        top:10,
-        toolbar: [{
-            text: '保存',
-            iconCls: 'icon-save',
-            handler: function () {
-                var childWindow = $(".xjh")[0].contentWindow; //#map是iframe
-                childWindow.Save();
-            }
-        }, '-', {
-            text: '关闭',
-            iconCls: 'icon-no',
-            handler: function () {
-                closeWin();
-            }
-        }],
+        //maximizable: true,
+        fit: true,
+        //inline: true,
+        border: 'thin',
+        //cls: 'c6',
+        //toolbar: [{
+        //    text: '保存',
+        //    iconCls: 'icon-save',
+        //    handler: function () {
+        //        var childWindow = $(".xjh")[0].contentWindow; //#map是iframe
+        //        childWindow.Save();
+        //    }
+        //}, '-', {
+        //    text: '关闭',
+        //    iconCls: 'icon-no',
+        //    handler: function () {
+        //        closeWin();
+        //    }
+        //}],
         content: '<iframe class="xjh" scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:99%;"></iframe>'
     });
 

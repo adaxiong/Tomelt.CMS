@@ -16,6 +16,10 @@ using Tomelt.Users.Services;
 using Tomelt.Users.ViewModels;
 using Tomelt.Mvc.Extensions;
 using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
+using System.Web.Mvc.Html;
 using Tomelt.Mvc.AntiForgery;
 using Tomelt.Settings;
 using Tomelt.UI.Navigation;
@@ -53,7 +57,8 @@ namespace Tomelt.Users.Controllers
         public ITomeltServices Services { get; set; }
         public Localizer T { get; set; }
 
-        //public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters) {
+        //public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters)
+        //{
         //    if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to list users")))
         //        return new HttpUnauthorizedResult();
 
@@ -66,7 +71,8 @@ namespace Tomelt.Users.Controllers
         //    var users = Services.ContentManager
         //        .Query<UserPart, UserPartRecord>();
 
-        //    switch (options.Filter) {
+        //    switch (options.Filter)
+        //    {
         //        case UsersFilter.Approved:
         //            users = users.Where(u => u.RegistrationStatus == UserStatus.Approved);
         //            break;
@@ -78,13 +84,15 @@ namespace Tomelt.Users.Controllers
         //            break;
         //    }
 
-        //    if(!string.IsNullOrWhiteSpace(options.Search)) {
+        //    if (!string.IsNullOrWhiteSpace(options.Search))
+        //    {
         //        users = users.Where(u => u.UserName.Contains(options.Search) || u.Email.Contains(options.Search));
         //    }
 
         //    var pagerShape = Shape.Pager(pager).TotalItemCount(users.Count());
 
-        //    switch (options.Order) {
+        //    switch (options.Order)
+        //    {
         //        case UsersOrder.Name:
         //            users = users.OrderBy(u => u.UserName);
         //            break;
@@ -103,12 +111,13 @@ namespace Tomelt.Users.Controllers
         //        .Slice(pager.GetStartIndex(), pager.PageSize)
         //        .ToList();
 
-        //    var model = new UsersIndexViewModel {
+        //    var model = new UsersIndexViewModel
+        //    {
         //        Users = results
         //            .Select(x => new UserEntry { User = x.Record })
         //            .ToList(),
-        //            Options = options,
-        //            Pager = pagerShape
+        //        Options = options,
+        //        Pager = pagerShape
         //    };
 
         //    // maintain previous route data when generating page links
@@ -123,15 +132,43 @@ namespace Tomelt.Users.Controllers
         //}
         public ActionResult Index()
         {
-            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限查看用户列表")))
-                return new HttpUnauthorizedResult();
+            //获取当前内容类型
+            var part= Services.ContentManager.New("User").Parts.FirstOrDefault(d => d.PartDefinition.Name == "User");
+            IDictionary<string,string> dc=new Dictionary<string, string>();
+            //获取用户类型字段属性名称和显示名称
+            var record = typeof(UserPartRecord);
+            foreach (var propertyInfo in record.GetProperties())
+            {
+                var typeName = propertyInfo.Name;
+                var displayName = typeName;
+                var displayAttr = propertyInfo.GetCustomAttribute<DisplayAttribute>();
+                if (!string.IsNullOrWhiteSpace(displayAttr?.Name))
+                {
+                    displayName = displayAttr.Name;
+                }
 
+                dc.Add(typeName,displayName);
 
+            }
+            //获取该内容类型的扩展字段
+            if (part != null)
+            {
+                foreach (var contentField in part.Fields)
+                {
+                    dc.Add(contentField.Name, contentField.DisplayName);
+                }
+            }
+            //去除不必要的字段
+            if (dc.ContainsKey("ContentItemRecord"))
+            {
+                dc.Remove("ContentItemRecord");
+            }
+            ViewBag.Fields = dc;
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryTokenTomelt(false)]
-        public ActionResult GetList(UserSearch search)
+        public ActionResult GetList(UsersIndexViewModel search)
         {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限查看用户列表")))
                 return new HttpUnauthorizedResult();
@@ -157,6 +194,7 @@ namespace Tomelt.Users.Controllers
                     d.RegistrationStatus,
                     d.Id
                 })
+                
             });
         }
         [HttpPost]
@@ -269,6 +307,51 @@ namespace Tomelt.Users.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult CreateAJAX(UserCreateViewModel createModel)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+                return Json(new{State=0,Msg="无权限执行该操作"});
+
+            if (!string.IsNullOrEmpty(createModel.UserName))
+            {
+                if (!_userService.VerifyUserUnicity(createModel.UserName, createModel.Email))
+                {
+                    return Json(new { State = 0, Msg = "用户名或电子邮箱已存在" });
+                }
+            }
+
+            if (!Regex.IsMatch(createModel.Email ?? "", UserPart.EmailPattern, RegexOptions.IgnoreCase))
+            {
+                return Json(new { State = 0, Msg = "请输入正确的电子邮箱格式" });
+            }
+
+            if (createModel.Password != createModel.ConfirmPassword)
+            {
+                return Json(new { State = 0, Msg = "两次密码不匹配" });
+            }
+
+            Services.ContentManager.New<IUser>("User");
+            if (ModelState.IsValid)
+            {
+                _membershipService.CreateUser(new CreateUserParams(
+                    createModel.UserName,
+                    createModel.Password,
+                    createModel.Email,
+                    null, null, true));
+            }
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = "数据校验有误，登陆密码至少7位" });
+            }
+            return Json(new { State = 1, Msg = "创建用户成功" });
+        }
+
+
+
+
         public ActionResult Edit(int id)
         {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
@@ -285,6 +368,52 @@ namespace Tomelt.Users.Controllers
             model.Content.Add(editor);
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult EditAJAX(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+                return Json(new { State = 0, Msg = "无权限执行此操作" });
+
+            var user = Services.ContentManager.Get<UserPart>(id, VersionOptions.DraftRequired);
+
+            if (user == null)
+                return Json(new { State = 0, Msg = "用户名不存在" });
+
+            string previousName = user.UserName;
+            Services.ContentManager.UpdateEditor(user, this);
+
+            var editModel = new UserEditViewModel { User = user };
+            if (TryUpdateModel(editModel))
+            {
+                if (!_userService.VerifyUserUnicity(id, editModel.UserName, editModel.Email))
+                {
+                    Services.TransactionManager.Cancel();
+                    return Json(new { State = 0, Msg = "用户名或电子邮箱已存在" });
+                }
+                if (!Regex.IsMatch(editModel.Email ?? "", UserPart.EmailPattern, RegexOptions.IgnoreCase))
+                {
+                    Services.TransactionManager.Cancel();
+                    return Json(new { State = 0, Msg = "电子邮箱格式不正确" });
+                }
+                // also update the Super user if this is the renamed account
+                if (string.Equals(Services.WorkContext.CurrentSite.SuperUser, previousName, StringComparison.Ordinal))
+                {
+                    _siteService.GetSiteSettings().As<SiteSettingsPart>().SuperUser = editModel.UserName;
+                }
+
+                user.NormalizedUserName = editModel.UserName.ToLowerInvariant();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = "数据校验不正确" });
+            }
+
+            Services.ContentManager.Publish(user.ContentItem);
+            return Json(new { State = 1, Msg = "编辑成功" });
         }
 
         [HttpPost, ActionName("Edit")]
@@ -370,7 +499,29 @@ namespace Tomelt.Users.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult DeleteAJAX(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+                return Json(new { State = 0, Msg = "无权限执行此操作" });
 
+            var user = Services.ContentManager.Get<IUser>(id);
+
+            if (user == null)
+                return Json(new { State = 0, Msg = "用户不存在" });
+
+            if (string.Equals(Services.WorkContext.CurrentSite.SuperUser, user.UserName, StringComparison.Ordinal))
+            {
+                return Json(new { State = 0, Msg = "超级用户不能被删除。要禁用此帐户请登陆另一个超级用户帐户。" });
+            }
+            if (string.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal))
+            {
+                return Json(new { State = 0, Msg = "自己的账户不能被删除。请登陆其他账户进行操作。" });
+            }
+            Services.ContentManager.Remove(user.ContentItem);
+            return Json(new { State = 1, Msg = "删除成功" });
+        }
         [HttpPost]
         public ActionResult SendChallengeEmail(int id)
         {
@@ -437,7 +588,42 @@ namespace Tomelt.Users.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult ModerateAJAX(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+                return Json(new { State = 0, Msg = "无权限执行此操作" });
 
+            var user = Services.ContentManager.Get<IUser>(id);
+
+            if (user == null)
+                return Json(new { State = 0, Msg = "用户不存在" });
+
+            if (string.Equals(Services.WorkContext.CurrentUser.UserName, user.UserName, StringComparison.Ordinal))
+            {
+                return Json(new { State = 0, Msg = "不能禁用自己的用户，请登陆其他用户进行操作" });
+            }
+            user.As<UserPart>().RegistrationStatus = UserStatus.Pending;
+            
+            return Json(new { State = 1, Msg = "操作成功" });
+        }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult ApproveAJAX(int id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+                return Json(new { State = 0, Msg = "无权限执行此操作" });
+
+            var user = Services.ContentManager.Get<IUser>(id);
+
+            if (user == null)
+                return Json(new { State = 0, Msg = "用户不存在" });
+
+            user.As<UserPart>().RegistrationStatus = UserStatus.Approved;
+            _userEventHandlers.Approved(user);
+            return Json(new { State = 1, Msg = "操作成功" });
+        }
         bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties)
         {
             return TryUpdateModel(model, prefix, includeProperties, excludeProperties);

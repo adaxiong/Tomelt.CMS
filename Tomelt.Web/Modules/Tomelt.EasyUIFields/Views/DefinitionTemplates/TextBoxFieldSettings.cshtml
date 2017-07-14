@@ -1,0 +1,81 @@
+﻿@model Tomelt.EasyUIFields.Settings.TextBoxFieldSettings
+
+<fieldset>
+    <div class="editor-field">
+        <label for="@Html.FieldIdFor(m => m.Width)">@T("宽度")</label>
+        @Html.TextBoxFor(m => m.Width, new { @class = "text"})
+        @Html.ValidationMessageFor(m => m.Width)
+        <span class="hint">@T("字段宽度")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="editor-field">
+        <label for="@Html.FieldIdFor(m => m.Height)">@T("宽度")</label>
+        @Html.TextBoxFor(m => m.Height, new { @class = "text" })
+        @Html.ValidationMessageFor(m => m.Height)
+        <span class="hint">@T("字段高度")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div>
+        @Html.CheckBoxFor(m => m.Required) <label for="@Html.FieldIdFor(m => m.Required)" class="forcheckbox">@T("是否必填")</label>
+        <span class="hint">@T("该字段是否必填.")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div>
+        @Html.CheckBoxFor(m => m.Readonly) <label for="@Html.FieldIdFor(m => m.Readonly)" class="forcheckbox">@T("是否只读")</label>
+        <span class="hint">@T("该字段是否只读.")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div>
+        @Html.CheckBoxFor(m => m.Editable) <label for="@Html.FieldIdFor(m => m.Editable)" class="forcheckbox">@T("是否可编辑")</label>
+        <span class="hint">@T("该字段是否可编辑.")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div>
+        @Html.CheckBoxFor(m => m.Disabled) <label for="@Html.FieldIdFor(m => m.Disabled)" class="forcheckbox">@T("是否禁用")</label>
+        <span class="hint">@T("该字段是否禁用.")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div>
+        @Html.CheckBoxFor(m => m.Multiline) <label for="@Html.FieldIdFor(m => m.Multiline)" class="forcheckbox">@T("是否多行")</label>
+        <span class="hint">@T("该字段是否多行.")</span>
+    </div>
+</fieldset>
+
+<fieldset>
+    <div class="editor-field">
+        <label for="@Html.FieldIdFor(m => m.Prompt)">@T("提示信息")</label>
+        @Html.TextBoxFor(m => m.Prompt, new { @class = "text" })
+        @Html.ValidationMessageFor(m => m.Prompt)
+        <span class="hint">@T("在输入框显示提示消息。")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="editor-field">
+        <label for="@Html.FieldIdFor(m => m.LabelAlign)">@T("标题对齐")</label>
+        @Html.TextBoxFor(m => m.LabelAlign, new { @class = "text" })
+        @Html.ValidationMessageFor(m => m.LabelAlign)
+        <span class="hint">@T("标题对齐")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div class="editor-field">
+        <label for="@Html.FieldIdFor(m => m.LabelPosition)">@T("标题位置")</label>
+        @Html.TextBoxFor(m => m.LabelPosition, new { @class = "text" })
+        @Html.ValidationMessageFor(m => m.LabelPosition)
+        <span class="hint">@T("标题位置")</span>
+    </div>
+</fieldset>
+<fieldset>
+    <div>
+        <label for="@Html.FieldIdFor(m => m.DefaultValue)">@T("默认值")</label>
+        @Html.TextBoxFor(m => m.DefaultValue, new { @class = "text" })
+        <span class="hint">@T("字段默认值")</span>
+        @Html.ValidationMessageFor(m => m.DefaultValue)
+    </div>
+</fieldset>

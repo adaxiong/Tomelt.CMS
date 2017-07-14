@@ -26,10 +26,10 @@ namespace Tomelt.ContentTypes {
                     menu.LinkToFirstChild(false);
                     menu.Add(T("内容类型"), "6.1",
                         item => item.Action("Index", "Admin", new { area = "Tomelt.ContentTypes" })
-                            .Permission(Permissions.ViewContentTypes).LocalNav());
+                            .Permission(Permissions.ViewContentTypes));
                     menu.Add(T("内容部件"), "6.2",
                         item => item.Action("ListParts", "Admin", new { area = "Tomelt.ContentTypes" })
-                            .Permission(Permissions.ViewContentTypes).LocalNav());
+                            .Permission(Permissions.ViewContentTypes));
                 });
         }
     }
