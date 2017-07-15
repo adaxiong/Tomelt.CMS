@@ -40,7 +40,7 @@ namespace Tomelt.EasyUIFields.Drivers
         {
             return ContentShape("Fields_TextBox", GetDifferentiator(field, part), () => {
                 var settings = field.PartFieldDefinition.Settings.GetModel<TextBoxFieldSettings>();
-                return shapeHelper.Fields_Input().Settings(settings);
+                return shapeHelper.Fields_TextBox().Settings(settings);
             });
         }
         protected override DriverResult Editor(ContentPart part, TextBoxField field, dynamic shapeHelper)

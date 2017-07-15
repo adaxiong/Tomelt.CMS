@@ -4,7 +4,7 @@ using Tomelt.Users.Models;
 
 namespace Tomelt.Users.ViewModels {
 
-    public class UsersIndexViewModel: DatagridPagerParameters
+    public class UsersIndexViewModel
     {
         public IList<UserEntry> Users { get; set; }
         public UserIndexOptions Options { get; set; }
@@ -47,5 +47,12 @@ namespace Tomelt.Users.ViewModels {
         Disable,
         Approve,
         ChallengeEmail
+    }
+
+    public class UsersSearch : DatagridPagerParameters
+    {
+        public string UserNameOrEmali { get; set; }
+        public string UserSortBy { get; set; }
+        public string UserStaus { get; set; }
     }
 }

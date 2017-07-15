@@ -57,83 +57,84 @@ namespace Tomelt.Users.Controllers
         public ITomeltServices Services { get; set; }
         public Localizer T { get; set; }
 
-        //public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters)
-        //{
-        //    if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to list users")))
-        //        return new HttpUnauthorizedResult();
+        public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to list users")))
+                return new HttpUnauthorizedResult();
 
-        //    var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
+            var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
 
-        //    // default options
-        //    if (options == null)
-        //        options = new UserIndexOptions();
+            // default options
+            if (options == null)
+                options = new UserIndexOptions();
 
-        //    var users = Services.ContentManager
-        //        .Query<UserPart, UserPartRecord>();
+            var users = Services.ContentManager
+                .Query<UserPart, UserPartRecord>();
 
-        //    switch (options.Filter)
-        //    {
-        //        case UsersFilter.Approved:
-        //            users = users.Where(u => u.RegistrationStatus == UserStatus.Approved);
-        //            break;
-        //        case UsersFilter.Pending:
-        //            users = users.Where(u => u.RegistrationStatus == UserStatus.Pending);
-        //            break;
-        //        case UsersFilter.EmailPending:
-        //            users = users.Where(u => u.EmailStatus == UserStatus.Pending);
-        //            break;
-        //    }
+            switch (options.Filter)
+            {
+                case UsersFilter.Approved:
+                    users = users.Where(u => u.RegistrationStatus == UserStatus.Approved);
+                    break;
+                case UsersFilter.Pending:
+                    users = users.Where(u => u.RegistrationStatus == UserStatus.Pending);
+                    break;
+                case UsersFilter.EmailPending:
+                    users = users.Where(u => u.EmailStatus == UserStatus.Pending);
+                    break;
+            }
 
-        //    if (!string.IsNullOrWhiteSpace(options.Search))
-        //    {
-        //        users = users.Where(u => u.UserName.Contains(options.Search) || u.Email.Contains(options.Search));
-        //    }
+            if (!string.IsNullOrWhiteSpace(options.Search))
+            {
+                users = users.Where(u => u.UserName.Contains(options.Search) || u.Email.Contains(options.Search));
+            }
 
-        //    var pagerShape = Shape.Pager(pager).TotalItemCount(users.Count());
+            var pagerShape = Shape.Pager(pager).TotalItemCount(users.Count());
 
-        //    switch (options.Order)
-        //    {
-        //        case UsersOrder.Name:
-        //            users = users.OrderBy(u => u.UserName);
-        //            break;
-        //        case UsersOrder.Email:
-        //            users = users.OrderBy(u => u.Email);
-        //            break;
-        //        case UsersOrder.CreatedUtc:
-        //            users = users.OrderBy(u => u.CreatedUtc);
-        //            break;
-        //        case UsersOrder.LastLoginUtc:
-        //            users = users.OrderBy(u => u.LastLoginUtc);
-        //            break;
-        //    }
+            switch (options.Order)
+            {
+                case UsersOrder.Name:
+                    users = users.OrderBy(u => u.UserName);
+                    break;
+                case UsersOrder.Email:
+                    users = users.OrderBy(u => u.Email);
+                    break;
+                case UsersOrder.CreatedUtc:
+                    users = users.OrderBy(u => u.CreatedUtc);
+                    break;
+                case UsersOrder.LastLoginUtc:
+                    users = users.OrderBy(u => u.LastLoginUtc);
+                    break;
+            }
 
-        //    var results = users
-        //        .Slice(pager.GetStartIndex(), pager.PageSize)
-        //        .ToList();
+            var results = users
+                .Slice(pager.GetStartIndex(), pager.PageSize)
+                .ToList();
 
-        //    var model = new UsersIndexViewModel
-        //    {
-        //        Users = results
-        //            .Select(x => new UserEntry { User = x.Record })
-        //            .ToList(),
-        //        Options = options,
-        //        Pager = pagerShape
-        //    };
+            var model = new UsersIndexViewModel
+            {
+                Users = results
+                    .Select(x => new UserEntry { User = x.Record })
+                    .ToList(),
+                Options = options,
+                Pager = pagerShape
+            };
 
-        //    // maintain previous route data when generating page links
-        //    var routeData = new RouteData();
-        //    routeData.Values.Add("Options.Filter", options.Filter);
-        //    routeData.Values.Add("Options.Search", options.Search);
-        //    routeData.Values.Add("Options.Order", options.Order);
+            // maintain previous route data when generating page links
+            var routeData = new RouteData();
+            routeData.Values.Add("Options.Filter", options.Filter);
+            routeData.Values.Add("Options.Search", options.Search);
+            routeData.Values.Add("Options.Order", options.Order);
 
-        //    pagerShape.RouteData(routeData);
+            pagerShape.RouteData(routeData);
 
-        //    return View(model);
-        //}
-        public ActionResult Index()
+            return View(model);
+        }
+        public ActionResult List()
         {
             //获取当前内容类型
             var part= Services.ContentManager.New("User").Parts.FirstOrDefault(d => d.PartDefinition.Name == "User");
+            
             IDictionary<string,string> dc=new Dictionary<string, string>();
             //获取用户类型字段属性名称和显示名称
             var record = typeof(UserPartRecord);
@@ -168,7 +169,7 @@ namespace Tomelt.Users.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryTokenTomelt(false)]
-        public ActionResult GetList(UsersIndexViewModel search)
+        public ActionResult GetList(UsersSearch search)
         {
             if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限查看用户列表")))
                 return new HttpUnauthorizedResult();

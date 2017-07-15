@@ -29,7 +29,7 @@
     <script type="text/javascript">
         $(function() {
             $('form').form({
-                url:"@Url.Action("EditAJAX","Admin",new{area= "Tomelt.Users",id=Model.User.Id})",
+                url:this.action,
                 onSubmit: function(){
                     var isValid = $(this).form('validate');
                     $.messager.progress();	// 显示进度条

@@ -46,7 +46,7 @@
     <ExtensionId>Tomelt.EasyUIFields</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.EasyUIFields/bin/Tomelt.EasyUIFields.dll</VirtualPath>
-    <Hash>49131abcad949f16</Hash>
+    <Hash>49131b8b469fa11d</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Forms</ExtensionId>
@@ -154,7 +154,7 @@
     <ExtensionId>Tomelt.Users</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Users/bin/Tomelt.Users.dll</VirtualPath>
-    <Hash>24ff23c196706eef</Hash>
+    <Hash>24ff2477ebb6e4fc</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Widgets</ExtensionId>
