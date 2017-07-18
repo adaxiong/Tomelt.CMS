@@ -1,0 +1,148 @@
+﻿@model Tomelt.Core.Settings.ViewModels.SiteSettingsPartViewModel
+@using Tomelt.Settings;
+@{
+    var resourceDebugMode = new SelectList(new object[] {
+        new { Id = ResourceDebugMode.FromAppSetting, Text = T("使用WEB.CONFIG设置").Text },
+        new { Id = ResourceDebugMode.Enabled, Text = T("启用").Text },
+        new { Id = ResourceDebugMode.Disabled, Text = T("禁用").Text },
+    }, "Id", "Text", Model.ResourceDebugMode);
+}
+
+<div class="col-xs-12 text-center">
+    <div class="form-group">
+        <h4>@T("综合设置")</h4>
+        <hr />
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.SiteName, "easyui-textbox", new
+   {
+       label = T("网站名称"),
+       required = true,
+       labelPosition="top",
+       width = "100%"
+   })
+        @Html.ValidationMessageFor(m => m.SiteName, "*")
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.BaseUrl, "easyui-textbox", new
+        {
+            label = T("网站域名"),
+            labelPosition = "top",
+            width = "100%"
+        })
+        <p class="description">@T("输入网站首页的完整URL。")@T("如：http://localhost:30320/orchardlocal，http://www.yourdomain.com")</p>
+    </div>
+</div>
+<div class="col-xs-12 hidden">
+    <div class="form-group">
+        <label for="SiteCulture">@T("默认网站语言")</label>
+        @Html.DropDownList("SiteCulture", new SelectList(Model.SiteCultures, Model.SiteCulture),new{@class= "easyui-combobox",style="width:100%;", data_options= "editable:false,panelHeight:'auto'" })
+        @Html.ValidationMessage("SiteCulture", "*")
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        <label for="SiteCalendar">@T("默认网站日历")</label>
+        @Html.DropDownList("SiteCalendar", new[] { new SelectListItem { Text = T("区域性日历").Text, Value = "" } }.Union(new SelectList(Model.SiteCalendars, Model.SiteCalendar)), new { @class = "easyui-combobox", style = "width:100%;", data_options = "editable:false,panelHeight:'auto'" })
+        @Html.ValidationMessage("SiteCalendar", "*")
+        <p class="description">@T("确定当显示和编辑日期和时间时，默认使用的日历")@T("'语言日历(Culture calenda)' 选项表示当前请求的所使用的语言下的默认日历， （不一定是配置的默认网站语言）。")</p>
+        
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        <label for="SiteCalendar">@T("默认时区")</label>
+        @Html.DropDownList("TimeZone", new[] { new SelectListItem { Text = T("服务器当地时区").Text, Value = "" } }.Union(new SelectList(Model.TimeZones, "Id", "", Model.TimeZone)), new { @class = "easyui-combobox", style = "width:100%;", data_options = "editable:false,panelHeight:200" })
+        @Html.ValidationMessage("TimeZone", "*")
+        <p class="description">@T("确定当显示和编辑日期和时间时，默认使用的时区。")</p>
+
+    </div>
+</div>
+<div class="col-xs-12 hidden">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.PageTitleSeparator, "easyui-textbox", new
+   {
+       label = T("页面标题分隔符号"),
+       labelPosition = "top",
+       width = "100%"
+   })
+        @Html.ValidationMessageFor(m => m.PageTitleSeparator, "*")
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.SuperUser, "easyui-textbox", new
+   {
+       label = T("超级用户"),
+       labelPosition = "top",
+       width = "100%",
+       //@readonly = AuthorizedFor(Tomelt.Security.StandardPermissions.SiteOwner).ToString().ToLower()
+   })
+        <p class="description">@T("输入一个存在的帐户名，如不需要超级用户帐户则留空")</p>
+        @Html.ValidationMessageFor(m => m.PageTitleSeparator, "*")
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        <label for="SiteDebugMode">@T("默认网站日历")</label>
+        @Html.DropDownList("ResourceDebugMode", resourceDebugMode, new { @class = "easyui-combobox", style = "width:100%;", data_options = "editable:false,panelHeight:'auto'" })
+        <p class="description">@T("确定是否加载debug版或min版的脚本和样式表。")</p>
+
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+                <label for="@Html.FieldIdFor(m => m.UseCdn)">
+                    @Html.CheckBoxFor(m => m.UseCdn)
+                    @T("使用 CDN").Text
+                </label>
+        <p class="description">@T("选择脚本和样式表使用已定义的 CDN 值或本地版本。")</p>
+    </div>
+</div>
+<div class="col-xs-12 hidden">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.PageSize, "easyui-numberbox", new
+        {
+            label = T("默认每页项目数"),
+            labelPosition = "top",
+            width = "100%"
+            
+        })
+        <p class="description">@T("确定默认每页显示的项目数。")</p>
+
+    </div>
+</div>
+@if (AuthorizedFor(Tomelt.Security.StandardPermissions.SiteOwner)) {
+    
+    <div class="col-xs-12 hidden">
+        <div class="form-group">
+            @Html.EasyUIFor(m => m.MaxPageSize, "easyui-numberbox", new
+            {
+                label = T("每页的最大项数"),
+                labelPosition = "top",
+                width = "100%"
+            
+            })
+            <p class="description">@T("确定每页显示的最大项数。设为0则表示为无限制。")</p>
+
+        </div>
+    </div>
+    <div class="col-xs-12 hidden">
+        <div class="form-group">
+            @Html.EasyUIFor(m => m.MaxPagedCount, "easyui-numberbox", new
+            {
+                label = T("最后一个索引页中的项目"),
+                labelPosition = "top",
+                width = "100%"
+            
+            })
+            <p class="description">@T("确定数据库中可以显示的最后一个元素。默认 0 表示无限制。")</p>
+
+        </div>
+    </div>
+    
+}

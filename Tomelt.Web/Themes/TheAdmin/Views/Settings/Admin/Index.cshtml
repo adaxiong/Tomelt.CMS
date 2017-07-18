@@ -1,0 +1,15 @@
+﻿﻿@using Tomelt.ContentManagement
+@{
+    Layout.Title = T("网站设置").ToString();
+}
+
+@using (Html.BeginFormAntiForgeryPost()) {
+    @Html.ValidationSummary()
+    @Display(Model.Content)
+    <div class="col-xs-12">
+        
+        <div class="form-group">
+            <button class="easyui-linkbutton c6" type="submit" data-options="iconCls:'icon-save'">@T("保存")</button>
+        </div>
+    </div>
+}

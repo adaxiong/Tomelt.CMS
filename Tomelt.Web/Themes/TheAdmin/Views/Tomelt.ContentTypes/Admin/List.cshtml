@@ -1,0 +1,170 @@
+@model Tomelt.ContentTypes.ViewModels.ListContentTypesViewModel
+@{
+    Layout.Title = T("内容类型").ToString();
+}
+
+<form id="searchFrm">
+    <fieldset class="text-center">
+        <legend class="f15"><span class="glyphicon glyphicon-search"></span> 搜索条件</legend>
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.EasyUI("name", "", "easyui-textbox", new
+                {
+                    width = 200,
+                    prompt = "-请输入关键字-",
+                    label = "类型名称：",
+                })
+
+            </div>
+
+
+        </div>
+
+        <div class="row mt05">
+            <div class="col-xs-12">
+                <a href="javascript:searchData();" class="easyui-linkbutton c8 " data-options="iconCls:'icon-search icon-large',width:80">查找</a>
+                <a href="javascript:resetData();" class="easyui-linkbutton c2 umar-l" data-options="iconCls:'icon-reload',width:80">重置</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<div id="tb">
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').datagrid('reload');"></a>
+
+</div>
+
+<table id="dataGrid" class="easyui-datagrid" style="width: 100%;"
+       data-options="url: '@Url.Action("GetList")',
+       title:'@Layout.Title',
+       iconCls: 'icon-datalist',
+       height: 'auto',
+       nowrap: true,
+       striped: true,
+       collapsible: true,
+       sortName: 'Category',
+       sortOrder: 'asc',
+       idField: 'Id',
+       queryParams: {},
+       toolbar: '#tb',
+       singleSelect: true,
+       fitColumns: true,
+       pagination: false,
+       rownumbers: true,
+       onLoadSuccess:onLoadSuccess
+       ">
+    <thead>
+    <tr>
+        <th data-options="field:'DisplayName',width:100,align:'center'">类型名称</th>
+        <th data-options="field:'Type',width:150,align:'center'">类型类别</th>
+        <th data-options="field:'Name',width:300,align:'center'">操作</th>
+
+    </tr>
+    </thead>
+</table>
+@using (Script.Foot())
+{
+
+    <script>
+        $(function () {
+            //formatCol();
+
+        });
+
+        function onLoadSuccess() {
+            @*$('#dataGrid').datagrid("autoMergeCells", ['Category']);
+            var url = "@Url.Action("FeaturesAJAX")";
+            $(".easyui-tooltip").tooltip({
+                onShow: function () {
+                    $(this).tooltip('tip').css({
+                        borderColor: '#000'
+                    });
+                }
+            });
+            $(".easyui-linkbutton").linkbutton({
+                onClick: function () {
+                    $.post(url,
+                        { featureId: this.id, action: "Update", force: true },
+                        function (data) {
+
+                            if (data.State==1) {
+                                $.messager.alert('消息', data.Msg, 'info',
+                                    function () {
+                                        parent.window.location.reload();
+                                    });
+                            } else {
+                                $.messager.alert('错误', data.Msg, 'error',
+                                    function () {
+                                        searchData();
+                                    });
+                            }
+                            
+                        });
+                }
+            });
+            $(".easyui-switchbutton").switchbutton({
+
+                height: 20,
+                onChange: function (res) {
+                    var action;
+                    if (res) {
+                        action = "Disable";
+                    } else {
+                        action = "Enable";
+                    }
+                    $.post(url,
+                        { featureId: this.id, action: action, force:true},
+                        function(data) {
+                            if (data.State == 1) {
+                                $.messager.alert('消息', data.Msg, 'info',
+                                    function () {
+                                        parent.window.location.reload();
+                                    });
+                            } else {
+                                $.messager.alert('错误', data.Msg, 'error',
+                                    function () {
+                                        searchData();
+                                    });
+                            }
+                        });
+                }
+            });*@
+        }
+        function formatCol() {
+            var dg = $('#dataGrid');
+            var descriptionCol = dg.datagrid('getColumnOption', 'Description');
+            descriptionCol.formatter = function (value, row, index) {
+                if (value) {
+                    return '<span title="' + value + '"  class="easyui-tooltip">' + value + '</span>';
+                } else {
+                    return "";
+                }
+            }
+            var dependenciesCol = dg.datagrid('getColumnOption', 'Dependencies');
+            dependenciesCol.formatter = function (value, row, index) {
+                if (value) {
+                    return '<span title="' + value + '"  class="easyui-tooltip">' + value + '</span>';
+                } else {
+                    return "";
+                }
+            }
+            var isEnabledCol = dg.datagrid('getColumnOption', 'IsEnabled');
+            isEnabledCol.formatter = function (value, row, index) {
+                var result = "核心模块";
+                var isCore = row.Category != "Core";
+                if (isCore && row.IsEnabled) {
+                    result= "<input id=\"" + row.Id + "\" class=\"easyui-switchbutton\" data-options=\"checked:false,onText: '启用',offText: '禁用'\">";
+                }
+                if (row.ShowEnable && !row.IsEnabled) {
+                    result = "<input id=\"" + row.Id + "\" class=\"easyui-switchbutton\" data-options=\"checked:true,onText: '启用',offText: '禁用'\">";
+                }
+                if (row.NeedsUpdate) {
+                    result = "<a href='#' id=\"" + row.Id + "\" class='easyui-linkbutton c5' data-options=\"iconCls:'icon-tip'\">更新</a>";
+                }
+                return result;
+
+            }
+        }
+    </script>
+
+}

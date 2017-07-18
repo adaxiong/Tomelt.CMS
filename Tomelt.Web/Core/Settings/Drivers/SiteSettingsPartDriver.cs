@@ -84,14 +84,14 @@ namespace Tomelt.Core.Settings.Drivers {
                     //the user management module ensures the super user can't be deleted, but it can be disabled
                 else {
                     if (_membershipService.GetUser(model.SuperUser) == null) {
-                        updater.AddModelError("SuperUser", T("The user {0} was not found", model.SuperUser));
+                        updater.AddModelError("SuperUser", T("用户 {0} 不存在", model.SuperUser));
                     }
                 }
 
                 // ensure the base url is absolute if provided
                 if (!String.IsNullOrWhiteSpace(model.Site.BaseUrl)) {
                     if (!Uri.IsWellFormedUriString(model.Site.BaseUrl, UriKind.Absolute)) {
-                        updater.AddModelError("BaseUrl", T("The base url must be absolute."));
+                        updater.AddModelError("BaseUrl", T("网站地址必须是绝对路径."));
                     }
                     // if the base url has been modified, try to ping it
                     else if (!String.Equals(previousBaseUrl, model.Site.BaseUrl, StringComparison.OrdinalIgnoreCase)) {
@@ -105,7 +105,7 @@ namespace Tomelt.Core.Settings.Drivers {
                             if (ex.IsFatal()) {
                                 throw;
                             }
-                            _notifier.Warning(T("The base url you entered could not be requested from current location."));
+                            _notifier.Warning(T("网站URL不能应用于当前地址."));
                             Logger.Warning(ex, "Could not query base url: {0}", model.Site.BaseUrl);
                         }
                     }

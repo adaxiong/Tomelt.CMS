@@ -16,7 +16,7 @@
 
 <form id="searchFrm">
     <fieldset class="text-center">
-        <legend class="f15"><span class="glyphicon glyphicon-search"></span> 搜索条件自定义</legend>
+        <legend class="f15"><span class="glyphicon glyphicon-search"></span> 搜索条件</legend>
         <div class="row">
             <div class="col-xs-4">
                 @Html.EasyUIFor(d => d.UserNameOrEmali, "easyui-textbox", new
@@ -66,7 +66,8 @@
        fitColumns: true,
        pagination: true,
        rownumbers: true,
-       onLoadSuccess:onLoadSuccess">   
+       onLoadSuccess:onLoadSuccess,
+       onDblClickRow: onDblClickRow">   
     <thead>   
     <tr>   
         @foreach (var field in fields)
@@ -82,6 +83,8 @@
     <script>
         $(function () {
             //loadList();
+            var $dg = $('#dataGrid');
+            formatCol($dg);
         });
         //加载数据列表
         function loadList() {
@@ -135,7 +138,8 @@
                 fitColumns: true,
                 pagination: true, //如果为true，则在DataGrid控件底部显示分页工具栏。
                 rownumbers: true,//如果为true，则显示一个行号列。
-                onLoadSuccess: onLoadSuccess
+                onLoadSuccess: onLoadSuccess,
+                onDblClickRow: onDblClickRow
             });
         }
 
@@ -154,11 +158,34 @@
                         {id:this.id},
                         function(data) {
                             if (data.State==0) {
-                                $.messager.alert('错误', data.Msg, 'error');
-                            }
+                                $.messager.alert('错误', data.Msg, 'error',
+                                    function() {
+                                        searchData();
+                                    });
+                            } 
                         });
                 }
             });
+        }
+
+        function onDblClickRow(index, row) {
+            updateData('@Url.Action("Edit")');
+        }
+
+        function formatCol(dg) {
+            var statusCol = dg.datagrid('getColumnOption', 'RegistrationStatus');
+            statusCol.formatter = function (value, row, index) {
+                var ischeck = value == 1 ? "true" : "false";
+                return "<input id=\"" + row.Id + "\" class=\"easyui-switchbutton\" data-options=\"checked:" + ischeck + ",onText: '开启',offText: '禁用'\">";
+            }
+            var createdUtcCol = dg.datagrid('getColumnOption', 'CreatedUtc');
+            createdUtcCol.formatter = function (value, row, index) {
+                return formatValue.dateTime(value);
+            }
+            var lastLoginUtcCol = dg.datagrid('getColumnOption', 'LastLoginUtc');
+            lastLoginUtcCol.formatter = function (value, row, index) {
+                return formatValue.dateTime(value);
+            }
         }
     </script>
 

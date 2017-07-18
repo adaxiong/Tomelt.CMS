@@ -183,6 +183,19 @@
   <ItemGroup>
     <Content Include="TheAdmin\Views\Tomelt.Users\Admin\Create.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Settings\Admin\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.Modules\Admin\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Parts.Settings.SiteSettingsPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\List.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

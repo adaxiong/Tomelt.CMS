@@ -24,8 +24,8 @@ namespace Tomelt.Modules {
                 .Add(T("系统功能"), "88", menu =>
                 {
                     menu.LinkToFirstChild(false);
-                    menu.Add(T("安装模块"), "0",
-                        item => item.Action("Features", "Admin", new { area = "Tomelt.Modules" })
+                    menu.Add(T("模块管理"), "0",
+                        item => item.Action("List", "Admin", new { area = "Tomelt.Modules" })
                             .Permission(Permissions.ManageFeatures));
                 });
         }

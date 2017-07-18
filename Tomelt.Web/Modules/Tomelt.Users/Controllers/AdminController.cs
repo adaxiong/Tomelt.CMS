@@ -59,7 +59,7 @@ namespace Tomelt.Users.Controllers
 
         public ActionResult Index(UserIndexOptions options, PagerParameters pagerParameters)
         {
-            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to list users")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限查看")))
                 return new HttpUnauthorizedResult();
 
             var pager = new Pager(_siteService.GetSiteSettings(), pagerParameters);
@@ -244,7 +244,7 @@ namespace Tomelt.Users.Controllers
 
         public ActionResult Create()
         {
-            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             var user = Services.ContentManager.New<IUser>("User");
@@ -259,7 +259,7 @@ namespace Tomelt.Users.Controllers
         [HttpPost, ActionName("Create")]
         public ActionResult CreatePOST(UserCreateViewModel createModel)
         {
-            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("Not authorized to manage users")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageUsers, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             if (!string.IsNullOrEmpty(createModel.UserName))

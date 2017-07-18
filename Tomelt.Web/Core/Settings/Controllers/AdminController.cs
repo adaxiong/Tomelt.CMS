@@ -28,7 +28,7 @@ namespace Tomelt.Core.Settings.Controllers {
         public Localizer T { get; set; }
 
         public ActionResult Index(string groupInfoId) {
-            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("Not authorized to manage settings")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             dynamic model;
@@ -54,7 +54,7 @@ namespace Tomelt.Core.Settings.Controllers {
 
         [HttpPost, ActionName("Index")]
         public ActionResult IndexPOST(string groupInfoId) {
-            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("Not authorized to manage settings")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             var site = _siteService.GetSiteSettings();
@@ -82,13 +82,13 @@ namespace Tomelt.Core.Settings.Controllers {
                 return View(model);
             }
 
-            Services.Notifier.Information(T("Settings updated"));
+            Services.Notifier.Information(T("设置更新成功"));
             return RedirectToAction("Index");
         }
 
         public ActionResult Culture() {
             //todo: class and/or method attributes for our auth?
-            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("Not authorized to manage settings")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             var model = new SiteCulturesViewModel {
@@ -104,7 +104,7 @@ namespace Tomelt.Core.Settings.Controllers {
 
         [HttpPost]
         public ActionResult AddCulture(string systemCultureName, string cultureName) {
-            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("Not authorized to manage settings")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             cultureName = string.IsNullOrWhiteSpace(cultureName) ? systemCultureName : cultureName;
@@ -117,7 +117,7 @@ namespace Tomelt.Core.Settings.Controllers {
 
         [HttpPost]
         public ActionResult DeleteCulture(string cultureName) {
-            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("Not authorized to manage settings")))
+            if (!Services.Authorizer.Authorize(Permissions.ManageSettings, T("无权限")))
                 return new HttpUnauthorizedResult();
 
             _cultureManager.DeleteCulture(cultureName);

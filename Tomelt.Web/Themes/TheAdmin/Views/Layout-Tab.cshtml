@@ -24,7 +24,11 @@
 
 }
 
-
+@if (Model.Messages != null) {
+    <div id="messages" style="margin-top: 15px;">
+        @Zone(Model.Messages)
+    </div>
+}
 @* 内容区域，默认展现内容的地方。 *@
 @if (Model.Content != null)
 {

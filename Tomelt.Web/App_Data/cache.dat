@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-16"?>
 <Tenants>
-  <Default>8|Tomelt.Framework;Common;Contents;Dashboard;Navigation;Scheduling;Settings;Shapes;Title;Tomelt.Pages;Tomelt.ContentPicker;Tomelt.Themes;Tomelt.Users;Tomelt.Roles;Tomelt.Modules;PackagingServices;Tomelt.Packaging;Gallery;Tomelt.Recipes;Tomelt.Alias;Tomelt.Tokens;Tomelt.Autoroute;Tomelt.Resources;Tomelt.Resources;Tomelt.Alias;Tomelt.Autoroute;Containers;Feeds;Tomelt.CodeGeneration;Tomelt.Setup.Services;Tomelt.ContentTypes;Tomelt.EasyUIFields;|</Default>
+  <Default>12|Tomelt.Framework;Common;Contents;Dashboard;Navigation;Scheduling;Settings;Shapes;Title;Tomelt.Pages;Tomelt.ContentPicker;Tomelt.Themes;Tomelt.Users;Tomelt.Roles;Tomelt.Modules;PackagingServices;Tomelt.Packaging;Gallery;Tomelt.Recipes;Tomelt.Alias;Tomelt.Tokens;Tomelt.Autoroute;Tomelt.Resources;Tomelt.Resources;Tomelt.Alias;Tomelt.Autoroute;Containers;Feeds;Tomelt.CodeGeneration;Tomelt.Setup.Services;Tomelt.EasyUIFields;Tomelt.ContentTypes;|</Default>
 </Tenants>
