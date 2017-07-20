@@ -1,0 +1,11 @@
+﻿@model Tomelt.Core.Common.OwnerEditor.OwnerEditorSettings
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.ShowOwnerEditor)">
+            @Html.CheckBoxFor(m => m.ShowOwnerEditor)
+            @T("对拥有者显示编辑器")
+        </label>
+        @Html.ValidationMessageFor(m => m.ShowOwnerEditor)
+    </div>
+</div>

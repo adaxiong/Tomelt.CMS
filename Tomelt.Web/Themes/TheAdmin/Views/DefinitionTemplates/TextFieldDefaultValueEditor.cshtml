@@ -1,0 +1,16 @@
+﻿@model Tomelt.Core.Common.ViewModels.TextFieldSettingsEventsViewModel
+
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Settings.DefaultValue, "easyui-textbox", new
+   {
+       label = T("默认值"),
+       width = "50%",
+       labelPosition="top"
+   })
+        @Html.ValidationMessageFor(m => m.Settings.DefaultValue)
+        <p class="description">@T("创建一个默认内容项。(可选)")</p>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+﻿@model Tomelt.Core.Common.DateEditor.DateEditorSettings
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.ShowDateEditor)">
+            @Html.CheckBoxFor(m => m.ShowDateEditor)
+            @T("显示创建日期时间的编辑器")
+        </label>
+        @Html.ValidationMessageFor(m => m.ShowDateEditor)
+    </div>
+</div>

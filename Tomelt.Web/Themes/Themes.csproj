@@ -192,9 +192,86 @@
   <ItemGroup>
     <Content Include="TheAdmin\Views\EditorTemplates\Parts.Settings.SiteSettingsPart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\Create.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\ContentPartSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\ContentTypeSettingsViewModel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DisplayTemplates\EditPartViewModel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DisplayTemplates\EditTypeViewModel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DisplayTemplates\Field.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DisplayTemplates\Fields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DisplayTemplates\Settings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Field.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Fields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\TypePart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\TypePartField.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\TypePartFields.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\TypeParts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\TextBoxFieldSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\TextFieldDefaultValueEditor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\TextFieldSettingsEventsViewModel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Flavor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\AddFieldTo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\ContentPickerFieldSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\EditField.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\AddPartsTo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\DateEditorSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\OwnerEditorSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\BodyTypePartSettings.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

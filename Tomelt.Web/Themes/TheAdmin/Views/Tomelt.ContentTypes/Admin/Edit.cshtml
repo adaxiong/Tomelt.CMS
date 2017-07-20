@@ -1,0 +1,92 @@
+@using Tomelt.Utility.Extensions;
+@model Tomelt.ContentTypes.ViewModels.EditTypeViewModel
+@{
+
+    Layout.Title = T("编辑内容类型 {0}", Html.Raw(Model.DisplayName)).Text;
+    var returnUrl = ViewContext.RequestContext.HttpContext.Request.ToUrlString();
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("EditAJAX", "Admin",new{id= Model.Name})))
+{
+    @Html.ValidationSummary()
+
+    <div class="col-xs-12" style="margin-top: 30px;">
+        <div class="form-group">
+            @Html.EasyUIFor(m => m.DisplayName, "easyui-textbox", new
+       {
+           label = T("显示名称"),
+           labelPosition = "top",
+           required = true,
+           width = "100%"
+       })
+            <p class="description">@T("内容类型ID：{0}", Model.Name)</p>
+            @Html.HiddenFor(m => m.Name)
+        </div>
+    </div>
+    { Html.RenderTemplates(Model.Templates); }
+    
+    <div class="col-xs-12">
+        
+        <div class="form-group">
+            @Html.ActionLink(T("添加字段").Text, "AddFieldTo", new {area = "Tomelt.ContentTypes", id = Model.Name,returnUrl}, new {@class = "easyui-linkbutton c2", data_options = "iconCls:'icon-add'" })
+        </div>
+        
+        @Html.EditorFor(m => m.Fields, "Fields", "")
+       
+    </div>
+
+    
+
+    <div class="col-xs-12" style="margin-top: 30px">
+        <div class="form-group">
+            @Html.ActionLink(T("添加元件").Text, "AddPartsTo", new { area = "Tomelt.ContentTypes", id = Model.Name, returnUrl }, new { @class = "easyui-linkbutton c2" , data_options = "iconCls:'icon-add'"})
+        </div>
+        
+        @Html.EditorFor(m => m.Parts, "TypeParts", "")
+    </div>
+    <div class="col-xs-12 text-center" style="margin-top: 30px;">
+        <div class="form-group">
+            <button class="easyui-linkbutton c6" name="submit.Save" value="Save" type="submit" data-options="iconCls:'icon-save'">@T("保存提交")</button>
+            <button class="easyui-linkbutton c5" type="button" data-options="iconCls:'icon-cancel'" onclick="window.parent.window.closeWin();">@T("关闭返回")</button>
+        </div>
+    </div>
+
+}
+@using(Script.Foot()){
+    <script type="text/javascript">
+        $(function() {
+            $('form').form({
+                url:this.action,
+                onSubmit: function(){
+                    var isValid = $(this).form('validate');
+                    $.messager.progress();	// 显示进度条
+                    if (!isValid) {
+                        $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                    }
+                    return isValid;	// 返回false终止表单提交
+                },
+                success:function(data){
+                    var result = JSON.parse(data);
+                    if (result.State == 1) {
+                        //刷新表单
+                        window.parent.window.reloadData();
+                        if ($.messager) {
+                            $.messager.defaults.ok = "继续";
+                            $.messager.defaults.cancel = "返回";
+                            $.messager.confirm("操作提示", result.Msg, function (r) {
+                                if (!r) {
+                                    //关闭窗口
+                                    window.parent.window.closeWin();
+                                }
+                            });
+                        }
+                    } else {
+                        $.messager.alert('错误', result.Msg, 'error');
+                    }
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                }
+            });
+            //$('form').submit();
+        });
+    </script>
+}

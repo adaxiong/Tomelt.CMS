@@ -90,3 +90,10 @@ legend {
     border: 1px solid transparent;
     border-radius: 4px;
 }
+.m-left {
+    margin-left: 20px;
+}
+
+.ul-point {
+    list-style: none;
+}

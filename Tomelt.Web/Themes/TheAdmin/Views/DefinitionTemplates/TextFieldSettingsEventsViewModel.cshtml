@@ -1,0 +1,38 @@
+﻿@model Tomelt.Core.Common.ViewModels.TextFieldSettingsEventsViewModel
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        
+        @Html.EditorFor(m => m.Settings.Flavor)
+        @Html.ValidationMessageFor(m => m.Settings.Flavor)
+       
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Settings.Required)">
+            @Html.CheckBoxFor(m => m.Settings.Required)
+            @T("必填")
+        </label>
+        <p class="description">@T("当作者编辑内容项目时显示于字段下的帮助文本。")</p>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Settings.Hint, "easyui-textbox", new
+   {
+       label = T("帮助文本"),
+       width = "50%",
+       multiline=true,
+       height=120,
+       labelPosition = "top"
+   })
+        @Html.ValidationMessageFor(m => m.Settings.Hint)
+        <p class="description">@T("当作者编辑内容项目时显示于字段下的帮助文本。")</p>
+    </div>
+</div>
+
+
+@Display.DefinitionTemplate(TemplateName: "TextFieldDefaultValueEditor", Model: Model)

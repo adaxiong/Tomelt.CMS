@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Tomelt.ContentTypes.ViewModels.EditPartFieldViewModel>
+@if (Model.Any()) {
+    <div class="easyui-accordion" data-options="multiple:true,selected:''" style="width: 100%;">
+        @foreach (var field in Model)
+             {
+                 var f = field;
+                 @Html.EditorFor(m => f, "Field", field.Prefix)
+             }
+    </div>}

@@ -1,0 +1,57 @@
+@using Tomelt.Utility.Extensions
+@model Tomelt.ContentTypes.ViewModels.AddFieldViewModel
+@{
+
+    Layout.Title = T("添加新字段到 \"{0}\"", Model.Part.DisplayName).ToString();
+    var returnUrl = Request.QueryString["returnUrl"];
+}
+<h3 class="text-center">@Layout.Title</h3>
+<hr/>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+   
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.EasyUIFor(m => m.DisplayName, "easyui-textbox", new
+            {
+                label = T("显示名称"),
+                width = "50%",
+                required = true,
+                labelPosition = "top"
+            })
+            <p class="description">@T("将显示在屏幕中的字段名称。")</p>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.EasyUIFor(m => m.Name, "easyui-textbox", new
+            {
+                label = T("技术名称"),
+                width = "50%",
+                required = true,
+                labelPosition = "top"
+            })
+            <p class="description">@T("该字段的技术名称。")</p>
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <div class="form-group">
+        
+            @Html.DropDownListFor(m => m.FieldTypeName, new SelectList(Model.Fields.Select(x => new { x.FieldTypeName, DisplayName = x.FieldTypeName.CamelFriendly() }), "FieldTypeName", "DisplayName"),new
+            {
+                @class= "easyui-combobox",style="width:50%;", data_options= "panelHeight:'auto',editable:false,label:'"+ T("文件类型") + "',labelPosition:'top'"
+            })
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button class="easyui-linkbutton c6" type="submit" data-options="iconCls:'icon-save'">@T("保存提交")</button>
+            @if (!String.IsNullOrWhiteSpace(returnUrl) && Request.IsLocalUrl(returnUrl))
+            {
+                <a class="easyui-linkbutton c5" type="button" data-options="iconCls:'icon-cancel'" href="@returnUrl">@T("关闭返回")</a>
+            }
+        </div>
+    </div>
+}

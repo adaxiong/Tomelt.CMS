@@ -67,22 +67,27 @@ namespace Tomelt.ContentTypes.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryTokenTomelt(false)]
-        public ActionResult GetList(string name = "")
+        public ActionResult GetList(string name = "",string displayname="")
         {
             if (!Services.Authorizer.Authorize(Permissions.ViewContentTypes, T("无权限.")))
                 return new HttpUnauthorizedResult();
             var rows = _contentDefinitionService.GetTypes();
             if (!string.IsNullOrWhiteSpace(name))
             {
-                rows = rows.Where(d => d.DisplayName.Contains(name));
+                rows = rows.Where(d => d.Name.ToLower().Contains(name));
+            }
+            if (!string.IsNullOrWhiteSpace(displayname))
+            {
+                rows = rows.Where(d => d.DisplayName.ToLower().Contains(displayname));
             }
             return Json(rows.Select(d => new
             {
+                Id = d.Name,
                 d.DisplayName,
                 d.Name,
                 d.Settings.GetModel<ContentTypeSettings>().Creatable,
                 Type = d.Settings.ContainsKey("Stereotype") ? d.Settings["Stereotype"] : default(string)
-            }));
+            }).OrderBy(d=>d.Name));
         }
         public ActionResult Create(string suggestion)
         {
@@ -144,7 +149,57 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("AddPartsTo", new { id = typeViewModel.Name });
         }
+        [HttpPost]
+        public ActionResult CreateAJAX(CreateTypeViewModel viewModel)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new { State = 0, Msg = "无权限操作" });
 
+            viewModel.DisplayName = viewModel.DisplayName ?? String.Empty;
+            viewModel.Name = viewModel.Name ?? String.Empty;
+
+            if (String.IsNullOrWhiteSpace(viewModel.DisplayName))
+            {
+                return Json(new { State = 0, Msg = T("显示名称不能为空.").ToString() });
+
+            }
+
+            if (String.IsNullOrWhiteSpace(viewModel.Name))
+            {
+                return Json(new { State = 0, Msg = T("内容类型ID不能为空.").ToString() });
+            }
+
+            if (_contentDefinitionService.GetTypes().Any(t => String.Equals(t.Name.Trim(), viewModel.Name.Trim(), StringComparison.OrdinalIgnoreCase)))
+            {
+                return Json(new { State = 0, Msg = T("内容类型ID已存在.").ToString() });
+            }
+
+            if (!String.IsNullOrWhiteSpace(viewModel.Name) && !viewModel.Name[0].IsLetter())
+            {
+                return Json(new { State = 0, Msg = T("内容类型ID必须以字母开头.").ToString() });
+            }
+
+            if (_contentDefinitionService.GetTypes().Any(t => String.Equals(t.DisplayName.Trim(), viewModel.DisplayName.Trim(), StringComparison.OrdinalIgnoreCase)))
+            {
+                return Json(new { State = 0, Msg = T("显示名称已存在.").ToString() });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = T("数据校验未通过.").ToString() });
+            }
+
+            var contentTypeDefinition = _contentDefinitionService.AddType(viewModel.Name, viewModel.DisplayName);
+
+            // adds CommonPart by default
+            _contentDefinitionService.AddPartToType("CommonPart", viewModel.Name);
+
+            var typeViewModel = new EditTypeViewModel(contentTypeDefinition);
+
+            return Json(new { State = 1, Msg = Url.Action("AddPartsTo", new { id = typeViewModel.Name }) });
+
+        }
         public ActionResult ContentTypeName(string displayName, int version)
         {
             return Json(new
@@ -304,7 +359,43 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("Edit", new { id });
         }
+        [HttpPost]
+        public ActionResult EditAJAX(string id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new { State = 0, Msg = "无权限" });
 
+            var typeViewModel = _contentDefinitionService.GetType(id);
+
+            if (typeViewModel == null)
+                return Json(new { State = 0, Msg = "内容类型不存在" });
+
+            var edited = new EditTypeViewModel();
+            TryUpdateModel(edited);
+            typeViewModel.DisplayName = edited.DisplayName ?? string.Empty;
+
+            if (String.IsNullOrWhiteSpace(typeViewModel.DisplayName))
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = T("显示名称不能为空.").ToString() });
+               
+            }
+
+            if (_contentDefinitionService.GetTypes().Any(t => String.Equals(t.DisplayName.Trim(), typeViewModel.DisplayName.Trim(), StringComparison.OrdinalIgnoreCase) && !String.Equals(t.Name, id)))
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = T("显示名称已存在.").ToString() });
+            }
+            _contentDefinitionService.AlterType(typeViewModel, this);
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = T("数据校验不正确.").ToString() });
+            }
+            return Json(new { State = 1, Msg = T("\"{0}\" 修改成功.", typeViewModel.DisplayName).Text });
+            
+        }
         [HttpPost, ActionName("Edit")]
         [FormValueRequired("submit.Delete")]
         public ActionResult Delete(string id)
@@ -323,7 +414,23 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("List");
         }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult DeleteAJAX(string id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new { State = 0, Msg = T("无权限.").Text });
 
+            var typeViewModel = _contentDefinitionService.GetType(id);
+
+            if (typeViewModel == null)
+                return Json(new { State = 0, Msg = T("内容类型不存在.").Text });
+
+            _contentDefinitionService.RemoveType(id, true);
+            
+            return Json(new { State = 1, Msg = T("\"{0}\" 成功删除.", typeViewModel.DisplayName).Text });
+            
+        }
         public ActionResult AddPartsTo(string id)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
@@ -423,7 +530,29 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("Edit", new { id });
         }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult RemovePartFromAJAX(string id,string part)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new { State = 0, Msg = "无权限" });
 
+            var typeViewModel = _contentDefinitionService.GetType(id);
+
+            
+            if (typeViewModel == null
+                || typeViewModel.Parts.All(p => p.PartDefinition.Name != part))
+                return Json(new { State = 0, Msg = "元件不存在" });
+
+            _contentDefinitionService.RemovePartFromType(part, typeViewModel.Name);
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = "数据校验失败" });
+            }
+            return Json(new { State = 1, Msg = T("元件 \"{0}\" 删除成功.", part).Text });
+        }
         #endregion
 
         #region Parts
@@ -584,32 +713,32 @@ namespace Tomelt.ContentTypes.Controllers
 
             if (String.IsNullOrWhiteSpace(viewModel.DisplayName))
             {
-                ModelState.AddModelError("DisplayName", T("The Display Name name can't be empty.").ToString());
+                ModelState.AddModelError("DisplayName", T("显示名称不能为空.").ToString());
             }
 
             if (String.IsNullOrWhiteSpace(viewModel.Name))
             {
-                ModelState.AddModelError("Name", T("The Technical Name can't be empty.").ToString());
+                ModelState.AddModelError("Name", T("技术名称不能为空.").ToString());
             }
 
             if (_contentDefinitionService.GetPart(partViewModel.Name).Fields.Any(t => String.Equals(t.Name.Trim(), viewModel.Name.Trim(), StringComparison.OrdinalIgnoreCase)))
             {
-                ModelState.AddModelError("Name", T("A field with the same name already exists.").ToString());
+                ModelState.AddModelError("Name", T("该字段已存在.").ToString());
             }
 
             if (!String.IsNullOrWhiteSpace(viewModel.Name) && !viewModel.Name[0].IsLetter())
             {
-                ModelState.AddModelError("Name", T("The technical name must start with a letter.").ToString());
+                ModelState.AddModelError("Name", T("技术名称必须以字母开头.").ToString());
             }
 
             if (!String.Equals(viewModel.Name, viewModel.Name.ToSafeName(), StringComparison.OrdinalIgnoreCase))
             {
-                ModelState.AddModelError("Name", T("The technical name contains invalid characters.").ToString());
+                ModelState.AddModelError("Name", T("技术名称包含非法字符.").ToString());
             }
 
             if (_contentDefinitionService.GetPart(partViewModel.Name).Fields.Any(t => String.Equals(t.DisplayName.Trim(), Convert.ToString(viewModel.DisplayName).Trim(), StringComparison.OrdinalIgnoreCase)))
             {
-                ModelState.AddModelError("DisplayName", T("A field with the same Display Name already exists.").ToString());
+                ModelState.AddModelError("DisplayName", T("显示名称已存在.").ToString());
             }
 
             if (!ModelState.IsValid)
@@ -628,12 +757,12 @@ namespace Tomelt.ContentTypes.Controllers
             }
             catch (Exception ex)
             {
-                Services.Notifier.Information(T("The \"{0}\" field was not added. {1}", viewModel.DisplayName, ex.Message));
+                Services.Notifier.Information(T("字段 \"{0}\" 添加失败. {1}", viewModel.DisplayName, ex.Message));
                 Services.TransactionManager.Cancel();
                 return AddFieldTo(id);
             }
 
-            Services.Notifier.Information(T("The \"{0}\" field has been added.", viewModel.DisplayName));
+            Services.Notifier.Information(T("字段 \"{0}\" 添加成功.", viewModel.DisplayName));
 
             if (typeViewModel != null)
             {
@@ -696,12 +825,12 @@ namespace Tomelt.ContentTypes.Controllers
 
             if (String.IsNullOrWhiteSpace(viewModel.DisplayName))
             {
-                ModelState.AddModelError("DisplayName", T("The Display Name name can't be empty.").ToString());
+                ModelState.AddModelError("DisplayName", T("字段的显示名称不能为空.").ToString());
             }
 
             if (_contentDefinitionService.GetPart(partViewModel.Name).Fields.Any(t => t.Name != viewModel.Name && String.Equals(t.DisplayName.Trim(), viewModel.DisplayName.Trim(), StringComparison.OrdinalIgnoreCase)))
             {
-                ModelState.AddModelError("DisplayName", T("A field with the same Display Name already exists.").ToString());
+                ModelState.AddModelError("DisplayName", T("字段的显示名称已经存在.").ToString());
             }
 
             if (!ModelState.IsValid)
@@ -718,7 +847,7 @@ namespace Tomelt.ContentTypes.Controllers
 
             _contentDefinitionService.AlterField(partViewModel, viewModel);
 
-            Services.Notifier.Information(T("Display name changed to {0}.", viewModel.DisplayName));
+            Services.Notifier.Information(T("显示名称修改为： {0}.", viewModel.DisplayName));
 
             // redirect to the type editor if a type exists with this name
             var typeViewModel = _contentDefinitionService.GetType(id);
@@ -777,7 +906,29 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("EditPart", new { id });
         }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult RemoveFieldFromAJAX(string id,string part)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new {State = 0, Msg = "无权限"});
 
+            var partViewModel = _contentDefinitionService.GetPart(part);
+
+            
+            if (partViewModel == null
+                || partViewModel.Fields.All(p => p.Name != id))
+                return Json(new { State = 0, Msg = "不存在的字段" });
+
+            _contentDefinitionService.RemoveFieldFromPart(id, partViewModel.Name);
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = "数据校验失败" });
+            }
+            return Json(new { State = 1, Msg = T("字段 \"{0}\" 删除成功.", id).Text });
+        }
         #endregion
 
         bool IUpdateModel.TryUpdateModel<TModel>(TModel model, string prefix, string[] includeProperties, string[] excludeProperties)

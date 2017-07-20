@@ -1,0 +1,64 @@
+﻿@model Tomelt.ContentTypes.ViewModels.EditTypePartViewModel
+@using Tomelt.Core.Contents.Settings;
+@{
+    var title = Model.PartDefinition.DisplayName;
+    var showDelete = "";
+    if (Model.PartDefinition.Settings.GetModel<ContentPartSettings>().Attachable)
+    {
+        showDelete = "tools:[{iconCls:'icon-delete',handler:function(){removePart('"+ Model.PartDefinition.Name + "');}}]";
+    }
+}
+<div title="@title" style="padding:10px" data-options="@showDelete">
+
+    <div>
+        @Html.EditorFor(m => m.PartDefinition.Fields, "TypePartFields", "PartDefinition")
+        @if (Model.Templates.Any())
+        {
+            <div>
+                <h5>@T("{0} 设置:", Model.PartDefinition.DisplayName)</h5>
+                <p class="description">@Model.Description</p>
+                @{
+                    Html.RenderTemplates(Model.Templates);
+                }
+            </div>
+        }
+        else
+        {
+            if (!string.IsNullOrWhiteSpace(Model.Description))
+            {
+                <div>
+                    <h5>@T("{0} 描述:", Model.PartDefinition.DisplayName)</h5>
+                    <span class="description">@Model.Description</span>
+                </div>
+            }
+
+        }
+
+        @Html.HiddenFor(m => m.PartDefinition.Name)
+        @Html.HiddenFor(m => m.Index)
+
+    </div>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        function removePart(id) {
+            $.messager.confirm('确认', '您确认想要删除此元件吗？', function (r) {
+                if (r) {
+                    xAjax("@Url.Action("RemovePartFromAJAX", new{area= "Tomelt.ContentTypes"})", "post", { id: '@Model.Type.Name', part: id}, function (data) {
+                        if (data.State == 1) {
+                            $.messager.alert("消息", data.Msg, "info", function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            $.messager.alert("提示", data.Msg, "error");
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}

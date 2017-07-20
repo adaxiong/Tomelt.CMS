@@ -54,5 +54,11 @@ namespace Tomelt.Users {
 
             return 4;
         }
+        public int UpdateFrom4()
+        {
+            ContentDefinitionManager.AlterTypeDefinition("User", cfg => cfg.DisplayedAs("用户"));
+
+            return 5;
+        }
     }
 }

@@ -1,0 +1,117 @@
+﻿@model Tomelt.EasyUIFields.Settings.TextBoxFieldSettings
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Width, "easyui-textbox", new
+        {
+            label = T("宽度"),
+            width = "50%"
+        })
+        @Html.ValidationMessageFor(m => m.Width)
+        <span class="description">@T("字段宽度，不填默认为100%")</span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Height, "easyui-numberbox", new
+   {
+       label = T("高度"),
+       width = "50%"
+   })
+        @Html.ValidationMessageFor(m => m.Height)
+        <span class="description">@T("字段高度")</span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Required)">
+            @Html.CheckBoxFor(m => m.Required) 
+            @T("是否必填")
+        </label>
+
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Readonly)">
+            @Html.CheckBoxFor(m => m.Readonly)
+            @T("是否只读")
+        </label>
+        <span class="description">@T("该字段是否只读.")</span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Editable)">
+            @Html.CheckBoxFor(m => m.Editable)
+            @T("是否可编辑")
+        </label>
+        <span class="description">@T("该字段是否可编辑.")</span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Disabled)">
+            @Html.CheckBoxFor(m => m.Disabled)
+            @T("是否禁用")
+        </label>
+        <span class="description">@T("该字段是否禁用.")</span>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Multiline)">
+            @Html.CheckBoxFor(m => m.Multiline)
+            @T("是否多行")
+        </label>
+        <span class="description">@T("该字段是否多行.")</span>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Prompt, "easyui-textbox", new
+   {
+       label = T("提示信息"),
+       width = "50%"
+   })
+        @Html.ValidationMessageFor(m => m.Prompt)
+        <span class="description">@T("在输入框显示提示消息")</span>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.LabelAlign, "easyui-textbox", new
+        {
+            label = T("标题对齐"),
+            width = "50%"
+        })
+        @Html.ValidationMessageFor(m => m.LabelAlign)
+        <span class="description">@T("可用值：'left','right'")</span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.LabelPosition, "easyui-textbox", new
+   {
+       label = T("标题位置"),
+       width = "50%"
+   })
+        @Html.ValidationMessageFor(m => m.LabelPosition)
+        <span class="description">@T("可用值：'before','after','top'")</span>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.DefaultValue, "easyui-textbox", new
+        {
+            label = T("默认值"),
+            width = "50%"
+        })
+        @Html.ValidationMessageFor(m => m.DefaultValue)
+        <span class="description">@T("字段默认值")</span>
+    </div>
+</div>
+

@@ -1,0 +1,46 @@
+﻿@using Tomelt.Utility.Extensions
+@model Tomelt.ContentTypes.ViewModels.EditPartFieldViewModel
+@{
+    var returnUrl = ViewContext.RequestContext.HttpContext.Request.ToUrlString();
+    var title = Model.DisplayName + "[" + Model.FieldDefinition.Name.CamelFriendly() + "]";
+}
+<div  title="@title" style="padding:10px" data-options="tools:[{
+					iconCls:'icon-edit',
+					handler:function(){
+						window.location.href='@Url.Action("EditField",new { area = "Tomelt.ContentTypes", id = Model.Part.Name, Model.Name, returnUrl })';
+					}
+				},{
+					iconCls:'icon-delete',
+					handler:function(){
+						removeField('@Model.Name');
+					}
+				}]">
+    
+    <div>
+        @{Html.RenderTemplates(Model.Templates);}
+        @Html.HiddenFor(m => m.Name)@Html.HiddenFor(m => m.FieldDefinition.Name)@Html.HiddenFor(m => m.Index)
+    </div>
+</div>
+
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+        function removeField(id) {
+            $.messager.confirm('确认', '您确认想要删除此字段吗？', function (r) {
+                if (r) {
+                    xAjax("@Url.Action("RemoveFieldFromAJAX", new{area= "Tomelt.ContentTypes"})", "post", { id: id, part: '@Model.Part.Name'}, function (data) {
+                        if (data.State == 1) {
+                            $.messager.alert("消息", data.Msg, "info", function () {
+                                window.location.reload();
+                            });
+                        } else {
+                            $.messager.alert("提示", data.Msg, "error");
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+}

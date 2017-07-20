@@ -1,0 +1,64 @@
+﻿@model Tomelt.ContentPicker.Settings.ContentPickerFieldSettings
+
+
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Required)">
+            @Html.CheckBoxFor(m => m.Required)
+            @T("内容项是必需的")
+        </label>
+        <p class="description">@T("选中以确保用户提供至少一个内容项。")</p>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Multiple)">
+            @Html.CheckBoxFor(m => m.Multiple)
+            @T("允许多个内容项")
+        </label>
+        <p class="description">@T("选中以允许用户选择多个内容项。")</p>
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Hint, "easyui-textbox", new
+        {
+            label = T("帮助文本"),
+            width = "50%",
+            multiline = true,
+            height = 120,
+            labelPosition = "top"
+        })
+        @Html.ValidationMessageFor(m => m.Hint)
+        <p class="description">@T("当作者选取内容项时显示在字段下的帮助文本。")</p>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.ShowContentTab)">
+            @Html.CheckBoxFor(m => m.ShowContentTab)
+            @T("显示内容选项卡")
+        </label>
+        <p class="description">@T("取消选中将隐藏选取窗口的内容选项卡。")</p>
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.DisplayedContentTypes, "easyui-textbox", new
+        {
+            label = T("内容类型和元件"),
+            width = "50%",
+            labelPosition = "top"
+        })
+        @Html.ValidationMessageFor(m => m.DisplayedContentTypes)
+        <p class="description">@T("以逗号分隔的值包含所有要显示的内容类型或内容元件。")</p>
+    </div>
+</div>
+
+

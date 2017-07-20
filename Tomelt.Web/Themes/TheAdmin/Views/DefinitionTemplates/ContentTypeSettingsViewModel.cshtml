@@ -1,0 +1,57 @@
+﻿@model Tomelt.ContentTypes.ViewModels.ContentTypeSettingsViewModel
+
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Creatable)">
+            @Html.EditorFor(m => m.Creatable) 
+            @T("可创建")
+        </label>
+        <p class="description">@T("确定是否可以通过用户界面创建此内容类型的实例。")</p>
+        @Html.ValidationMessageFor(m => m.Creatable)
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Listable)">
+            @Html.EditorFor(m => m.Listable)
+            @T("可作为列表")
+        </label>
+        <p class="description">@T("决定该内容类型的实例能否通过用户界面显示为列表。")</p>
+        @Html.ValidationMessageFor(m => m.Listable)
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Draftable)">
+            @Html.EditorFor(m => m.Draftable)
+            @T("可存储为草稿")
+        </label>
+        <p class="description">@T("确定此内容类型是否支持草稿版本。")</p>
+        @Html.ValidationMessageFor(m => m.Draftable)
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Securable)">
+            @Html.EditorFor(m => m.Securable)
+            @T("可使用安全性")
+        </label>
+        <p class="description">@T("决定此内容类型能否具有自定义权限。")</p>
+        @Html.ValidationMessageFor(m => m.Securable)
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Stereotype, "easyui-textbox", new
+        {
+            label = T("存储类型"),
+            labelPosition = "top",
+            width = "100%"
+        })
+        <p class="description">@T("（可选）内容类型的存储类型。例如Widget, MenuItem, ...")</p>
+        @Html.ValidationMessageFor(m => m.Stereotype)
+    </div>
+</div>
