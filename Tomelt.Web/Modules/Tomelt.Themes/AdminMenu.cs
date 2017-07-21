@@ -15,12 +15,12 @@ namespace Tomelt.Themes {
         public void GetNavigation(NavigationBuilder builder)
         {
             builder.AddImageSet("ok")
-                .Add(T("系统功能"), "88", menu =>
+                .Add(T("至融系统"), "-5", menu =>
                     {
                         menu.LinkToFirstChild(false);
                         menu.Add(T("网站主题"), "0",
                             item => item.Action("Index", "Admin", new {area = "Tomelt.Themes"})
-                                .Permission(Permissions.ApplyTheme).LocalNav());
+                                .Permission(Permissions.ApplyTheme));
                     });
         }
     }

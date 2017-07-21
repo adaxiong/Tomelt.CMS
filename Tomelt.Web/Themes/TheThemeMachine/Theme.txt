@@ -1,6 +1,6 @@
-﻿Name: The Theme Machine
-Author: jowall, mibach, loudej, heskew
-Description: Tomelt Theme Machine is a flexible multi-zone theme that provides a solid foundation to build your site. It features 20 collapsible widget zones and is flexible enough to cover a wide range of layouts.
+﻿Name: 至融主题
+Author: 江西至融
+Description: 本主题是一个灵活的多区域的主题，为你的网站提供了一个坚实的基础。它的特点有20个部件区域并足够灵活，适用大部分的网站布局。
 Version: 1.10.2
 Tags: Awesome
 Website: http://www.tomelt.com

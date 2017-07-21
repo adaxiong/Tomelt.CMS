@@ -1,5 +1,6 @@
 ﻿Name: SafeMode
 Author: AdaXiong
+Tags: hidden
 Description: 默认主题.
 Version: 1.10.2
 Website: http://www.tomelt.com

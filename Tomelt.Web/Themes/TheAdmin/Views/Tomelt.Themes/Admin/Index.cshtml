@@ -1,0 +1,42 @@
+﻿@model Tomelt.Themes.ViewModels.ThemesIndexViewModel
+@using Tomelt.Themes.Models
+@using Tomelt.Mvc.Html
+@{
+    Layout.Title = T("网站主题").ToString();
+}
+@if (Model.CurrentTheme == null)
+{
+    <p class="alert alert-warning" style="margin-top: 10px;">
+        @T("当前网站暂无主题，请选择并设置为网站主题！")<br />
+    </p>
+}
+else
+{
+    <h3 id="currentThemeTitle">@T("当前的主题")</h3>
+    <hr />
+    @Display.ThemeEntry_Current(Theme: Model.CurrentTheme)
+}
+<div id="installedBar" class="group">
+    <h3>
+        @T("可用的主题")
+    @if (Model.InstallThemes)
+    {
+        @Html.ActionLink(T("从本地安装主题").ToString(), "AddTheme", "PackagingServices", new { area = "Tomelt.Packaging", returnUrl = HttpContext.Current.Request.RawUrl }, new { @class = "btn btn-primary btn-sm", style = "float:right;" })
+    }
+</h3>
+<hr />
+
+</div>
+@if (Model.Themes == null || !Model.Themes.Any())
+{
+    <p>@T("暂没有可用的主题.")</p>
+}
+else
+{
+    <div class="row">
+        @foreach (var themeEntry in Model.Themes)
+        {
+            @Display.ThemeEntry(Theme: themeEntry)
+        }
+    </div>
+}

@@ -273,6 +273,21 @@
   <ItemGroup>
     <Content Include="TheAdmin\Views\DefinitionTemplates\BodyTypePartSettings.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.Themes\Admin\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\ThemeEntry.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\ThemeEntry.Current.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheThemeMachine\Views\ThemePreview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\ThemePreview.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

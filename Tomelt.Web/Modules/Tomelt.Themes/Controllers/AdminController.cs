@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 using Tomelt.Data.Migration;
 using Tomelt.Environment.Descriptor.Models;
@@ -143,7 +144,49 @@ namespace Tomelt.Themes.Controllers {
 
             return this.RedirectLocal(returnUrl, "~/");
         }
+        [HttpPost]
+        public ActionResult PreviewAJAX(string themeId,string returnUrl)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.ApplyTheme, T("Couldn't preview the current theme")))
+                return Json(new{State=0,Msg=T("无权限").Text});
 
+            if (_extensionManager.AvailableExtensions()
+                    .FirstOrDefault(extension => DefaultExtensionTypes.IsTheme(extension.ExtensionType) && extension.Id.Equals(themeId)) == null)
+            {
+                return Json(new { State = 0, Msg = T("主题未找到").Text });
+            }
+            var alreadyEnabledFeatures = GetEnabledFeatures();
+            _themeService.EnableThemeFeatures(themeId);
+            _previewTheme.SetPreviewTheme(themeId);
+            alreadyEnabledFeatures.Except(new[] { themeId });
+            TempData[AlreadyEnabledFeatures] = alreadyEnabledFeatures;
+            var url = "~/";
+            url = GetRedirectUrl(Request.IsLocalUrl(returnUrl) ? returnUrl : url);
+            
+            return Json(new { State = 1, Msg = url });
+            
+        }
+
+        private string GetRedirectUrl(string url)
+        {
+            if (url.StartsWith("~/"))
+            {
+                ShellSettings settings;
+                var context = ControllerContext.GetWorkContext();
+
+                if (context != null &&
+                    context.TryResolve<ShellSettings>(out settings) &&
+                    !string.IsNullOrWhiteSpace(settings.RequestUrlPrefix))
+                {
+                    url = VirtualPathUtility.ToAbsolute(url, Request.ApplicationPath.TrimEnd('/') + "/" + settings.RequestUrlPrefix);
+                }
+            }
+            if (url.StartsWith("~"))
+            {
+                url = url.TrimStart('~');
+            }
+            return url;
+        }
         [HttpPost, ActionName("Preview"), FormValueRequired("submit.Apply")]
         public ActionResult ApplyPreview(string themeId, string returnUrl) {
             if (!Services.Authorizer.Authorize(Permissions.ApplyTheme, T("Couldn't preview the current theme")))

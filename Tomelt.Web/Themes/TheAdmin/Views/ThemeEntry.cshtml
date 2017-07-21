@@ -1,0 +1,118 @@
+﻿@using Tomelt.Themes.Models
+@using Tomelt.Mvc.Html
+@using Tomelt.Environment.Extensions.Models
+@using Tomelt.Utility.Extensions;
+@{
+
+    ThemeEntry theme = Model.Theme;
+}
+
+<div class="col-xs-12 col-md-3">
+    <div class="thumbnail">
+        @Html.Image(Href(Html.ThemePath((ExtensionDescriptor)theme.Descriptor, "/Theme.png")), Html.Encode((string)theme.Name), null)
+        <div class="caption">
+            <h4>@theme.Name</h4>
+            <p>
+                @T("作者:") @theme.Descriptor.Author<br />
+                @T("版本:") @theme.Descriptor.Version
+                @*@theme.Descriptor.Description<br />*@
+                @*@if (theme.Descriptor.WebSite != null)
+                {
+                    <a href="@theme.Descriptor.WebSite">@theme.Descriptor.WebSite</a><br />
+                }*@
+            </p>
+            <p>
+                @using (Html.BeginFormAntiForgeryPost(Url.Action("Activate"), FormMethod.Post, new { @class = "inline" }))
+                {
+                    @Html.Hidden("themeId", (string)theme.Descriptor.Id)
+                    <button class="btn btn-info btn-sm" type="submit" title="@T("设置")" class="btn btn-primary">@T("设置")</button>
+                }
+                @using (Html.BeginFormAntiForgeryPost(Url.Action("PreviewAJAX"), FormMethod.Post, new { @class = "inline",id="preview" }))
+                {
+                    @Html.Hidden("themeId", (string)theme.Descriptor.Id)
+                    <button class="btn btn-default btn-sm" type="submit" title="@T("预览")">@T("预览")</button>
+                }
+                @if (theme.Enabled)
+                {
+                    using (Html.BeginFormAntiForgeryPost(Url.Action("Disable"), FormMethod.Post, new { @class = "inline" }))
+                    {
+                        @Html.Hidden("themeId", (string)theme.Descriptor.Id)
+                        <button class="btn btn-warning btn-sm" type="submit" title="Disable">@T("禁用")</button>
+                    }
+                }
+                else
+                {
+                    using (Html.BeginFormAntiForgeryPost(Url.Action("Enable"), FormMethod.Post, new { @class = "inline" }))
+                    {
+                        @Html.Hidden("themeId", (string)theme.Descriptor.Id)
+                        <button class="btn btn-success btn-sm" type="submit" title="Enable">@T("启用")</button>
+                    }
+                }
+                @if (theme.NeedsUpdate)
+                {
+
+                    using (Html.BeginFormAntiForgeryPost(Url.Action("Update"), FormMethod.Post, new { @class = "inline" }))
+                    {
+                        @Html.Hidden("themeId", (string)theme.Descriptor.Id)
+                        <button class="btn btn-primary btn-sm" type="submit">@T("更新")</button> <br />
+                    }
+                }
+                @if (theme.CanUninstall)
+                {
+
+                    @Html.ActionLink(
+                            T("卸载").Text,
+                            "UninstallTheme",
+                            "PackagingServices",
+                            new { ThemeId = theme.Descriptor.Id, ReturnUrl = Request.ToUrlString(), Area = "Tomelt.Packaging" },
+                            new { itemprop = "RemoveUrl UnsafeUrl", @class = "btn btn-danger btn-sm" })
+                }
+            </p>
+            
+            @if (theme.Notifications != null && theme.Notifications.Count > 0)
+            {
+                <ul class="notifications">
+                    @foreach (string notification in theme.Notifications)
+                    {
+                        <li>@notification</li>
+                    }
+                </ul>
+            }
+
+        </div>
+    </div>
+</div>
+
+
+@using (Script.Foot())
+{
+
+    <script type="text/javascript">
+        $(function() {
+            $('#preview').form({
+                url:this.action,
+                success:function(data){
+                    var result = JSON.parse(data);
+                    if (result.State == 1) {
+                        //打开新窗口
+                        //alert(result.Msg);
+                        
+                        parent.window.$("#popupWin").dialog({
+                            modal: true,
+                            title: "主题预览",
+                            maximizable: true,
+                            fit: true,
+                            //inline: true,
+                            border: 'thin',
+                            content: '<iframe class="xjh" scrolling="auto" frameborder="0"  src="' + result.Msg + '" style="width:100%;height:99%;"></iframe>'
+                        });
+                    } else {
+                        $.messager.alert('错误', result.Msg, 'error');
+                    }
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                }
+            });
+        });
+
+    </script>
+}

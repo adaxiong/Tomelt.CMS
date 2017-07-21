@@ -1,2 +1,0 @@
-﻿@model dynamic
-@if (Model.CurrentUser != null) {<div id="login">@T("User:") @Html.ItemDisplayText((Tomelt.ContentManagement.IContent)Model.CurrentUser)@T(" | ")@Html.ActionLink(T("Change password").ToString(), "ChangePassword", new { area = "Tomelt.Users", Controller = "Account" })@T(" | ")@Html.ActionLink(T("Logout").ToString(), "LogOff", new { Area = "Tomelt.Users", Controller = "Account", ReturnUrl = Href("~/") })</div>}

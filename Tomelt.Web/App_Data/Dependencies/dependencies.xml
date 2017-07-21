@@ -113,12 +113,6 @@
     <References />
   </Dependency>
   <Dependency>
-    <ModuleName>TheAdminBack</ModuleName>
-    <VirtualPath>~/Themes/TheAdminBack</VirtualPath>
-    <LoaderName>RawThemeExtensionLoader</LoaderName>
-    <References />
-  </Dependency>
-  <Dependency>
     <ModuleName>TheThemeMachine</ModuleName>
     <VirtualPath>~/Themes/TheThemeMachine</VirtualPath>
     <LoaderName>RawThemeExtensionLoader</LoaderName>

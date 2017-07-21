@@ -97,3 +97,6 @@ legend {
 .ul-point {
     list-style: none;
 }
+.inline {
+    display: inline;
+}

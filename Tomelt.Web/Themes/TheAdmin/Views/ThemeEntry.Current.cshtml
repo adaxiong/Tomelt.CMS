@@ -1,0 +1,26 @@
+﻿@using Tomelt.Themes.Models
+@using Tomelt.Mvc.Html
+@using Tomelt.Environment.Extensions.Models
+
+@{
+    Tomelt.Themes.Models.ThemeEntry theme = Model.Theme;
+}
+
+<div class="media">
+    <div class="media-left media-middle">
+        <a href="#">
+            @Html.Image(Href(Html.ThemePath(theme.Descriptor, "/Theme.png")), Html.Encode(theme.Name), new { @class = "media-object",style="width:300px;" })
+        </a>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading">@theme.Name</h4>
+        <hr/>
+        <p>
+            @T("作者:") @theme.Descriptor.Author
+        </p>
+        <p>
+            @T("版本:") @theme.Descriptor.Version
+        </p>
+        <p>@T("描述:")@theme.Descriptor.Description</p>
+    </div>
+</div>

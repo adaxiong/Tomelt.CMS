@@ -18,14 +18,14 @@ namespace Tomelt.Core.Dashboard {
 
         public void GetNavigation(NavigationBuilder builder)
         {
-            builder.AddImageSet("ok")
-                .Add(T("至融系统"), "-5",
-                    menu =>
-                    {
-                        menu.LinkToFirstChild(false);
-                        menu.Add(T("系统首页"), "1", item => item.Action("Index", "Admin", new {area = "Dashboard"})
-                            .Permission(StandardPermissions.AccessAdminPanel));
-                    });
+            //builder.AddImageSet("ok")
+            //    .Add(T("至融系统"), "-5",
+            //        menu =>
+            //        {
+            //            menu.LinkToFirstChild(false);
+            //            menu.Add(T("系统首页"), "1", item => item.Action("Index", "Admin", new {area = "Dashboard"})
+            //                .Permission(StandardPermissions.AccessAdminPanel));
+            //        });
         }
     }
 }

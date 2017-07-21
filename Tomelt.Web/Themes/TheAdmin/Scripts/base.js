@@ -237,12 +237,13 @@ function reloadData(isTree) {
 //打开窗口
 function openWin(url, title, width, height) {
     $("#popupWin").dialog({
-        //width: width,
-        //height: height,
+        width: width,
+        height: height,
         modal: true,
         title: title,
-        //maximizable: true,
-        fit: true,
+        top:5,
+        maximizable: true,
+        //fit: true,
         //inline: true,
         border: 'thin',
         //cls: 'c6',
