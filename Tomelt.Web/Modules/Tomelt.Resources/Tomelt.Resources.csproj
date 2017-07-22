@@ -772,6 +772,7 @@
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\jquery.plugin.js" />
     <Content Include="Scripts\jquery.plugin.min.js" />
+    <Content Include="Scripts\jquery.portal.js" />
     <Content Include="Scripts\jquery.utils.js" />
     <Content Include="Scripts\jquery.utils.min.js" />
     <Content Include="Scripts\knockout.js" />

@@ -1047,7 +1047,7 @@
         }
         else {
             style.left = "0";
-            style.width = "100%";
+            style.width = "80%";
         }
 
         doc.body.appendChild(background);
@@ -1134,7 +1134,7 @@
             style.padding = "0";
             style.margin = "0";
             style.cssFloat = "left";
-            style.width = "100%";
+            style.width = "80%";
             style.textAlign = "center";
             style.position = "relative";
             dialog.appendChild(form);

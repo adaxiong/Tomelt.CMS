@@ -118,10 +118,7 @@ function updateData(url, width, height) {
     var newurl = url + "/";
     openWin(newurl + rows[0].Id, "编辑", width || 880, height || 600);
 }
-//修改
-function updateDataByClick(url, width, height) {
-    openWin(url, "编辑", width || 880, height || 600);
-}
+
 //删除
 function deleteData(url,isTree) {
     var rows = $('#dataGrid').datagrid('getSelections');//获取所选择的行

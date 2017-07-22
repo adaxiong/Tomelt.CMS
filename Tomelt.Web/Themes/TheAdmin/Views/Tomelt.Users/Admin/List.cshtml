@@ -42,14 +42,14 @@
 
 
 <div id="tb">
-    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-unchecked',plain:true" onclick="datagridChecked(this, 'dataGrid');">全选</a>
+    @*<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-unchecked',plain:true" onclick="datagridChecked(this, 'dataGrid');">全选</a>*@
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').datagrid('reload');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("Create")');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
 </div>
 
-<table id="dataGrid" class="easyui-datagrid" style="width: 100%;"   
+<table id="dataGrid" class="easyui-datagrid" style="width: 99%;"   
        data-options="url: '@Url.Action("GetList")',
        title:'@Layout.Title',
        iconCls: 'icon-datalist',

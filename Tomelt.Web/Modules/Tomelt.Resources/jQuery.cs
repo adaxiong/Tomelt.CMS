@@ -71,6 +71,7 @@ namespace Tomelt.Resources {
             // jQuery EasyUI
             manifest.DefineScript("jQueryEasyUI").SetUrl("jquery.easyui.min.js").SetVersion("1.5.2").SetDependencies("jQuery");
             manifest.DefineScript("jQueryEasyUILocale").SetUrl("easyui-lang-zh_CN.js").SetDependencies("jQueryEasyUI");
+            manifest.DefineScript("jQueryEasyUIPortal").SetUrl("jquery.portal.js").SetDependencies("jQueryEasyUI");
             manifest.DefineStyle("jQueryEasyUI").SetUrl("EasyUI/metro/easyui.css").SetVersion("1.5.2");
             manifest.DefineStyle("jQueryEasyUI_icon").SetUrl("EasyUI/icon.css").SetDependencies("jQueryEasyUI");
             manifest.DefineStyle("jQueryEasyUI_color").SetUrl("EasyUI/color.css").SetDependencies("jQueryEasyUI");

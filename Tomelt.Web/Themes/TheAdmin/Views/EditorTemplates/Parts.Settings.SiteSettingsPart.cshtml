@@ -21,7 +21,7 @@
        label = T("网站名称"),
        required = true,
        labelPosition="top",
-       width = "100%"
+       width = "80%"
    })
         @Html.ValidationMessageFor(m => m.SiteName, "*")
     </div>
@@ -32,7 +32,7 @@
         {
             label = T("网站域名"),
             labelPosition = "top",
-            width = "100%"
+            width = "80%"
         })
         <p class="description">@T("输入网站首页的完整URL。")@T("如：http://localhost:30320/orchardlocal，http://www.yourdomain.com")</p>
     </div>
@@ -68,7 +68,7 @@
    {
        label = T("页面标题分隔符号"),
        labelPosition = "top",
-       width = "100%"
+       width = "80%"
    })
         @Html.ValidationMessageFor(m => m.PageTitleSeparator, "*")
     </div>
@@ -79,7 +79,7 @@
    {
        label = T("超级用户"),
        labelPosition = "top",
-       width = "100%",
+       width = "80%",
        //@readonly = AuthorizedFor(Tomelt.Security.StandardPermissions.SiteOwner).ToString().ToLower()
    })
         <p class="description">@T("输入一个存在的帐户名，如不需要超级用户帐户则留空")</p>
@@ -109,7 +109,7 @@
         {
             label = T("默认每页项目数"),
             labelPosition = "top",
-            width = "100%"
+            width = "80%"
             
         })
         <p class="description">@T("确定默认每页显示的项目数。")</p>
@@ -124,7 +124,7 @@
             {
                 label = T("每页的最大项数"),
                 labelPosition = "top",
-                width = "100%"
+                width = "80%"
             
             })
             <p class="description">@T("确定每页显示的最大项数。设为0则表示为无限制。")</p>
@@ -137,7 +137,7 @@
             {
                 label = T("最后一个索引页中的项目"),
                 labelPosition = "top",
-                width = "100%"
+                width = "80%"
             
             })
             <p class="description">@T("确定数据库中可以显示的最后一个元素。默认 0 表示无限制。")</p>

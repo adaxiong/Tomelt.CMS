@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.Web", "Tomelt.Web\Tomelt.Web.csproj", "{D013D4CC-AFB3-4DF1-BCFB-92E5A588F130}"
 EndProject
@@ -73,6 +73,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.CodeGeneration", "Tomelt.Web\Modules\Tomelt.CodeGeneration\Tomelt.CodeGeneration.csproj", "{D550E447-08F0-4331-9256-62DF803FF8A6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomelt.EasyUIFields", "Tomelt.Web\Modules\Tomelt.EasyUIFields\Tomelt.EasyUIFields.csproj", "{2E0EFACF-C2AE-4FF2-B14E-36CCF4293119}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UEditor", "Tomelt.Web\Modules\UEditor\UEditor.csproj", "{D3FBD2D9-C753-4AAA-ADBC-874FC7617677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -216,6 +218,10 @@ Global
 		{2E0EFACF-C2AE-4FF2-B14E-36CCF4293119}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E0EFACF-C2AE-4FF2-B14E-36CCF4293119}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E0EFACF-C2AE-4FF2-B14E-36CCF4293119}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3FBD2D9-C753-4AAA-ADBC-874FC7617677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3FBD2D9-C753-4AAA-ADBC-874FC7617677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3FBD2D9-C753-4AAA-ADBC-874FC7617677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3FBD2D9-C753-4AAA-ADBC-874FC7617677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -250,5 +256,6 @@ Global
 		{47417535-1C68-45FA-A6DE-03864A6C72B2} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 		{D550E447-08F0-4331-9256-62DF803FF8A6} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 		{2E0EFACF-C2AE-4FF2-B14E-36CCF4293119} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
+		{D3FBD2D9-C753-4AAA-ADBC-874FC7617677} = {239D2A11-0445-4AFD-8672-F0FBCE9E4BCC}
 	EndGlobalSection
 EndGlobal

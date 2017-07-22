@@ -8,7 +8,7 @@ namespace Tomelt.Core.Navigation {
         public int Create() {
             ContentDefinitionManager.AlterPartDefinition("MenuPart", builder => builder
                 .Attachable()
-                .WithDescription("Provides an easy way to create a ContentMenuItem from the content editor."));
+                .WithDescription("提供一个简单创建菜单内容项的编辑器."));
 
             SchemaBuilder.CreateTable("MenuPartRecord", 
                 table => table
@@ -61,7 +61,7 @@ namespace Tomelt.Core.Navigation {
             
             ContentDefinitionManager.AlterPartDefinition("AdminMenuPart", builder => builder
                 .Attachable()
-                .WithDescription("Adds a menu item to the Admin menu that links to this content item."));
+                .WithDescription("将菜单项添加到链接到该内容项的管理菜单中"));
             
             ContentDefinitionManager.AlterTypeDefinition("ShapeMenuItem",
                 cfg => cfg
@@ -161,11 +161,11 @@ namespace Tomelt.Core.Navigation {
 
         public int UpdateFrom4() {
             ContentDefinitionManager.AlterPartDefinition("MenuPart", builder => builder
-                .WithDescription("Provides an easy way to create a ContentMenuItem from the content editor."));
+                .WithDescription("提供一个简单创建菜单内容项的编辑器"));
 
             ContentDefinitionManager.AlterPartDefinition("AdminMenuPart", builder => builder
                 .Attachable()
-                .WithDescription("Adds a menu item to the Admin menu that links to this content item."));
+                .WithDescription("将菜单项添加到链接到该内容项的管理菜单中"));
 
             return 5;
         }

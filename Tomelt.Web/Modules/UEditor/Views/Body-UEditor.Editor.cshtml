@@ -1,0 +1,17 @@
+﻿
+
+@{ 
+    Script.Require("UEditorConfig");
+    Script.Require("UEditor");
+}
+
+@Html.TextArea("Text", (string)Model.Text, 25, 80,
+     new Dictionary<string,object> {
+        {"style", "width:100%"}
+     })
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        var ue = UE.getEditor('Body_Text');
+    </script>
+}

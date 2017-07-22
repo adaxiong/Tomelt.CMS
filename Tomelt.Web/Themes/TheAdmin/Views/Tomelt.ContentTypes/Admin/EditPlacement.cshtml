@@ -1,0 +1,104 @@
+@model Tomelt.ContentTypes.ViewModels.EditPlacementViewModel
+@{
+    //Style.Require("ContentTypesAdmin");
+    //Script.Require("jQueryUI_Sortable");
+    Script.Require("jQueryEasyUIPortal");
+    Layout.Title = T("布局 - {0}", Model.ContentTypeDefinition.DisplayName).ToString();
+
+    var hiddenShapes = Model.AllPlacements.Where(x => String.IsNullOrEmpty(x.PlacementSettings.Zone) && (String.IsNullOrWhiteSpace(x.PlacementSettings.Position) || x.PlacementSettings.Position == "-"));
+}
+<div id="save-message" class="alert alert-warning mt05 hidden">@T("改变布局顺序后，需点保存按钮.")</div>
+@using (Html.BeginFormAntiForgeryPost())
+{
+    @Html.ValidationSummary()
+
+
+    <div id="placement" style="position: relative; ">
+        <div class="col-xs-12">
+            @for (int i = 0; i < Model.AllPlacements.Count; i++)
+            {
+
+                var placement = Model.AllPlacements[i].PlacementSettings;
+
+                if (placement.Zone != "Content")
+                {
+                    continue;
+                }
+
+                <div title="@placement.ShapeType @placement.Differentiator" collapsible="true" collapsed="true" data-shape-type="@placement.ShapeType" data-shape-differentiator="@placement.Differentiator" data-shape-zone="Content" data-shape-position="@placement.Position" style="padding: 5px;">
+                    <div class="shape-editor mt05">
+                        @try
+                    {
+                            @Display(Model.AllPlacements[i].Shape)
+                        }
+                        catch
+                        {
+                        }
+                    </div>
+                    @*  @shape.Position @(Model.PlacementSettings.Any(x => x.Equals(shape)))*@
+                    @Html.HiddenFor(m => m.AllPlacements[i].PlacementSettings.ShapeType, new { @class = "type" })
+                    @Html.HiddenFor(m => m.AllPlacements[i].PlacementSettings.Differentiator, new { @class = "differentiator" })
+                    @Html.HiddenFor(m => m.AllPlacements[i].PlacementSettings.Zone, new { @class = "zone" })
+                    @Html.HiddenFor(m => m.AllPlacements[i].PlacementSettings.Position, new { @class = "position" })
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button class="easyui-linkbutton c6" type="submit" name="submit.Save" value="Save" data-options="iconCls:'icon-save'">@T("保存布局")</button>
+            <button class="easyui-linkbutton c3" type="submit" name="submit.Restore" value="Restore" data-options="iconCls:'icon-undo'" itemprop="RemoveUrl">@T("恢复默认")</button>
+        </div>
+    </div>
+}
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+
+
+        $(function () {
+            //初始化定位
+            var reAssignIdName = function (input, pos) {
+                var name = input.attr('name');
+                input.attr('name', name.replace(new RegExp("\\[.*\\]", 'gi'), '[' + pos + ']'));
+
+                var id = input.attr('id');
+                input.attr('id', id.replace(new RegExp('_.*__', 'i'), '_' + pos + '__'));
+            };
+            var assignPositions = function () {
+                var position = 0;
+                $('.type').each(function () {
+                    var input = $(this);
+                    reAssignIdName(input, position);  // type
+
+                    input = input.next();
+                    reAssignIdName(input, position);  // differentiator
+
+                    input = input.next();
+                    reAssignIdName(input, position);  // zone
+
+                    input = input.next();
+                    reAssignIdName(input, position);  // position
+
+                    input.val(++position);
+                });
+            };
+            assignPositions();
+            $('#placement').portal({
+                border: false,
+                width: 'auto',
+                height: 'auto',
+                onStateChange: function () {
+                    assignPositions();
+                    $('#save-message').removeClass('hidden');
+                }
+            });
+            //禁用所有的INPUT标签
+            $('.shape-editor *').attr('disabled', 'disabled');
+           
+
+        });
+    </script>
+}

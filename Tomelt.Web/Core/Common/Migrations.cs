@@ -49,15 +49,15 @@ namespace Tomelt.Core.Common {
 
             ContentDefinitionManager.AlterPartDefinition("BodyPart", builder => builder
                 .Attachable()
-                .WithDescription("Allows the editing of text using an editor provided by the configured flavor (e.g. html, text, markdown)."));
+                .WithDescription("允许编辑器可用适用富文本编辑器（如：HTML,TEXT,MarkDown）"));
 
             ContentDefinitionManager.AlterPartDefinition("CommonPart", builder => builder
                 .Attachable()
-                .WithDescription("Provides common information about a content item, such as Owner, Date Created, Date Published and Date Modified."));
+                .WithDescription("提供有关内容项的公共信息，如所有者、创建日期、发布日期和日期修改"));
 
             ContentDefinitionManager.AlterPartDefinition("IdentityPart", builder => builder
                 .Attachable()
-                .WithDescription("Automatically generates a unique identity for the content item, which is required in import/export scenarios where one content item references another."));
+                .WithDescription("自动为内容项生成唯一标识，在导入/导出场景中，其中一个内容项引用另一个内容。"));
 
             return 5;
         }
@@ -75,13 +75,13 @@ namespace Tomelt.Core.Common {
 
         public int UpdateFrom2() {
             ContentDefinitionManager.AlterPartDefinition("BodyPart", builder => builder
-                .WithDescription("Allows the editing of text using an editor provided by the configured flavor (e.g. html, text, markdown)."));
+                .WithDescription("允许编辑器可用适用富文本编辑器（如：HTML,TEXT,MarkDown）"));
 
             ContentDefinitionManager.AlterPartDefinition("CommonPart", builder => builder
-                .WithDescription("Provides common information about a content item, such as Owner, Date Created, Date Published and Date Modified."));
+                .WithDescription("提供有关内容项的公共信息，如所有者、创建日期、发布日期和日期修改"));
 
             ContentDefinitionManager.AlterPartDefinition("IdentityPart", builder => builder
-                .WithDescription("Automatically generates a unique identity for the content item, which is required in import/export scenarios where one content item references another."));
+                .WithDescription("自动为内容项生成唯一标识，在导入/导出场景中，其中一个内容项引用另一个内容。"));
 
             return 3;
         }

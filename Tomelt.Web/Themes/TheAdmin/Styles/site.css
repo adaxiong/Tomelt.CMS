@@ -63,7 +63,8 @@ h2 {
 fieldset {
     padding: .3em .35em .3em;
     margin: 5px 2px;
-    border: 1px solid #95B8E7;
+    border: 1px solid rgb(221, 221, 221);
+    width: 99%;
 }
 legend {
     padding: .5em;

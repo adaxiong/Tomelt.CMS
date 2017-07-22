@@ -13,7 +13,7 @@ namespace Tomelt.Themes {
 
             ContentDefinitionManager.AlterPartDefinition("DisableThemePart", builder => builder
                 .Attachable()
-                .WithDescription("When attached to a content type, disables the theme when a content item of this type is displayed."));
+                .WithDescription("当附件一个内容类型时，内容项的类型为显示状态时，使其禁止主题"));
 
             return 2;
         }

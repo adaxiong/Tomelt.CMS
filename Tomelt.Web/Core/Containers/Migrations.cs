@@ -43,11 +43,11 @@ namespace Tomelt.Core.Containers {
 
             ContentDefinitionManager.AlterPartDefinition("ContainerPart", part => part
                 .Attachable()
-                .WithDescription("Turns your content item into a container that is capable of containing content items that have the ContainablePart attached."));
+                .WithDescription("将你的内容放到一个容器，可以包含有ContainablePart附加内容"));
 
             ContentDefinitionManager.AlterPartDefinition("ContainablePart", part => part
                 .Attachable()
-                .WithDescription("Allows your content item to be contained by a content item that has the ContainerPart attached."));
+                .WithDescription("让你的内容是由内容项目有ContainerPart附加"));
 
             return 7;
         }
@@ -70,10 +70,10 @@ namespace Tomelt.Core.Containers {
 
         public int UpdateFrom3() {
             ContentDefinitionManager.AlterPartDefinition("ContainerPart", part => part
-                .WithDescription("Turns your content item into a container that is capable of containing content items that have the ContainablePart attached."));
+                .WithDescription("将你的内容放到一个容器，可以包含有ContainablePart附加内容"));
 
             ContentDefinitionManager.AlterPartDefinition("ContainablePart", part => part
-                .WithDescription("Allows your content item to be contained by a content item that has the ContainerPart attached."));
+                .WithDescription("让你的内容是由内容项目有ContainerPart附加"));
 
             ContentDefinitionManager.AlterPartDefinition("CustomPropertiesPart", part => part
                 .WithDescription("Adds 3 custom properties to your content item."));

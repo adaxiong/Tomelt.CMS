@@ -14,14 +14,14 @@ namespace Tomelt.Core.Title {
 
             ContentDefinitionManager.AlterPartDefinition("TitlePart", builder => builder
                 .Attachable()
-                .WithDescription("Provides a Title for your content item."));
+                .WithDescription("提供一个标题的内容项"));
 
             return 2;
         }
 
         public int UpdateFrom1() {
             ContentDefinitionManager.AlterPartDefinition("TitlePart", builder => builder
-                .WithDescription("Provides a Title for your content item."));
+                .WithDescription("提供一个标题的内容项"));
             return 2;
         }
     }

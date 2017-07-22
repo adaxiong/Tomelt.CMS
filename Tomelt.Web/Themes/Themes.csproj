@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TheAdmin\Content\Images\logo_header.png" />
+    <Content Include="TheAdmin\Content\Images\tomelt_ad1.jpg" />
     <Content Include="TheAdmin\Content\Images\tomelt_mp.jpg" />
     <Content Include="TheAdmin\Content\tomelt.ico" />
     <Content Include="TheAdmin\Scripts\base.js" />
@@ -287,6 +288,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="TheAdmin\Views\ThemePreview.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\EditPlacement.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\ListParts.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\CreatePart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.ContentTypes\Admin\EditPart.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Dashboard\Admin\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\DefinitionTemplates\BodyPartSettings.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

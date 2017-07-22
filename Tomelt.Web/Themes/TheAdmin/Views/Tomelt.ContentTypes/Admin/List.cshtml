@@ -44,10 +44,10 @@
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("Create")');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
-    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-datalist',plain:true,text:'布局'" onclick="updateData('@Url.Action("EditPlacement")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-datalist',plain:true,text:'布局'" onclick="layOut('@Url.Action("EditPlacement")');"></a>
 </div>
 
-<table id="dataGrid" class="easyui-datagrid" style="width: 100%;"
+<table id="dataGrid" class="easyui-datagrid" style="width: 99%;"
        data-options="url: '@Url.Action("GetList")',
        title:'@Layout.Title',
        iconCls: 'icon-datalist',
@@ -105,7 +105,16 @@
         function onDblClickRow(index, row) {
             updateData('@Url.Action("Edit")');
         }
-        
+        //布局
+        function layOut(url) {
+            var rows = $('#dataGrid').datagrid('getSelections');//获取所选择的行
+            if (rows.length != 1) {
+                $.messager.alert("提示", "请选择内容类型", "warning");
+                return;
+            }
+            var newurl = url + "/";
+            openWin(newurl + rows[0].Id, "布局[" + rows[0].Id+"]", 880, 600);
+        }
     </script>
 
 }

@@ -1,13 +1,25 @@
 ﻿@model Tomelt.Core.Contents.Settings.ContentPartSettings
-<fieldset>
-    <label for="@Html.FieldIdFor(m => m.Description)">@T("Description")</label>
-    @Html.TextBoxFor(m => m.Description, new { @class = "text large"})
-    <span class="hint">@T("Optionally provide a description for this part")</span>
-    @Html.ValidationMessageFor(m => m.Description)
-</fieldset>
-<fieldset>
-    @Html.EditorFor(m => m.Attachable)
-    <label for="@Html.FieldIdFor(m => m.Attachable)" class="forcheckbox">@T("Attachable")</label>
-    <span class="hint">@T("Check to allow this part to be attached to other content types.")</span> 
-    @Html.ValidationMessageFor(m => m.Attachable)
-</fieldset>
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Description, "easyui-textbox", new
+        {
+            label = T("元件描述"),
+            width = "80%",
+            labelPosition = "top"
+        })
+        @Html.ValidationMessageFor(m => m.Description)
+        <p class="description">@T("（可选） 提供此元件的描述说明")</p>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.Attachable)">
+            @Html.CheckBoxFor(m => m.Attachable)
+            @Html.ValidationMessageFor(m => m.Attachable)
+            @T("可附加")
+        </label>
+        <p class="description">@T("选中将允许此元件附加到其他内容类型。")</p>
+    </div>
+</div>

@@ -74,11 +74,11 @@ namespace Tomelt.ContentTypes.Controllers
             var rows = _contentDefinitionService.GetTypes();
             if (!string.IsNullOrWhiteSpace(name))
             {
-                rows = rows.Where(d => d.Name.ToLower().Contains(name));
+                rows = rows.Where(d => d.Name.ToLower().Contains(name.ToLower()));
             }
             if (!string.IsNullOrWhiteSpace(displayname))
             {
-                rows = rows.Where(d => d.DisplayName.ToLower().Contains(displayname));
+                rows = rows.Where(d => d.DisplayName.ToLower().Contains(displayname.ToLower()));
             }
             return Json(rows.Select(d => new
             {
@@ -565,7 +565,28 @@ namespace Tomelt.ContentTypes.Controllers
                 Parts = _contentDefinitionService.GetParts(true/*metadataPartsOnly*/)
             });
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult GetListParts(string name = "", string displayname = "")
+        {
+            
+            var rows = _contentDefinitionService.GetParts(true);
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                rows = rows.Where(d => d.Name.ToLower().Contains(name.ToLower()));
+            }
+            if (!string.IsNullOrWhiteSpace(displayname))
+            {
+                rows = rows.Where(d => d.DisplayName.ToLower().Contains(displayname.ToLower()));
+            }
+            return Json(rows.Select(d => new
+            {
+                Id = d.Name,
+                d.DisplayName,
+                d.Name,
+                d.Description
+            }).OrderBy(d => d.Name));
+        }
         public ActionResult CreatePart(string suggestion)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
@@ -581,7 +602,7 @@ namespace Tomelt.ContentTypes.Controllers
                 return new HttpUnauthorizedResult();
 
             if (_contentDefinitionManager.GetPartDefinition(viewModel.Name) != null)
-                ModelState.AddModelError("Name", T("Cannot add part named '{0}'. It already exists.", viewModel.Name).ToString());
+                ModelState.AddModelError("Name", T("内容元件 '{0}'. 已存在.", viewModel.Name).ToString());
 
             if (!ModelState.IsValid)
                 return View(viewModel);
@@ -590,17 +611,38 @@ namespace Tomelt.ContentTypes.Controllers
 
             if (partViewModel == null)
             {
-                Services.Notifier.Information(T("The content part could not be created."));
+                Services.Notifier.Information(T("内容元件创建失败，请输入正确的名称."));
                 return View(viewModel);
             }
 
-            Services.Notifier.Information(T("The \"{0}\" content part has been created.", partViewModel.Name));
+            Services.Notifier.Information(T("内容元件 \"{0}\" 创建成功.", partViewModel.Name));
             return RedirectToAction("EditPart", new { id = partViewModel.Name });
         }
+        [HttpPost]
+        public ActionResult CreatePartAJAX(CreatePartViewModel viewModel)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new { State = 0, Msg = T("无权限！").Text });
 
+            if (_contentDefinitionManager.GetPartDefinition(viewModel.Name) != null)
+                return Json(new { State = 0, Msg = T("内容元件 '{0}'. 已存在.", viewModel.Name).ToString() });
+
+
+            if (!ModelState.IsValid)
+                return Json(new { State = 0, Msg = T("数据校验失败！").Text });
+
+            var partViewModel = _contentDefinitionService.AddPart(viewModel);
+
+            if (partViewModel == null)
+            {
+                return Json(new { State = 0, Msg = T("内容元件创建失败，请输入正确的名称.").Text });
+            }
+            return Json(new { State = 1, Msg = T("内容元件 \"{0}\" 创建成功.", partViewModel.Name).Text });
+
+        }
         public ActionResult EditPart(string id)
         {
-            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("Not allowed to edit a content part.")))
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
                 return new HttpUnauthorizedResult();
 
             var partViewModel = _contentDefinitionService.GetPart(id);
@@ -638,7 +680,35 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("ListParts");
         }
+        [HttpPost]
+        public ActionResult EditPartAJAX(string id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("无权限.")))
+                return Json(new { State = 0, Msg = T("无权限！").Text });
 
+            var partViewModel = _contentDefinitionService.GetPart(id);
+
+            if (partViewModel == null)
+                return Json(new { State = 0, Msg = T("内容元件创建失败，请输入正确的名称.").Text });
+
+            if (!TryUpdateModel(partViewModel))
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = T("数据校验失败！").Text });
+            }
+
+
+
+            _contentDefinitionService.AlterPart(partViewModel, this);
+
+            if (!ModelState.IsValid)
+            {
+                Services.TransactionManager.Cancel();
+                return Json(new { State = 0, Msg = T("数据校验失败！").Text });
+            }
+
+            return Json(new { State = 1, Msg = T("内容元件 \"{0}\" 编辑成功.", partViewModel.Name).Text });
+        }
         [HttpPost, ActionName("EditPart")]
         [FormValueRequired("submit.Delete")]
         public ActionResult DeletePart(string id)
@@ -657,7 +727,22 @@ namespace Tomelt.ContentTypes.Controllers
 
             return RedirectToAction("ListParts");
         }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult DeletePartAJAX(string id)
+        {
+            if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("Not allowed to delete a content part.")))
+                return Json(new { State = 0, Msg = T("无权限！").Text });
 
+            var partViewModel = _contentDefinitionService.GetPart(id);
+
+            if (partViewModel == null)
+                return Json(new { State = 0, Msg = T("内容元件不存在！").Text });
+
+            _contentDefinitionService.RemovePart(id);
+            
+            return Json(new { State = 1, Msg = T("内容元件 \"{0}\" 删除成功.", partViewModel.DisplayName).Text });
+        }
         public ActionResult AddFieldTo(string id)
         {
             if (!Services.Authorizer.Authorize(Permissions.EditContentTypes, T("Not allowed to edit a content part.")))

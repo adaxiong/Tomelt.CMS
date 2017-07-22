@@ -27,7 +27,7 @@ namespace Tomelt.Autoroute {
 
             ContentDefinitionManager.AlterPartDefinition("AutoroutePart", part => part
                 .Attachable()
-                .WithDescription("Adds advanced url configuration options to your content type to completely customize the url pattern for a content item."));
+                .WithDescription("将高级URL配置选项添加到内容类型中，以完全自定义内容项的URL模式"));
 
             SchemaBuilder.AlterTable("AutoroutePartRecord", table => table
                 .CreateIndex("IDX_AutoroutePartRecord_DisplayAlias", "DisplayAlias")
@@ -38,7 +38,7 @@ namespace Tomelt.Autoroute {
 
         public int UpdateFrom1() {
             ContentDefinitionManager.AlterPartDefinition("AutoroutePart", part => part
-                .WithDescription("Adds advanced url configuration options to your content type to completely customize the url pattern for a content item."));
+                .WithDescription("将高级URL配置选项添加到内容类型中，以完全自定义内容项的URL模式"));
             return 2;
         }
 

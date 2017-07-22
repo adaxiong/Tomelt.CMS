@@ -25,7 +25,7 @@ namespace Tomelt.ContentPicker {
 
             ContentDefinitionManager.AlterPartDefinition("NavigationPart", builder => builder
                 .Attachable()
-                .WithDescription("Allows the management of Content Menu Items associated with a Content Item."));
+                .WithDescription("允许管理与内容项相关联的内容菜单项。"));
             
             return 1;
         }
