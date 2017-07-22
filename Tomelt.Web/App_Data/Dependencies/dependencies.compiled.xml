@@ -170,8 +170,8 @@
   </Dependency>
   <Dependency>
     <ExtensionId>UEditor</ExtensionId>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
-    <VirtualPath>~/Modules/UEditor/bin/UEditor.dll</VirtualPath>
-    <Hash>48ecb0fabfd26d0e</Hash>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/UEditor/UEditor.csproj</VirtualPath>
+    <Hash>8d54ae176a8b42df</Hash>
   </Dependency>
 </Dependencies>

@@ -921,8 +921,8 @@
   </Dependency>
   <Dependency>
     <ModuleName>UEditor</ModuleName>
-    <VirtualPath>~/Modules/UEditor/bin/UEditor.dll</VirtualPath>
-    <LoaderName>PrecompiledExtensionLoader</LoaderName>
+    <VirtualPath>~/Modules/UEditor/UEditor.csproj</VirtualPath>
+    <LoaderName>DynamicExtensionLoader</LoaderName>
     <References />
   </Dependency>
   <Dependency>
