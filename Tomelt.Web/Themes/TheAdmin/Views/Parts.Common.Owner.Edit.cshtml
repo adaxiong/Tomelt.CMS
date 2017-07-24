@@ -1,0 +1,17 @@
+﻿@model Tomelt.Core.Common.OwnerEditor.OwnerEditorViewModel
+@{
+	var OwnerEditor = Model;
+}
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => OwnerEditor.Owner, "easyui-textbox", new
+        {
+            label = T("发布人"),
+            required = true,
+            width = "80%"
+        })
+        @Html.ValidationMessageFor(m => OwnerEditor.Owner)
+    </div>
+</div>
+

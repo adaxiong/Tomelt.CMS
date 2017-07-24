@@ -39,15 +39,13 @@
 </div>
 <div class="col-xs-12 hidden">
     <div class="form-group">
-        <label for="SiteCulture">@T("默认网站语言")</label>
-        @Html.DropDownList("SiteCulture", new SelectList(Model.SiteCultures, Model.SiteCulture),new{@class= "easyui-combobox",style="width:100%;", data_options= "editable:false,panelHeight:'auto'" })
+        @Html.DropDownList("SiteCulture", new SelectList(Model.SiteCultures, Model.SiteCulture),new{@class= "easyui-combobox",style="width:80%;", data_options= "editable:false,panelHeight:'auto',labelPosition:'top',label:'"+ T("默认网站语言") + "'" })
         @Html.ValidationMessage("SiteCulture", "*")
     </div>
 </div>
 <div class="col-xs-12">
     <div class="form-group">
-        <label for="SiteCalendar">@T("默认网站日历")</label>
-        @Html.DropDownList("SiteCalendar", new[] { new SelectListItem { Text = T("区域性日历").Text, Value = "" } }.Union(new SelectList(Model.SiteCalendars, Model.SiteCalendar)), new { @class = "easyui-combobox", style = "width:100%;", data_options = "editable:false,panelHeight:'auto'" })
+        @Html.DropDownList("SiteCalendar", new[] { new SelectListItem { Text = T("区域性日历").Text, Value = "" } }.Union(new SelectList(Model.SiteCalendars, Model.SiteCalendar)), new { @class = "easyui-combobox", style = "width:80%;", data_options = "editable:false,panelHeight:'auto',labelPosition:'top',label:'" + T("默认网站日历") + "'" })
         @Html.ValidationMessage("SiteCalendar", "*")
         <p class="description">@T("确定当显示和编辑日期和时间时，默认使用的日历")@T("'语言日历(Culture calenda)' 选项表示当前请求的所使用的语言下的默认日历， （不一定是配置的默认网站语言）。")</p>
         
@@ -55,8 +53,7 @@
 </div>
 <div class="col-xs-12">
     <div class="form-group">
-        <label for="SiteCalendar">@T("默认时区")</label>
-        @Html.DropDownList("TimeZone", new[] { new SelectListItem { Text = T("服务器当地时区").Text, Value = "" } }.Union(new SelectList(Model.TimeZones, "Id", "", Model.TimeZone)), new { @class = "easyui-combobox", style = "width:100%;", data_options = "editable:false,panelHeight:200" })
+        @Html.DropDownList("TimeZone", new[] { new SelectListItem { Text = T("服务器当地时区").Text, Value = "" } }.Union(new SelectList(Model.TimeZones, "Id", "", Model.TimeZone)), new { @class = "easyui-combobox", style = "width:80%;", data_options = "editable:false,panelHeight:200,labelPosition:'top',label:'" + T("默认时区") + "'" })
         @Html.ValidationMessage("TimeZone", "*")
         <p class="description">@T("确定当显示和编辑日期和时间时，默认使用的时区。")</p>
 
@@ -88,13 +85,12 @@
 </div>
 <div class="col-xs-12">
     <div class="form-group">
-        <label for="SiteDebugMode">@T("默认网站日历")</label>
-        @Html.DropDownList("ResourceDebugMode", resourceDebugMode, new { @class = "easyui-combobox", style = "width:100%;", data_options = "editable:false,panelHeight:'auto'" })
+        @Html.DropDownList("ResourceDebugMode", resourceDebugMode, new { @class = "easyui-combobox", style = "width:80%;", data_options = "editable:false,panelHeight:'auto',labelPosition:'top',label:'" + T("资源调试模式") + "'" })
         <p class="description">@T("确定是否加载debug版或min版的脚本和样式表。")</p>
 
     </div>
 </div>
-<div class="col-xs-12">
+<div class="col-xs-12 hidden">
     <div class="form-group checkbox">
                 <label for="@Html.FieldIdFor(m => m.UseCdn)">
                     @Html.CheckBoxFor(m => m.UseCdn)

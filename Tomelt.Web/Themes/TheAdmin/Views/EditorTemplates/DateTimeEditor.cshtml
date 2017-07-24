@@ -1,0 +1,26 @@
+﻿@model Tomelt.Core.Common.ViewModels.DateTimeEditor
+
+
+
+@if (Model.ShowDate) {
+        @Html.EasyUIFor(m => m.Date, "easyui-datebox", new
+        {
+            label = T("日期"),
+            width = "36%",
+            prompt= T("日期").Text,
+            labelAlign="right"
+        })
+}
+
+@if (Model.ShowTime) {
+        @Html.EasyUIFor(m => m.Time, "easyui-timespinner", new
+   {
+       label = T("时间"),
+       width = "38%",
+       prompt= T("时间").Text,
+       labelAlign="right"
+   })
+}
+
+@if (Model.ShowDate) { <text>@Html.ValidationMessageFor(m => m.Date)</text> }
+@if (Model.ShowTime) { <text>@Html.ValidationMessageFor(m => m.Time)</text> }

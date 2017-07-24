@@ -1,0 +1,14 @@
+﻿@model Tomelt.Core.Title.Models.TitlePart
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Title, "easyui-textbox", new
+   {
+       label = T("标题"),
+       required = true,
+       width = "80%",
+       prompt= T("请输入标题内容").Text
+   })
+    </div>
+</div>
+

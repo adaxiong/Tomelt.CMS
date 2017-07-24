@@ -7,5 +7,5 @@ TomeltVersion: 1.0
 Description: EasyUI字段
 Features:
     Tomelt.EasyUIFields:
-        Description: Description for feature Tomelt.EasyUIFields.
+        Description: EasyUI表单编辑器
 		Category: Fields

@@ -54,14 +54,14 @@ namespace Tomelt.Core.Contents {
 
         public void GetNavigation(NavigationBuilder builder)
         {
-            builder.AddImageSet("ok")
-                .Add(T("系统功能"), "88", menu =>
-                    {
-                        menu.LinkToFirstChild(false);
-                        menu.Add(T("内容管理"), "98",
-                            item => item.Action("List", "Admin", new {area = "Contents", id = ""}));
-                    }
-                );
+            //builder.AddImageSet("ok")
+            //    .Add(T("系统功能"), "88", menu =>
+            //        {
+            //            menu.LinkToFirstChild(false);
+            //            menu.Add(T("内容管理"), "98",
+            //                item => item.Action("List", "Admin", new {area = "Contents", id = ""}));
+            //        }
+            //    );
         }
     }
 }

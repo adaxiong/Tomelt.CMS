@@ -1,0 +1,51 @@
+@{
+    Layout.Title = T("角色管理").ToString();
+}
+<div id="tb">
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').datagrid('reload');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("Create")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
+
+</div>
+<div class="mt05"></div>
+<table id="dataGrid" class="easyui-datagrid" style="width: 99%;"
+       data-options="url: '@Url.Action("GetList")',
+       title:'@Layout.Title',
+       iconCls: 'icon-datalist',
+       height: 'auto',
+       nowrap: true,
+       striped: true,
+       collapsible: true,
+       sortName: 'Name',
+       sortOrder: 'asc',
+       idField: 'Id',
+       queryParams: {},
+       toolbar: '#tb',
+       singleSelect: true,
+       fitColumns: true,
+       pagination: false,
+       rownumbers: true,
+       onDblClickRow: onDblClickRow
+       ">
+    <thead>
+    <tr>
+        <th data-options="field:'Id',width:60,align:'center'">主键</th>
+        <th data-options="field:'Name',width:100,align:'center'">角色名称</th>
+
+
+    </tr>
+    </thead>
+</table>
+
+@using (Script.Foot())
+{
+
+    <script>
+
+        function onDblClickRow(index, row) {
+            updateData('@Url.Action("Edit")');
+        }
+    </script>
+
+}

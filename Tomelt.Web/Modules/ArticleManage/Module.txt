@@ -1,0 +1,10 @@
+﻿Name: ArticleManage
+AntiForgery: enabled
+Author: AdaXiong
+Website: http://www.tomelt.com
+Version: 1.0
+TomeltVersion: 1.0
+Description: 文章管理模块，包括网站发布文章，栏目等
+Features:
+    ArticleManage:
+        Description: 文章管理模块，包括网站发布文章，栏目等.

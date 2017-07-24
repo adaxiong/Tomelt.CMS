@@ -4,7 +4,7 @@ using Tomelt.Caching;
 namespace Tomelt.Services {
     public class Clock : IClock {
         public DateTime UtcNow {
-            get { return DateTime.UtcNow; }
+            get { return DateTime.Now; }
         }
 
         public IVolatileToken When(TimeSpan duration) {

@@ -19,11 +19,11 @@ namespace Tomelt.Users
         public void GetNavigation(NavigationBuilder builder)
         {
             builder.AddImageSet("ok")
-                .Add(T("系统功能"), "88",
+                .Add(T("用户管理"), "77",
                     menu =>
                     {
                         menu.LinkToFirstChild(false);
-                        menu.Add(T("用户管理"), "0", subitem => subitem
+                        menu.Add(T("用户列表"), "0", subitem => subitem
                                         .Action("List", "Admin", new { area = "Tomelt.Users" })
                                         .Permission(Permissions.ManageUsers));
                     });
