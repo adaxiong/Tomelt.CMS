@@ -30,7 +30,6 @@ namespace ArticleManage.Services
         public void UpdateForContentItem(ContentItem item, EditColumnPartViewModel model)
         {
             var part = item.As<ColumnPart>();
-            part.Title = model.Title;
             part.CallIndex = model.CallIndex;
             part.Groups = model.Groups;
             part.ImageUrl = model.ImageUrl;

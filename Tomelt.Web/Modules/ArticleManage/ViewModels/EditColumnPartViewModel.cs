@@ -10,9 +10,6 @@ namespace ArticleManage.ViewModels
     {
         [Display(Name = "上级栏目")]
         public int ParentId { get; set; }
-        [Display(Name = "栏目标题")]
-        [Required]
-        public string Title { get; set; }
         [Display(Name = "排序")]
         public int Sort { get; set; }
         [Display(Name = "栏目摘要")]

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ArticleManage.ViewModels;
 using Tomelt;
 using Tomelt.ContentManagement;
+using Tomelt.UI.Navigation;
 
 namespace ArticleManage.Services
 {
@@ -13,5 +14,7 @@ namespace ArticleManage.Services
     {
         void UpdateForContentItem(ContentItem item, EditArticlePartViewModel model);
         IEnumerable<ContentItem> GetArticles(VersionOptions versionOptions);
+
+        IEnumerable<ContentItem> GetArticlesPro(DatagridPagerParameters pagerParameters);
     }
 }

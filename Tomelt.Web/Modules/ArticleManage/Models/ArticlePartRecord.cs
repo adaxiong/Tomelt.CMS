@@ -5,8 +5,7 @@ using Tomelt.Data.Conventions;
 namespace ArticleManage.Models {
     public class ArticlePartRecord : ContentPartRecord {
 
-        [Display(Name = "文章标题")]
-        public virtual string Title { get; set; }
+
         [Display(Name = "副标题")]
         public virtual string Subtitle { get; set; }
         [Display(Name = "内容摘要")]

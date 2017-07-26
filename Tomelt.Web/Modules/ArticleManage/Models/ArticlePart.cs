@@ -4,12 +4,6 @@ using Tomelt.ContentManagement;
 namespace ArticleManage.Models {
     public class ArticlePart : ContentPart<ArticlePartRecord>
     {
-        [Display(Name = "文章标题")]
-        public string Title
-        {
-            get { return Record.Title; }
-            set { Record.Title = value; }
-        }
         [Display(Name = "内容摘要")]
         public string Summary
         {

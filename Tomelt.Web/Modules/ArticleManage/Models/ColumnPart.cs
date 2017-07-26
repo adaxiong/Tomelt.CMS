@@ -4,12 +4,7 @@ using Tomelt.ContentManagement;
 namespace ArticleManage.Models {
     public class ColumnPart : ContentPart<ColumnPartRecord>
     {
-        [Display(Name = "栏目标题")]
-        public string Title
-        {
-            get { return Record.Title; }
-            set { Record.Title = value; }
-        }
+
         [Display(Name = "栏目摘要")]
         public string Summary
         {

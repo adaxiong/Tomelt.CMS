@@ -32,5 +32,9 @@
         /// 排序字段
         /// </summary>
         public string sort { get; set; }
+        /// <summary>
+        /// 内容状态
+        /// </summary>
+        public string contentStatus { get; set; }
     }
 }

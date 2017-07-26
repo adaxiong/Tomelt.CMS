@@ -6,8 +6,6 @@ namespace ArticleManage.Models {
     {
         [Display(Name = "上级栏目")]
         public virtual int ParentId { get; set; }
-        [Display(Name = "栏目标题")]
-        public virtual string Title { get; set; }
         [Display(Name = "排序")]
         public virtual int Sort { get; set; }
         [Display(Name = "栏目摘要")]
