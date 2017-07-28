@@ -9,6 +9,7 @@ using Tomelt;
 using Tomelt.ContentManagement;
 using Tomelt.ContentManagement.MetaData;
 using Tomelt.ContentManagement.MetaData.Models;
+using Tomelt.ContentManagement.Records;
 using Tomelt.Core.Common.Models;
 using Tomelt.Core.Contents.Settings;
 using Tomelt.Data;
@@ -34,9 +35,9 @@ namespace ArticleManage.Services
             ContentDefinitionManager = contentDefinitionManager;
             SiteService = siteService;
         }
-        public IEnumerable<ContentItem> GetArticles(VersionOptions versionOptions)
+        public IEnumerable<ContentItem> GetArticles<TRecord>(VersionOptions versionOptions, Expression<Func<TRecord, bool>> whereLambad) where TRecord:ContentPartRecord
         {
-            return TomeltServices.ContentManager.Query(versionOptions, ContentTypeName).List();
+            return TomeltServices.ContentManager.Query(versionOptions, ContentTypeName).Where(whereLambad).List();
 
         }
 

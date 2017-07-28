@@ -8,6 +8,7 @@ using ArticleManage.ViewModels;
 using Tomelt;
 using Tomelt.ContentManagement;
 using Tomelt.Core.Common.Models;
+using Tomelt.Core.Title.Models;
 using Tomelt.Data;
 
 namespace ArticleManage.Services
@@ -23,7 +24,12 @@ namespace ArticleManage.Services
         }
         public IEnumerable<ContentItem> GetColumns(VersionOptions versionOptions)
         {
-            return TomeltServices.ContentManager.Query(versionOptions, "Column").List();
+            return TomeltServices.ContentManager.Query(versionOptions, "Column").OrderBy<ColumnPartRecord>(d => d.Sort).List();
+
+        }
+        public List<EasyuiTree> GetTreeColumns(VersionOptions versionOptions)
+        {
+            return GetTree(0, GetColumns(versionOptions));
 
         }
 
@@ -102,6 +108,22 @@ namespace ArticleManage.Services
                     UpdateChilds(treePartRecord.Id);
                 }
             }
+        }
+        private List<EasyuiTree> GetTree(int parentId, IEnumerable<ContentItem> list)
+        {
+            var newlist = list.Where(d => d.As<ColumnPart>().ParentId == parentId).ToList();
+            List<EasyuiTree> jsonData = new List<EasyuiTree>();
+            newlist.ForEach(item =>
+            {
+                jsonData.Add(new EasyuiTree
+                {
+                    id = item.Id,
+                    children = GetTree(item.Id, list),
+                    ParentId = item.As<ColumnPart>().ParentId,
+                    text = item.As<TitlePart>().Title
+                });
+            });
+            return jsonData;
         }
     }
 }

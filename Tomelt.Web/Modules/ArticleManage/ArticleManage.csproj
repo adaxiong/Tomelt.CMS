@@ -86,6 +86,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminMenu.cs" />
     <Compile Include="ArticleManagePermissions.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Drivers\ArticlePartDriver.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Services\ArticleService.cs" />
     <Compile Include="Services\IColumnService.cs" />
     <Compile Include="Services\IArticleService.cs" />
+    <Compile Include="ViewModels\EasyuiTree.cs" />
     <Compile Include="ViewModels\EditArticlePartViewModel.cs" />
     <Compile Include="ViewModels\EditColumnPartViewModel.cs" />
     <Compile Include="Migrations.cs" />
@@ -128,7 +130,9 @@
       <Private>false</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Admin\Column.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>

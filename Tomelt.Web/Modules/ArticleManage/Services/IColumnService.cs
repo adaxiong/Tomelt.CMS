@@ -13,5 +13,6 @@ namespace ArticleManage.Services
     {
         void UpdateForContentItem(ContentItem item, EditColumnPartViewModel model);
         IEnumerable<ContentItem> GetColumns(VersionOptions versionOptions);
+        List<EasyuiTree> GetTreeColumns(VersionOptions versionOptions);
     }
 }

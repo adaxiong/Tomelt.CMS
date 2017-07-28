@@ -1,0 +1,53 @@
+﻿
+@{
+    Layout.Title = T("文章栏目").ToString();
+}
+<div class="mt05"></div>
+
+<div id="tb">
+    @*<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-unchecked',plain:true" onclick="datagridChecked(this, 'dataGrid');">全选</a>*@
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-collapse',plain:true,text:'折叠'" onclick="$('#dataGrid').treegrid('collapseAll');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-expand',plain:true,text:'展开'" onclick="$('#dataGrid').treegrid('expandAll');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').treegrid('reload');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("Create")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
+</div>
+
+<table id="dataGrid" class="easyui-treegrid" style="width: 99%;"
+       data-options="url: '@Url.Action("GetColumnList")',
+       title:'@Layout.Title',
+       iconCls: 'icon-datalist',
+       height: 600,
+       nowrap: true,
+       striped: true,
+       collapsible: true,
+       sortName: 'Id',
+       sortOrder: 'asc',
+       idField: 'Id',
+       treeField: 'Title',
+       queryParams: {},
+       toolbar: '#tb',
+       singleSelect: true,
+       fitColumns: true,
+       rownumbers: true,
+       onDblClickRow: onDblClickRow">
+    <thead>
+    <tr>
+        <th data-options="field:'Title',width:200">栏目标题</th>
+        <th data-options="field:'Count',width:100,align:'center'">关联文章数</th>
+        <th data-options="field:'Sort',width:100,align:'center'">排序</th>
+    </tr>
+    </thead>
+</table>
+@using (Script.Foot())
+{
+
+    <script>
+        function onDblClickRow(index, row) {
+            updateData('@Url.Action("Edit")');
+        }
+    </script>
+
+}
+

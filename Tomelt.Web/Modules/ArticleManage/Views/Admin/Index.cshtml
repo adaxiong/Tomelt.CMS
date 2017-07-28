@@ -1,7 +1,7 @@
 ﻿@model ArticleManage.ViewModels.EditArticlePartViewModel
 @{
 
-    Layout.Title = T("文章管理").ToString();
+    Layout.Title = T("文章内容").ToString();
     IDictionary<string, string> fields = ViewBag.Fields;
 }
 
@@ -63,12 +63,13 @@
        onLoadSuccess:onLoadSuccess,
        onDblClickRow: onDblClickRow">
     <thead>
-        <tr>
-            @foreach (var field in fields)
-            {
-                <th data-options="field:'@field.Key',width:150,align:'center'">@field.Value</th>
-            }
-        </tr>
+    <tr>
+        <th data-options="field:'Title',width:150,align:'center'">文章标题</th>
+        @foreach (var field in fields)
+        {
+            <th data-options="field:'@field.Key',width:150,align:'center'">@field.Value</th>
+        }
+    </tr>
     </thead>
 </table>
 @using (Script.Foot())
@@ -80,62 +81,7 @@
             var $dg = $('#dataGrid');
             //formatCol($dg);
         });
-        //加载数据列表
-        function loadList() {
-            $('#dataGrid').datagrid({
-                title: '@Layout.Title', //列表的标题
-                iconCls: 'icon-datalist',
-                height: 'auto',
-                nowrap: true, //如果为true，则在同一行中显示数据。设置为true可以提高加载性能
-                striped: true, //是否显示斑马线效果。
-                collapsible: true, //定义是否显示可折叠按钮。
-                url: '@Url.Action("GetList")', //获取数据的url
-                sortName: 'Id', //。定义哪些列可以进行排序。
-                sortOrder: 'asc', //定义列的排序顺序，只能是'asc'或'desc'。
-                idField: 'Id', //指明哪一个字段是标识字段
-                queryParams: {},
-                toolbar: '#tb',
-                columns: [
-                    [
-
-                        { field: 'UserName', title: '用户名称', width: 100, align: "center" },
-                        { field: 'Email', title: '电子邮件', width: 150, align: "center" },
-                        {
-                            field: 'CreatedUtc',
-                            title: '创建时间',
-                            width: 150,
-                            align: "center",
-                            formatter: function (value, row, index) {
-                                return formatValue.dateTime(value);
-                            }
-                        },
-                        {
-                            field: 'LastLoginUtc',
-                            title: '上次登录时间',
-                            width: 150,
-                            align: "center",
-                            formatter: function (value, row, index) {
-                                return formatValue.dateTime(value);
-                            }
-                        },
-                        {
-                            field: 'RegistrationStatus', title: '用户状态', width: 100, align: "center",
-                            formatter: function (value, row, index) {
-                                var ischeck = value == 1 ? "true" : "false";
-                                return "<input id=\""+row.Id+"\" class=\"easyui-switchbutton\" data-options=\"checked:" + ischeck+",onText: '开启',offText: '禁用'\">";
-
-                            }
-                        }
-                    ]
-                ],
-                singleSelect: true,
-                fitColumns: true,
-                pagination: true, //如果为true，则在DataGrid控件底部显示分页工具栏。
-                rownumbers: true,//如果为true，则显示一个行号列。
-                onLoadSuccess: onLoadSuccess,
-                onDblClickRow: onDblClickRow
-            });
-        }
+        
 
         function onLoadSuccess() {
             $(".easyui-switchbutton").switchbutton({

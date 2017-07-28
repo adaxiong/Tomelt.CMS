@@ -24,17 +24,19 @@ namespace ArticleManage.Controllers
     {
         public ITomeltServices TomeltServices { get; set; }
         public IArticleService ArticleService { get; set; }
+        public IColumnService ColumnService { get; set; }
         public IContentDefinitionManager ContentDefinitionManager { get; set; }
 
         private const string ContentTypeName = "Article";
 
         public AdminController(ITomeltServices tomeltServices,
             IContentDefinitionManager contentDefinitionManager,
-            IArticleService articleService)
+            IArticleService articleService, IColumnService columnService)
         {
             TomeltServices = tomeltServices;
             ContentDefinitionManager = contentDefinitionManager;
             ArticleService = articleService;
+            ColumnService = columnService;
         }
         // GET: Admin
         public ActionResult Index()
@@ -78,24 +80,62 @@ namespace ArticleManage.Controllers
         [ValidateAntiForgeryTokenTomelt(false)]
         public ActionResult GetList(DatagridPagerParameters pagerParameters)
         {
-            
+
             var rows = ArticleService.GetArticlesPro(pagerParameters);
             return Json(new
             {
                 pagerParameters.total,
-                rows=rows.Select(d=>new
+                rows = rows.Select(d => new
                 {
                     d.Id,
                     d.As<ArticlePart>().Author,
                     d.As<TitlePart>().Title,
                     d.As<CommonPart>().PublishedUtc,
-                    d.As<CommonPart>().Owner.UserName,
+                    UserName = d.As<CommonPart>().Owner == null ? "" : d.As<CommonPart>().Owner.UserName,
                     d.As<ArticlePart>().Sort
                 })
-                
+
             });
         }
-        
 
+
+        public ActionResult Column()
+        {
+            
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult GetColumnList()
+        {
+
+            var rows = ColumnService.GetColumns(VersionOptions.Latest);
+            return Json(new
+            {
+                total = rows.Count(),
+                rows = rows.Select(d => new
+                {
+                    d.Id,
+                    d.As<ColumnPart>().Sort,
+                    d.As<TitlePart>().Title,
+                    Count = GetArticleCount(d.Id),
+                    _parentId = d.As<ColumnPart>().ParentId
+                })
+
+            });
+        }
+
+        private int GetArticleCount(int columnId)
+        {
+            var temp= ArticleService.GetArticles<ArticlePartRecord>(VersionOptions.Latest, d => d.ColumnPartRecordId == columnId);
+            return temp.Count();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryTokenTomelt(false)]
+        public ActionResult GetColumnTreeList()
+        {
+            return Json(ColumnService.GetTreeColumns(VersionOptions.Latest));
+
+        }
     }
 }

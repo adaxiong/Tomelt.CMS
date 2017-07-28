@@ -9,6 +9,8 @@ namespace ArticleManage.ViewModels
 {
     public class EditArticlePartViewModel
     {
+        [Display(Name = "副标题")]
+        public string Title { get; set; }
 
         [Display(Name = "副标题")]
         public string Subtitle { get; set; }
