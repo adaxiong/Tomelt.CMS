@@ -1,0 +1,70 @@
+﻿@model ArticleManage.ViewModels.EditColumnPartViewModel
+
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.ParentId, "easyui-combotree", new
+   {
+       label = T(Html.DisplayNameFor(d => d.ParentId).ToString()),
+       width = "80%",
+       prompt = "-请选择-",
+       editable = false,
+       panelHeight = 200,
+       url = Url.Action("GetColumnTreeList","Admin",new{area= "ArticleManage" }),
+       value = Model.ParentId
+       
+   })
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Summary, "easyui-textbox", new
+       {
+           label = T(Html.DisplayNameFor(d => d.Summary).ToString()),
+           width = "80%"
+       })
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.CallIndex, "easyui-textbox", new
+       {
+           label = T(Html.DisplayNameFor(d => d.CallIndex).ToString()),
+           width = "80%"
+       })
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.LinkUrl, "easyui-textbox", new
+       {
+           label = T(Html.DisplayNameFor(d => d.LinkUrl).ToString()),
+           width = "80%"
+       })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Groups, "easyui-tagbox", new
+   {
+       label = T(Html.DisplayNameFor(d => d.Groups).ToString()),
+       width = "70%",
+       multivalue=false
+   })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Sort, "easyui-numberbox", new
+        {
+            label = T(Html.DisplayNameFor(d => d.Sort).ToString()),
+            width = "80%"
+        })
+    </div>
+</div>
+
+

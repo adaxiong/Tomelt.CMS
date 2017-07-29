@@ -23,7 +23,7 @@ namespace ArticleManage.Handlers
                 .Add("作者", part.Record.Author).Analyze().Store()
                 .Add("来源", part.Record.Source).Analyze().Store()
                 .Add("ID", part.Record.Id).Analyze().Store()
-                .Add("标题", part.As<TitlePart>().Title).Analyze().Store()
+                //.Add("标题", part.As<TitlePart>().Title).Analyze().Store()
             );
         }
     }

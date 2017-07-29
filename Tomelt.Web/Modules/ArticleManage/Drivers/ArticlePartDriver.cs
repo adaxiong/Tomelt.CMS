@@ -34,22 +34,13 @@ namespace ArticleManage.Drivers
 
         protected override DriverResult Editor(ArticlePart part, IUpdateModel updater, dynamic shapeHelper)
         {
-            var viewModel=new EditArticlePartViewModel();
-            updater.TryUpdateModel(viewModel, Prefix, null, null);
+            
+            updater.TryUpdateModel(part, Prefix, null, null);
             if (part.ContentItem.Id!=0)
             {
-                ArticleService.UpdateForContentItem(part.ContentItem,viewModel);
+                ArticleService.UpdateForContentItem(part.ContentItem);
             }
             return Editor(part, shapeHelper);
         }
-
-        //private EditArticlePartViewModel BuildEditorViewModel(ArticlePart part)
-        //{
-        //    return new EditArticlePartViewModel()
-        //    {
-        //        Title = part.Title,
-
-        //    };
-        //}
     }
 }

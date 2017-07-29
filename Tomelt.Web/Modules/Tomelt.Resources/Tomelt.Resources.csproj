@@ -846,6 +846,7 @@
     <Content Include="Styles\EasyUI\default\validatebox.css" />
     <Content Include="Styles\EasyUI\default\window.css" />
     <Content Include="Styles\EasyUI\icon.css" />
+    <Content Include="Styles\EasyUI\icons\collapse-all.gif" />
     <Content Include="Styles\EasyUI\icons\delete.png" />
     <Content Include="Styles\EasyUI\icons\application_view_list.png" />
     <Content Include="Styles\EasyUI\icons\back.png" />
@@ -857,6 +858,7 @@
     <Content Include="Styles\EasyUI\icons\cut.png" />
     <Content Include="Styles\EasyUI\icons\edit_add.png" />
     <Content Include="Styles\EasyUI\icons\edit_remove.png" />
+    <Content Include="Styles\EasyUI\icons\expand-all.gif" />
     <Content Include="Styles\EasyUI\icons\filesave.png" />
     <Content Include="Styles\EasyUI\icons\filter.png" />
     <Content Include="Styles\EasyUI\icons\help.png" />

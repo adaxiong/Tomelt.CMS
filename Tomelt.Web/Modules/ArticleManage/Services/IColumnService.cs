@@ -11,8 +11,8 @@ namespace ArticleManage.Services
 {
   public  interface IColumnService : IDependency
     {
-        void UpdateForContentItem(ContentItem item, EditColumnPartViewModel model);
-        IEnumerable<ContentItem> GetColumns(VersionOptions versionOptions);
+        void UpdateForContentItem(ContentItem item, EditColumnPartViewModel viewModel);
+        IContentQuery<ContentItem> GetColumns(VersionOptions versionOptions);
         List<EasyuiTree> GetTreeColumns(VersionOptions versionOptions);
     }
 }

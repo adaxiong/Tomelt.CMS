@@ -18,7 +18,7 @@ namespace ArticleManage.Handlers
             //索引
             OnIndexing<ColumnPart>((context, part) => context.DocumentIndex
                 .Add("栏目ID", part.Record.Id).Analyze().Store()
-                .Add("栏目标题", part.As<TitlePart>().Title).Analyze().Store()
+                //.Add("栏目标题", part.As<TitlePart>().Title).Analyze().Store()
 
             );
         }

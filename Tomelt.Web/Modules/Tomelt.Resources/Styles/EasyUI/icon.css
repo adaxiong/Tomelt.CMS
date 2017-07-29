@@ -98,8 +98,12 @@
     background: url('icons/delete.png') no-repeat center center;
 }
 
-
-
+.icon-expand {
+    background: url('icons/expand-all.gif') no-repeat center center;
+}
+.icon-collapse {
+    background: url('icons/collapse-all.gif') no-repeat center center;
+}
 
 
 

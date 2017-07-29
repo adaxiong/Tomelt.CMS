@@ -328,6 +328,15 @@
   <ItemGroup>
     <Content Include="TheAdmin\Views\Tomelt.Roles\Admin\List.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Content.PublishButton.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Parts.Common.Body.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Parts.Common.Container.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

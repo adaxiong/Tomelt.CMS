@@ -9,9 +9,9 @@
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-collapse',plain:true,text:'折叠'" onclick="$('#dataGrid').treegrid('collapseAll');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-expand',plain:true,text:'展开'" onclick="$('#dataGrid').treegrid('expandAll');"></a>
     <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').treegrid('reload');"></a>
-    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("Create")');"></a>
-    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
-    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("CreateColumn")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("EditColumn")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("Delete")',true);"></a>
 </div>
 
 <table id="dataGrid" class="easyui-treegrid" style="width: 99%;"
@@ -37,6 +37,7 @@
         <th data-options="field:'Title',width:200">栏目标题</th>
         <th data-options="field:'Count',width:100,align:'center'">关联文章数</th>
         <th data-options="field:'Sort',width:100,align:'center'">排序</th>
+        <th data-options="field:'Id',width:100,align:'center'">栏目ID</th>
     </tr>
     </thead>
 </table>
@@ -45,7 +46,7 @@
 
     <script>
         function onDblClickRow(index, row) {
-            updateData('@Url.Action("Edit")');
+            updateData('@Url.Action("EditColumn")');
         }
     </script>
 

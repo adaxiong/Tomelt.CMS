@@ -1,0 +1,14 @@
+﻿@using Tomelt.ContentManagement
+@{
+    Layout.Title = T("编辑文章内容").ToString();
+    ContentItem contentItem = Model.ContentItem;
+
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Edit", new { id = contentItem.Id })))
+{
+    @Html.ValidationSummary()
+    @Display(Model)
+}
+
+

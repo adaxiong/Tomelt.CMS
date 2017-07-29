@@ -22,40 +22,40 @@ namespace ArticleManage.Services
             TomeltServices = tomeltServices;
             ColumnRepository = columnRepository;
         }
-        public IEnumerable<ContentItem> GetColumns(VersionOptions versionOptions)
+        public IContentQuery<ContentItem> GetColumns(VersionOptions versionOptions)
         {
-            return TomeltServices.ContentManager.Query(versionOptions, "Column").OrderBy<ColumnPartRecord>(d => d.Sort).List();
+            return TomeltServices.ContentManager.Query(versionOptions, "Column");
 
         }
         public List<EasyuiTree> GetTreeColumns(VersionOptions versionOptions)
         {
-            return GetTree(0, GetColumns(versionOptions));
+            return GetTree(0, GetColumns(versionOptions).OrderBy<ColumnPartRecord>(d=>d.Sort).List());
 
         }
 
-        public void UpdateForContentItem(ContentItem item, EditColumnPartViewModel model)
+        public void UpdateForContentItem(ContentItem item, EditColumnPartViewModel viewModel)
         {
             var part = item.As<ColumnPart>();
-            part.CallIndex = model.CallIndex;
-            part.Groups = model.Groups;
-            part.ImageUrl = model.ImageUrl;
-            part.ParentId = model.ParentId;
-            part.Sort = model.Sort;
-            part.LinkUrl = model.LinkUrl;
-            part.Summary = model.Summary;
+            part.CallIndex = viewModel.CallIndex;
+            part.Groups = viewModel.Groups;
+            part.Sort = viewModel.Sort;
+            part.ImageUrl = viewModel.ImageUrl;
+            part.LinkUrl = viewModel.LinkUrl;
+            part.Summary = viewModel.Summary;
+            part.ParentId = viewModel.ParentId;
             if (IsContainNode(part.Id, part.ParentId))
             {
-                var oldEntity = TomeltServices.ContentManager.Get<ColumnPart>(part.Id);
+                var oldEntity = TomeltServices.ContentManager.Get<ColumnPart>(part.Id, VersionOptions.Latest);
                 var treePath = "," + part.ParentId + ",";
                 var layer = 1;
                 if (oldEntity.ParentId > 0)
                 {
-                    var oldParentEntity = TomeltServices.ContentManager.Get<ColumnPart>(oldEntity.ParentId);
+                    var oldParentEntity = TomeltServices.ContentManager.Get<ColumnPart>(oldEntity.ParentId, VersionOptions.Latest);
                     treePath = oldParentEntity.TreePath + part.ParentId + ",";
                     layer = oldParentEntity.Layer + 1;
 
                 }
-                var temp = TomeltServices.ContentManager.Get<ColumnPart>(part.ParentId);
+                var temp = TomeltServices.ContentManager.Get<ColumnPart>(part.ParentId, VersionOptions.Latest);
                 temp.TreePath = treePath;
                 temp.Layer = layer;
                 temp.ParentId = oldEntity.ParentId;
@@ -63,7 +63,7 @@ namespace ArticleManage.Services
             }
             if (part.ParentId > 0)
             {
-                var entity = TomeltServices.ContentManager.Get<ColumnPart>(part.ParentId);
+                var entity = TomeltServices.ContentManager.Get<ColumnPart>(part.ParentId,VersionOptions.Latest);
                 part.TreePath = entity.TreePath + part.Id + ",";
                 part.Layer = entity.Layer + 1;
             }
@@ -72,10 +72,11 @@ namespace ArticleManage.Services
                 part.TreePath = "," + part.Id + ",";
                 part.Layer = 1;
             }
-            var newEntity = TomeltServices.ContentManager.Get<ColumnPart>(part.Id);
+            var newEntity = TomeltServices.ContentManager.Get<ColumnPart>(part.Id, VersionOptions.Latest);
             newEntity.TreePath = part.TreePath;
             newEntity.Layer = part.Layer;
             UpdateChilds(part.Id);
+            ColumnRepository.Flush();
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace ArticleManage.Services
         /// <returns></returns>
         private bool IsContainNode(int id, int parentId)
         {
-            var query = TomeltServices.ContentManager.Query<ColumnPart, ColumnPartRecord>()
+            var query = TomeltServices.ContentManager.Query<ColumnPart, ColumnPartRecord>(VersionOptions.Latest)
                 .Where(d => d.TreePath.Contains("," + id + ",") && d.Id == parentId);
 
             return query.Count() > 0;
@@ -94,10 +95,10 @@ namespace ArticleManage.Services
 
         private void UpdateChilds(int parentId)
         {
-            var entity = TomeltServices.ContentManager.Get<ColumnPart>(parentId);
+            var entity = TomeltServices.ContentManager.Get<ColumnPart>(parentId, VersionOptions.Latest);
             if (entity != null)
             {
-                var list = TomeltServices.ContentManager.Query<ColumnPart, ColumnPartRecord>()
+                var list = TomeltServices.ContentManager.Query<ColumnPart, ColumnPartRecord>(VersionOptions.Latest)
                     .Where(d => d.ParentId == parentId).List();
                 foreach (var treePartRecord in list)
                 {

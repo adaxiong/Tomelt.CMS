@@ -1,0 +1,52 @@
+﻿@using Tomelt.ContentManagement
+@{
+    Layout.Title = T("新增文章内容").ToString();
+    ContentItem contentItem = Model.ContentItem;
+
+}
+
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Create", new { id = contentItem.TypeDefinition.Name })))
+{
+    @Html.ValidationSummary()
+    @Display(Model)
+}
+@using (Script.Foot())
+{
+
+    <script type="text/javascript">
+        $(function () {
+            $('form').form({
+                url: this.action,
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    $.messager.progress();	// 显示进度条
+                    if (!isValid) {
+                        $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                    }
+                    return isValid;	// 返回false终止表单提交
+                },
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.State == 1) {
+                        //刷新表单
+                        window.parent.window.reloadData();
+                        if ($.messager) {
+                            $.messager.defaults.ok = "继续";
+                            $.messager.defaults.cancel = "返回";
+                            $.messager.confirm("操作提示", result.Msg, function (r) {
+                                if (!r) {
+                                    //关闭窗口
+                                    window.parent.window.closeWin();
+                                }
+                            });
+                        }
+                    } else {
+                        $.messager.alert('错误', result.Msg, 'error');
+                    }
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                }
+            });
+        });
+
+    </script>
+}

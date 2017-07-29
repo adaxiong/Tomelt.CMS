@@ -83,7 +83,7 @@ namespace ArticleManage.Models {
             get { return Record.ClickNum; }
             set { Record.ClickNum = value; }
         }
-        [Display(Name = "栏目主键")]
+        [Display(Name = "文章栏目")]
         public int ColumnPartRecordId
         {
             get { return Record.ColumnPartRecordId; }

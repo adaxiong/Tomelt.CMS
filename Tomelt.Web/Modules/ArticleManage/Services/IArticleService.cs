@@ -15,10 +15,9 @@ namespace ArticleManage.Services
 {
   public  interface IArticleService: IDependency
     {
-        void UpdateForContentItem(ContentItem item, EditArticlePartViewModel model);
+        void UpdateForContentItem(ContentItem item);
 
-        IEnumerable<ContentItem> GetArticles<TRecord>(VersionOptions versionOptions,
-            Expression<Func<TRecord, bool>> whereLambad) where TRecord : ContentPartRecord;
+        IContentQuery<ContentItem> GetArticles(VersionOptions versionOptions);
 
         IEnumerable<ContentItem> GetArticlesPro(DatagridPagerParameters pagerParameters);
     }

@@ -35,37 +35,21 @@ namespace ArticleManage.Services
             ContentDefinitionManager = contentDefinitionManager;
             SiteService = siteService;
         }
-        public IEnumerable<ContentItem> GetArticles<TRecord>(VersionOptions versionOptions, Expression<Func<TRecord, bool>> whereLambad) where TRecord:ContentPartRecord
+        public IContentQuery<ContentItem> GetArticles(VersionOptions versionOptions)
         {
-            return TomeltServices.ContentManager.Query(versionOptions, ContentTypeName).Where(whereLambad).List();
+            return TomeltServices.ContentManager.Query(versionOptions, ContentTypeName);
 
         }
 
-        public void UpdateForContentItem(ContentItem item, EditArticlePartViewModel model)
+        public void UpdateForContentItem(ContentItem item)
         {
             var articlePart = item.As<ArticlePart>();
             var bodyPart = item.As<BodyPart>();
             if (bodyPart!=null)
             {
-                articlePart.Summary = string.IsNullOrWhiteSpace(model.Summary) ? Utity.DropHtml(bodyPart.Text, 255) : model.Summary;
+                articlePart.Summary = string.IsNullOrWhiteSpace(articlePart.Summary) ? Utity.DropHtml(bodyPart.Text, 255) : articlePart.Summary;
             }
-            else
-            {
-                articlePart.Summary = model.Summary;
-            }
-            articlePart.Author = model.Author;
-            articlePart.ClickNum = model.ClickNum;
-            articlePart.IsHot = model.IsHot;
-            articlePart.IsRecommend = model.IsRecommend;
-            articlePart.IsSlide = model.IsSlide;
-            articlePart.IsStriking = model.IsStriking;
-            articlePart.IsTop = model.IsTop;
-            articlePart.LinkUrl = model.LinkUrl;
-            articlePart.Sort = model.Sort;
-            articlePart.Source = model.Source;
-            articlePart.Subtitle = model.Subtitle;
-            articlePart.ColumnPartRecordId = model.ColumnPartRecordId;
-            articlePart.ColumnPartRecord = ColumnRepository.Get(d => d.Id == model.ColumnPartRecordId);
+            articlePart.ColumnPartRecord = ColumnRepository.Get(d => d.Id == articlePart.ColumnPartRecordId);
         }
 
         public IEnumerable<ContentItem> GetArticlesPro(DatagridPagerParameters pagerParameters)

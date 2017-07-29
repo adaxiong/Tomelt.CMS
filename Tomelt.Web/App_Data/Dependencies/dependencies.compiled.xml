@@ -4,7 +4,7 @@
     <ExtensionId>ArticleManage</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/ArticleManage/bin/ArticleManage.dll</VirtualPath>
-    <Hash>48ff3dc456a55492</Hash>
+    <Hash>48ff3e8d552a4335</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Markdown</ExtensionId>
@@ -118,7 +118,7 @@
     <ExtensionId>Tomelt.Resources</ExtensionId>
     <LoaderName>PrecompiledExtensionLoader</LoaderName>
     <VirtualPath>~/Modules/Tomelt.Resources/bin/Tomelt.Resources.dll</VirtualPath>
-    <Hash>925339299cbd96b9</Hash>
+    <Hash>925339ad729a2ded</Hash>
   </Dependency>
   <Dependency>
     <ExtensionId>Tomelt.Roles</ExtensionId>

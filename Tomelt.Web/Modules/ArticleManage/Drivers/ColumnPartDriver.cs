@@ -28,18 +28,31 @@ namespace ArticleManage.Drivers
         }
         protected override DriverResult Editor(ColumnPart part, dynamic shapeHelper)
         {
-            return ContentShape("Parts_Column_Edit", () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: part, Prefix: Prefix));
+            return ContentShape("Parts_Column_Edit", () => shapeHelper.EditorTemplate(TemplateName: TemplateName, Model: BuildEditorViewModel(part), Prefix: Prefix));
         }
         protected override DriverResult Editor(ColumnPart part, IUpdateModel updater, dynamic shapeHelper)
         {
             var model = new EditColumnPartViewModel();
             updater.TryUpdateModel(model, Prefix, null, null);
-
             if (part.ContentItem.Id != 0)
             {
-                ColumnService.UpdateForContentItem(part.ContentItem, model);
+                ColumnService.UpdateForContentItem(part.ContentItem,model);
             }
             return Editor(part, shapeHelper);
         }
+        public EditColumnPartViewModel BuildEditorViewModel(ColumnPart part)
+        {
+            return new EditColumnPartViewModel()
+            {
+                Sort = part.Sort,
+                CallIndex = part.CallIndex,
+                ImageUrl = part.ImageUrl,
+                LinkUrl = part.LinkUrl,
+                ParentId = part.ParentId,
+                Groups = part.Groups,
+                Summary = part.Summary
+            };
+        }
+
     }
 }

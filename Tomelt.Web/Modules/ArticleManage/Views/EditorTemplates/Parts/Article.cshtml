@@ -1,0 +1,125 @@
+﻿@model ArticleManage.Models.ArticlePart
+
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.ColumnPartRecordId, "easyui-combotree", new
+   {
+       label = T(Html.DisplayNameFor(d=>d.ColumnPartRecordId).ToString()),
+       width = "80%",
+       editable = false,
+       panelHeight = 200,
+       url = Url.Action("GetColumnTreeList"),
+       value = Model.ColumnPartRecordId
+   })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Subtitle, "easyui-textbox", new
+        {
+            label = T(Html.DisplayNameFor(d => d.Subtitle).ToString()),
+            width = "80%"
+        })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Summary, "easyui-textbox", new
+   {
+       label = T(Html.DisplayNameFor(d => d.Summary).ToString()),
+       width = "80%"
+   })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Author, "easyui-textbox", new
+        {
+            label = T(Html.DisplayNameFor(d => d.Author).ToString()),
+            width = "80%"
+        })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Source, "easyui-textbox", new
+        {
+            label = T(Html.DisplayNameFor(d => d.Source).ToString()),
+            width = "80%"
+        })
+    </div>
+</div>
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.LinkUrl, "easyui-textbox", new
+   {
+       label = T(Html.DisplayNameFor(d => d.LinkUrl).ToString()),
+       width = "80%"
+   })
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Sort, "easyui-numberbox", new
+        {
+            label = T(Html.DisplayNameFor(d => d.Sort).ToString()),
+            width = "80%"
+        })
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.IsSlide)">
+            @Html.CheckBoxFor(m => m.IsSlide)
+            @T(Html.DisplayNameFor(d => d.IsSlide).ToString()).Text
+        </label>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.IsHot)">
+            @Html.CheckBoxFor(m => m.IsHot)
+            @T(Html.DisplayNameFor(d => d.IsHot).ToString()).Text
+        </label>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.IsTop)">
+            @Html.CheckBoxFor(m => m.IsTop)
+            @T(Html.DisplayNameFor(d => d.IsTop).ToString()).Text
+        </label>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.IsRecommend)">
+            @Html.CheckBoxFor(m => m.IsRecommend)
+            @T(Html.DisplayNameFor(d => d.IsRecommend).ToString()).Text
+        </label>
+    </div>
+</div>
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.IsStriking)">
+            @Html.CheckBoxFor(m => m.IsStriking)
+            @T(Html.DisplayNameFor(d => d.IsStriking).ToString()).Text
+        </label>
+    </div>
+</div>
+
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.ClickNum, "easyui-numberbox", new
+        {
+            label = T(Html.DisplayNameFor(d => d.ClickNum).ToString()),
+            width = "80%"
+        })
+    </div>
+</div>

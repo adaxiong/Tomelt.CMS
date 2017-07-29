@@ -58,7 +58,7 @@
             $('form').form({
                 url:this.action,
                 onSubmit: function(){
-                    var isValid = $(this).form('validate');
+                    var isValid = $(this).form('validate');//不要验证？？？
                     $.messager.progress();	// 显示进度条
                     if (!isValid) {
                         $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
