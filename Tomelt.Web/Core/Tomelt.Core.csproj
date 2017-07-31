@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\BodyTabEditor\BodyTabEditorSettings.cs" />
     <Compile Include="Common\Controllers\ErrorController.cs" />
     <Compile Include="Common\DateEditor\DateEditorDriver.cs" />
     <Compile Include="Common\DateEditor\DateEditorHandler.cs" />

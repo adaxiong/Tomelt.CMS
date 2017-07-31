@@ -1,0 +1,11 @@
+﻿@model ArticleManage.Settings.TabEditorSettings
+
+<div class="col-xs-12">
+    <div class="form-group checkbox">
+        <label for="@Html.FieldIdFor(m => m.IsTab)">
+            @Html.CheckBoxFor(m => m.IsTab)
+            @T("是否设置成Tab")
+        </label>
+        @Html.ValidationMessageFor(m => m.IsTab)
+    </div>
+</div>

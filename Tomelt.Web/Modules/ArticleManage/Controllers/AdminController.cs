@@ -35,12 +35,11 @@ namespace ArticleManage.Controllers
 
         public ITransactionManager TransactionManager { get; set; }
         public Localizer T { get; set; }
-        private const string ContentTypeName = "Article";
 
         public AdminController(ITomeltServices tomeltServices,
             IContentDefinitionManager contentDefinitionManager,
-            IArticleService articleService, 
-            IColumnService columnService, 
+            IArticleService articleService,
+            IColumnService columnService,
             ITransactionManager transactionManager)
         {
             TomeltServices = tomeltServices;
@@ -54,8 +53,9 @@ namespace ArticleManage.Controllers
         {
             if (!TomeltServices.Authorizer.Authorize(ArticleManagePermissions.ViewContent, T("无权限")))
                 return new HttpUnauthorizedResult();
+
             //获取当前内容类型
-            var part = TomeltServices.ContentManager.New(ContentTypeName).Parts.FirstOrDefault(d => d.PartDefinition.Name == ContentTypeName);
+            var part = TomeltServices.ContentManager.New("Article").Parts.FirstOrDefault(d => d.PartDefinition.Name == "Article");
 
             IDictionary<string, string> dc = new Dictionary<string, string>();
             //获取用户类型字段属性名称和显示名称
@@ -101,6 +101,7 @@ namespace ArticleManage.Controllers
                 pagerParameters.total,
                 rows = rows.Select(d => new
                 {
+
                     d.Id,
                     d.As<ArticlePart>().Author,
                     d.As<TitlePart>().Title,
@@ -125,7 +126,7 @@ namespace ArticleManage.Controllers
         {
             if (!TomeltServices.Authorizer.Authorize(ArticleManagePermissions.ViewContent, T("无权限")))
                 return new HttpUnauthorizedResult();
-            var rows = ColumnService.GetColumns(VersionOptions.Latest).OrderBy<ColumnPartRecord>(d=>d.Sort).List();
+            var rows = ColumnService.GetColumns(VersionOptions.Latest).OrderBy<ColumnPartRecord>(d => d.Sort).List();
             return Json(new
             {
                 total = rows.Count(),
@@ -133,13 +134,15 @@ namespace ArticleManage.Controllers
                 {
                     d.Id,
                     d.As<ColumnPart>().ParentId,
+                    HasPublished = d.HasPublished(),
                     d.As<ColumnPart>().Sort,
                     d.As<TitlePart>().Title,
                     Count = GetArticleCount(d.Id),
-                    _parentId = d.As<ColumnPart>().ParentId==0?null:d.As<ColumnPart>().ParentId.ToString()
+                    _parentId = d.As<ColumnPart>().ParentId == 0 ? null : d.As<ColumnPart>().ParentId.ToString()
                 })
 
             });
+
         }
         /// <summary>
         /// 栏目树状数据
@@ -231,7 +234,8 @@ namespace ArticleManage.Controllers
         public ActionResult CreateSave(string id)
         {
             //根据配置参数判断是否邮发布的设置
-            return CreatePost(id, contentItem => {
+            return CreatePost(id, contentItem =>
+            {
                 if (!contentItem.Has<IPublishingControlAspect>() && !contentItem.TypeDefinition.Settings.GetModel<ContentTypeSettings>().Draftable)
                     TomeltServices.ContentManager.Publish(contentItem);
             });
@@ -262,7 +266,8 @@ namespace ArticleManage.Controllers
         [FormValueRequired("submit.Save")]
         public ActionResult EditSave(int id)
         {
-            return EditPost(id,contentItem => {
+            return EditPost(id, contentItem =>
+            {
                 if (!contentItem.Has<IPublishingControlAspect>() && !contentItem.TypeDefinition.Settings.GetModel<ContentTypeSettings>().Draftable)
                     TomeltServices.ContentManager.Publish(contentItem);
             });
@@ -286,7 +291,6 @@ namespace ArticleManage.Controllers
 
             return EditPost(id, contentItem => TomeltServices.ContentManager.Publish(contentItem));
         }
-       
 
 
 
@@ -313,12 +317,13 @@ namespace ArticleManage.Controllers
 
 
 
-        private ActionResult CreatePost(string typeId,Action<ContentItem> conditionallyPublish)
+
+        private ActionResult CreatePost(string typeId, Action<ContentItem> conditionallyPublish)
         {
             var contentItem = TomeltServices.ContentManager.New(typeId);
 
             if (!TomeltServices.Authorizer.Authorize(ArticleManagePermissions.EditContent, contentItem, T("无创建权限")))
-                return Json(new{State=0,Msg= T("无创建权限").Text });
+                return Json(new { State = 0, Msg = T("无创建权限").Text });
 
             TomeltServices.ContentManager.Create(contentItem, VersionOptions.Draft);
 
@@ -337,7 +342,7 @@ namespace ArticleManage.Controllers
         /// 公共部分编辑
         /// </summary>
         /// <returns></returns>
-        private ActionResult EditPost(int id,Action<ContentItem> conditionallyPublish)
+        private ActionResult EditPost(int id, Action<ContentItem> conditionallyPublish)
         {
             var contentItem = TomeltServices.ContentManager.Get(id, VersionOptions.DraftRequired);
 
@@ -471,7 +476,7 @@ namespace ArticleManage.Controllers
 
         private int GetArticleCount(int columnId)
         {
-            var temp= ArticleService.GetArticles(VersionOptions.Latest).Where<ArticlePartRecord>(d=>d.ColumnPartRecordId==columnId);
+            var temp = ArticleService.GetArticles(VersionOptions.Latest).Where<ArticlePartRecord>(d => d.ColumnPartRecordId == columnId);
             return temp.Count();
         }
 

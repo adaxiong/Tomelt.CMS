@@ -31,22 +31,62 @@
        singleSelect: true,
        fitColumns: true,
        rownumbers: true,
+       onLoadSuccess:onLoadSuccess,
        onDblClickRow: onDblClickRow">
     <thead>
-    <tr>
-        <th data-options="field:'Title',width:200">栏目标题</th>
-        <th data-options="field:'Count',width:100,align:'center'">关联文章数</th>
-        <th data-options="field:'Sort',width:100,align:'center'">排序</th>
-        <th data-options="field:'Id',width:100,align:'center'">栏目ID</th>
-    </tr>
+        <tr>
+            <th data-options="field:'Title',width:200">栏目标题</th>
+            <th data-options="field:'Count',width:100,align:'center'">关联文章数</th>
+            <th data-options="field:'Sort',width:100,align:'center'">排序</th>
+            <th data-options="field:'Id',width:100,align:'center'">栏目ID</th>
+            <th data-options="field:'HasPublished',width:100,align:'center'">发布操作</th>
+        </tr>
     </thead>
 </table>
 @using (Script.Foot())
 {
 
     <script>
+        $(function () {
+            formatCol();
+
+        });
+
         function onDblClickRow(index, row) {
             updateData('@Url.Action("EditColumn")');
+        }
+        function onLoadSuccess() {
+            $(".easyui-linkbutton").linkbutton({
+                height: 20
+            });
+        }
+        function formatCol() {
+            var dg = $('#dataGrid');
+            var isHasPublishedCol = dg.datagrid('getColumnOption', 'HasPublished');
+            isHasPublishedCol.formatter = function (value, row, index) {
+                if (!value) {
+                    return "<a href='javascript:publish("+row.Id+","+value+");' class='easyui-linkbutton c1' data-options=\"iconCls:'icon-ok'\">发布</a>";
+                } else {
+                    return "<a href='javascript:publish(" + row.Id + "," + value +");' class='easyui-linkbutton c5' data-options=\"iconCls:'icon-undo'\">取消</a>";
+                }
+            }
+
+        }
+
+        function publish(id, ispublish) {
+            var url = "@Url.Action("Publish")";
+            if (ispublish) {
+                url = "@Url.Action("Unpublish")";
+            }
+            $.post(url,
+                { id: id },
+                function(data) {
+                    if (data.State==0) {
+                        $.messager.alert("错误", data.Msg, "error");
+                    } else {
+                        $('#dataGrid').treegrid('reload');
+                    }
+                });
         }
     </script>
 
