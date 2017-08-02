@@ -1,0 +1,91 @@
+@model Tomelt.Tags.ViewModels.TagsSearch
+@{
+    Layout.Title = T("内容标签").ToString();
+}
+
+<form id="searchFrm">
+    <fieldset class="text-center">
+        <legend class="f15"><span class="glyphicon glyphicon-search"></span> 搜索条件</legend>
+        <div class="row">
+            <div class="col-xs-4">
+                @Html.EasyUIFor(d=>d.TagName, "easyui-textbox", new
+                {
+                    width = "80%",
+                    prompt = "-请输入关键字-",
+                    label = "标签名称：",
+                })
+
+            </div>
+
+
+        </div>
+
+        <div class="row mt05">
+            <div class="col-xs-12">
+                <a href="javascript:searchData();" class="easyui-linkbutton c8 " data-options="iconCls:'icon-search icon-large',width:80">查找</a>
+                <a href="javascript:resetData();" class="easyui-linkbutton c2 umar-l" data-options="iconCls:'icon-reload',width:80">重置</a>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+
+<div id="tb">
+    @*<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-unchecked',plain:true" onclick="datagridChecked(this, 'dataGrid');">全选</a>*@
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').datagrid('reload');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addTag();"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("Edit")');"></a>
+    <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("DeleteAJAX")');"></a>
+</div>
+
+<table id="dataGrid" class="easyui-datagrid" style="width: 99%;"   
+       data-options="url: '@Url.Action("GetList")',
+       title:'@Layout.Title',
+       iconCls: 'icon-datalist',
+       height: 'auto',
+       nowrap: true,
+       striped: true,
+       collapsible: true,
+       sortName: 'Id',
+       sortOrder: 'asc',
+       idField: 'Id',
+       queryParams: {},
+       toolbar: '#tb',
+       singleSelect: true,
+       fitColumns: true,
+       pagination: true,
+       rownumbers: true,
+       onDblClickRow: onDblClickRow">   
+    <thead>   
+    <tr>   
+        <th data-options="field:'Id',width:80,align:'center'">主键ID</th>
+        <th data-options="field:'TagName',width:200,align:'center'">标签名称</th>
+    </tr>   
+    </thead>   
+</table>  
+@using (Script.Foot())
+{
+    <script>
+        function onDblClickRow(index, row) {
+            updateData('@Url.Action("Edit")');
+        }
+        function addTag() {
+            $.messager.prompt('新增标签', '请输入标签名称：', function(r){
+                if (r) {
+                    $.post("@Url.Action("Create")",
+                        { tagName: r },
+                        function(data) {
+                            if (data.State==0) {
+                                $.messager.alert('错误',data.Msg, 'error');
+                            } else {
+                                searchData();
+                            }
+                        });
+                }
+            });
+
+
+        }
+    </script>
+
+}

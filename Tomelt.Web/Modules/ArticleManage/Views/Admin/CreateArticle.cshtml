@@ -5,10 +5,12 @@
 
 }
 
-@using (Html.BeginFormAntiForgeryPost(Url.Action("Create", new { id = contentItem.TypeDefinition.Name })))
+@using (Html.BeginFormAntiForgeryPost(Url.Action("Create", new { id = contentItem.TypeDefinition.Name }), FormMethod.Post, new { @class = "mt1" }))
 {
-    @Html.ValidationSummary()
-    @Display(Model)
+
+        @Html.ValidationSummary()
+        @Display(Model)
+        @Html.Hidden("btn")
 }
 @using (Script.Foot())
 {
@@ -18,6 +20,7 @@
             $('form').form({
                 url: this.action,
                 onSubmit: function () {
+                    $("#btn").attr("name", document.activeElement.name).val(document.activeElement.value);
                     var isValid = $(this).form('validate');
                     $.messager.progress();	// 显示进度条
                     if (!isValid) {

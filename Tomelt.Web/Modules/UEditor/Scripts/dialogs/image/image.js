@@ -81,7 +81,7 @@
                     break;
                 }
             }
-
+            
             switch (id) {
                 case 'remote':
                     list = remoteImage.getInsertList();
@@ -102,7 +102,7 @@
                     remote = true;
                     break;
             }
-
+           
             if(list) {
                 editor.execCommand('insertimage', list);
                 remote && editor.fireEvent("catchRemoteImage");

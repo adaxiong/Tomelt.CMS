@@ -88,6 +88,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\UEditorController.cs" />
+    <Compile Include="Drivers\FilePickFieldDriver.cs" />
+    <Compile Include="Fields\FilePickField.cs" />
     <Compile Include="Models\Crawler.cs" />
     <Compile Include="Models\PathFormatter.cs" />
     <Compile Include="Models\UEditorConfig.cs" />
@@ -96,6 +98,8 @@
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Services\UEditorShapeDisplayEvent.cs" />
+    <Compile Include="Settings\FilePickSettings.cs" />
+    <Compile Include="Settings\FilePickSettingsEvents.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
@@ -402,6 +406,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\DefinitionTemplates\FilePickSettings.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Fields\FilePick.Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Fields\FilePick.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Placement.info" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

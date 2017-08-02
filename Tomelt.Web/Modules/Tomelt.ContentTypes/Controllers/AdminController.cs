@@ -474,7 +474,7 @@ namespace Tomelt.ContentTypes.Controllers
             foreach (var partToAdd in partsToAdd)
             {
                 _contentDefinitionService.AddPartToType(partToAdd, typeViewModel.Name);
-                Services.Notifier.Information(T("The \"{0}\" part has been added.", partToAdd));
+                Services.Notifier.Information(T("内容元件 \"{0}\" 成功被添加.", partToAdd));
             }
 
             if (!ModelState.IsValid)
@@ -526,7 +526,7 @@ namespace Tomelt.ContentTypes.Controllers
                 return View(viewModel);
             }
 
-            Services.Notifier.Information(T("The \"{0}\" part has been removed.", viewModel.Name));
+            Services.Notifier.Information(T("内容元件 \"{0}\" 成功移除.", viewModel.Name));
 
             return RedirectToAction("Edit", new { id });
         }
@@ -676,7 +676,7 @@ namespace Tomelt.ContentTypes.Controllers
                 return View(partViewModel);
             }
 
-            Services.Notifier.Information(T("\"{0}\" settings have been saved.", partViewModel.Name));
+            Services.Notifier.Information(T("\"{0}\" 设置保存成功.", partViewModel.Name));
 
             return RedirectToAction("ListParts");
         }
@@ -723,7 +723,7 @@ namespace Tomelt.ContentTypes.Controllers
 
             _contentDefinitionService.RemovePart(id);
 
-            Services.Notifier.Information(T("\"{0}\" has been removed.", partViewModel.DisplayName));
+            Services.Notifier.Information(T("\"{0}\" 成功移除.", partViewModel.DisplayName));
 
             return RedirectToAction("ListParts");
         }

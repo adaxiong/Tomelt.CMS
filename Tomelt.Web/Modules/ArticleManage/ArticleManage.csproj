@@ -102,7 +102,6 @@
     <Compile Include="Services\ArticleService.cs" />
     <Compile Include="Services\IColumnService.cs" />
     <Compile Include="Services\IArticleService.cs" />
-    <Compile Include="Settings\TabEditorSettings.cs" />
     <Compile Include="ViewModels\EasyuiTree.cs" />
     <Compile Include="ViewModels\EditArticlePartViewModel.cs" />
     <Compile Include="ViewModels\EditColumnPartViewModel.cs" />
@@ -157,12 +156,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Placement.info" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\EditorTemplates\Parts.Common.Body.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\DefinitionTemplates\TabEditorSettings.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

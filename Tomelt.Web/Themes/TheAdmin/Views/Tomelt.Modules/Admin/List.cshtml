@@ -86,27 +86,27 @@
                     });
                 }
             });
-            $(".easyui-linkbutton").linkbutton({
-                onClick: function () {
-                    $.post(url,
-                        { featureId: this.id, action: "Update", force: true },
-                        function (data) {
+            //$(".easyui-linkbutton").linkbutton({
+            //    onClick: function () {
+            //        $.post(url,
+            //            { featureId: this.id, action: "Update", force: true },
+            //            function (data) {
 
-                            if (data.State==1) {
-                                $.messager.alert('消息', data.Msg, 'info',
-                                    function () {
-                                        parent.window.location.reload();
-                                    });
-                            } else {
-                                $.messager.alert('错误', data.Msg, 'error',
-                                    function () {
-                                        searchData();
-                                    });
-                            }
+            //                if (data.State==1) {
+            //                    $.messager.alert('消息', data.Msg, 'info',
+            //                        function () {
+            //                            parent.window.location.reload();
+            //                        });
+            //                } else {
+            //                    $.messager.alert('错误', data.Msg, 'error',
+            //                        function () {
+            //                            searchData();
+            //                        });
+            //                }
                             
-                        });
-                }
-            });
+            //            });
+            //    }
+            //});
             $(".easyui-switchbutton").switchbutton({
 
                 height: 20,

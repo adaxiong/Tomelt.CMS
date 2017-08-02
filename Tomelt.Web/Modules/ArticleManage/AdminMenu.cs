@@ -15,7 +15,7 @@ namespace ArticleManage
         public void GetNavigation(NavigationBuilder builder)
         {
             builder
-                .Add(T("文章管理"), "66",
+                .Add(T("内容管理"), "66",
                     menu =>
                     {
                         menu.LinkToFirstChild(false);

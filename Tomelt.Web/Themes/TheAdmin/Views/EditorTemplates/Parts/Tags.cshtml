@@ -1,0 +1,31 @@
+﻿@model Tomelt.Tags.ViewModels.EditTagsViewModel
+
+@{
+    Style.Require("jQueryUI_Tomelt");
+    Script.Require("TagsAutocomplete");
+}
+
+<div class="col-xs-12">
+    <div class="form-group">
+        @Html.EasyUIFor(m => m.Tags, "easyui-tagbox", new
+        {
+            label = T("内容标签"),
+            labelPosition = "top",
+            width = "80%",
+            multivalue=false
+        })
+        <p class="description">@T("注：每输入一个标签后，按回车键")</p>
+    </div>
+</div>
+
+@using (Script.Foot()) {
+<script type="text/javascript">
+//<![CDATA[
+    $(function () {
+        $.tagsAutocomplete.autocomplete(
+            '@Html.FieldIdFor(m => m.Tags)',
+            '@Url.Action("FetchSimilarTags", new { Controller = "Admin", Area = "Tomelt.Tags" })', 1);
+    });
+//]]>
+</script>
+}

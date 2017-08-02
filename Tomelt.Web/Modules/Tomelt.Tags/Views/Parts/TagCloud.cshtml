@@ -1,0 +1,17 @@
+@using Tomelt.Tags.Models
+@if (((IEnumerable<object>)Model.TagCounts).Any()) {
+    <ul class="tag-cloud">
+        @foreach (TagCount tagCount in Model.TagCounts) {
+            <li class="tag-cloud-tag tag-cloud-tag-@tagCount.Bucket">
+                @Html.ActionLink(tagCount.TagName, "Search", "Home", new {
+                       area = "Tomelt.Tags",
+                       tagName = tagCount.TagName
+                   }, null
+                  )
+            </li>
+        }
+    </ul>
+}
+else {
+    <p>@T("There are no tags to display.")</p>
+}

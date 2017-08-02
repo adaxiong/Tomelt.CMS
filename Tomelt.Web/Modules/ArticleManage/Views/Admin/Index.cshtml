@@ -24,11 +24,41 @@
             <div class="row">
                 <div class="col-xs-4">
                     @Html.EasyUIFor(d => d.Title, "easyui-textbox", new
-                    {
-                        width = 200,
-                        prompt = "-请输入关键字-",
-                        label = "文章标题：",
-                    })
+               {
+                   width = "80%",
+                   prompt = "-请输入关键字-",
+                   label = Html.DisplayNameFor(d=>d.Title)
+               })
+
+                </div>
+                <div class="col-xs-4">
+                    @Html.EasyUIFor(d => d.Author, "easyui-textbox", new
+               {
+                   width = "80%",
+                   prompt = "-请输入关键字-",
+                   label = Html.DisplayNameFor(d => d.Author)
+               })
+
+                </div>
+                <div class="col-xs-4">
+                    @Html.EasyUIFor(d => d.contentStatus, "easyui-combobox", new
+               {
+                   width = "80%",
+                   prompt = "-请选择-",
+                   label = "内容状态",
+                   panelHeight="auto",
+                   editable = false,
+                   data =Json.Encode(new List<object>()
+                   {
+                       new {value="Latest",text="最近的"},
+                       new {value="Published",text="已发布"},
+                       new {value="Draft",text="未发布"},
+                       new {value="AllVersions",text="全部的"},
+                       new {value="Owner",text="自己的"}
+                       
+                   })
+
+               })
 
                 </div>
                 @Html.HiddenFor(d=>d.ColumnPartRecordId)
@@ -49,6 +79,7 @@
         @*<a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-unchecked',plain:true" onclick="datagridChecked(this, 'dataGrid');">全选</a>*@
         <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true,text:'刷新'" onclick="$('#dataGrid').datagrid('reload');"></a>
         <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true,text:'新增'" onclick="addData('@Url.Action("CreateArticle")');"></a>
+        <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-copy',plain:true,text:'复制'" onclick="copyData('@Url.Action("Clone")');"></a>
         <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true,text:'编辑'" onclick="updateData('@Url.Action("EditArticle")');"></a>
         <a href="javascript:;" class="easyui-linkbutton" data-options="iconCls:'icon-delete',plain:true,text:'删除'" onclick="deleteData('@Url.Action("Delete")');"></a>
     </div>
@@ -62,7 +93,7 @@
        striped: true,
        collapsible: true,
        sortName: 'Id',
-       sortOrder: 'asc',
+       sortOrder: 'desc',
        idField: 'Id',
        queryParams: {},
        toolbar: '#tb',
@@ -74,11 +105,15 @@
        onDblClickRow: onDblClickRow">
         <thead>
         <tr>
-            <th data-options="field:'Title',width:150,align:'center'">文章标题</th>
-            @foreach (var field in fields)
+            <th data-options="field:'Id',width:60,align:'center'">主键ID</th>
+            <th data-options="field:'Title',width:300,align:'center'">文章标题</th>
+            @*@foreach (var field in fields)
             {
                 <th data-options="field:'@field.Key',width:150,align:'center'">@field.Value</th>
-            }
+            }*@
+            <th data-options="field:'Author',width:80,align:'center'">作者</th>
+            <th data-options="field:'UserName',width:60,align:'center'">发布人</th>
+            <th data-options="field:'HasPublished',width:80,align:'center'">发布操作</th>
         </tr>
         </thead>
     </table>
@@ -89,60 +124,53 @@
 
     <script>
         $(function () {
-            //loadList();
-            var $dg = $('#dataGrid');
-            //formatCol($dg);
+            formatCol();
         });
-        
+
         //选中事件
         function onSelect(node) {
             $("#ColumnPartRecordId").val(node.id);
             searchData();
         }
         function onLoadSuccess() {
-            $(".easyui-switchbutton").switchbutton({
-                //readonly: true,
-                height: 20,
-                onChange: function (res) {
-                    var url;
-                    if (!res) {
-                        url = "@Url.Action("ModerateAJAX","Admin")";
-                    } else {
-                        url = "@Url.Action("ApproveAJAX", "Admin")";
-                    }
-                    $.post(url,
-                        {id:this.id},
-                        function(data) {
-                            if (data.State==0) {
-                                $.messager.alert('错误', data.Msg, 'error',
-                                    function() {
-                                        searchData();
-                                    });
-                            }
-                        });
-                }
+            $(".easyui-linkbutton").linkbutton({
+                height: 20
             });
+        }
+        function formatCol() {
+            var dg = $('#dataGrid');
+            var isHasPublishedCol = dg.datagrid('getColumnOption', 'HasPublished');
+            isHasPublishedCol.formatter = function (value, row, index) {
+                if (!value) {
+                    return "<a href='javascript:publish("+row.Id+","+value+");' class='easyui-linkbutton c1' data-options=\"iconCls:'icon-ok'\">发布</a>";
+                } else {
+                    return "<a href='javascript:publish(" + row.Id + "," + value +");' class='easyui-linkbutton c5' data-options=\"iconCls:'icon-undo'\">取消</a>";
+                }
+            }
+
+        }
+
+        function publish(id, ispublish) {
+            var url = "@Url.Action("Publish")";
+            if (ispublish) {
+                url = "@Url.Action("Unpublish")";
+            }
+            $.post(url,
+                { id: id },
+                function(data) {
+                    if (data.State==0) {
+                        $.messager.alert("错误", data.Msg, "error");
+                    } else {
+                        $('#dataGrid').datagrid('reload');
+                    }
+                });
         }
 
         function onDblClickRow(index, row) {
-            updateData('@Url.Action("Edit")');
+            updateData('@Url.Action("EditArticle")');
         }
 
-        function formatCol(dg) {
-            var statusCol = dg.datagrid('getColumnOption', 'RegistrationStatus');
-            statusCol.formatter = function (value, row, index) {
-                var ischeck = value == 1 ? "true" : "false";
-                return "<input id=\"" + row.Id + "\" class=\"easyui-switchbutton\" data-options=\"checked:" + ischeck + ",onText: '开启',offText: '禁用'\">";
-            }
-            var createdUtcCol = dg.datagrid('getColumnOption', 'CreatedUtc');
-            createdUtcCol.formatter = function (value, row, index) {
-                return formatValue.dateTime(value);
-            }
-            var lastLoginUtcCol = dg.datagrid('getColumnOption', 'LastLoginUtc');
-            lastLoginUtcCol.formatter = function (value, row, index) {
-                return formatValue.dateTime(value);
-            }
-        }
+        
     </script>
 
 }

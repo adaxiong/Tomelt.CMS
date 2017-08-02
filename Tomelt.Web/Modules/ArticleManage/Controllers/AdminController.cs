@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using ArticleManage.Models;
 using ArticleManage.Services;
+using ArticleManage.ViewModels;
 using Tomelt;
 using Tomelt.ContentManagement;
 using Tomelt.ContentManagement.Aspects;
@@ -91,14 +92,14 @@ namespace ArticleManage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryTokenTomelt(false)]
-        public ActionResult GetList(DatagridPagerParameters pagerParameters)
+        public ActionResult GetList(EditArticlePartViewModel search)
         {
             if (!TomeltServices.Authorizer.Authorize(ArticleManagePermissions.ViewContent, T("无权限")))
                 return new HttpUnauthorizedResult();
-            var rows = ArticleService.GetArticlesPro(pagerParameters);
+            var rows = ArticleService.GetArticlesPro(search);
             return Json(new
             {
-                pagerParameters.total,
+                search.total,
                 rows = rows.Select(d => new
                 {
 
@@ -106,6 +107,7 @@ namespace ArticleManage.Controllers
                     d.As<ArticlePart>().Author,
                     d.As<TitlePart>().Title,
                     d.As<CommonPart>().PublishedUtc,
+                    HasPublished = d.HasPublished(),
                     UserName = d.As<CommonPart>().Owner == null ? "" : d.As<CommonPart>().Owner.UserName,
                     d.As<ArticlePart>().Sort
                 })
@@ -137,7 +139,7 @@ namespace ArticleManage.Controllers
                     HasPublished = d.HasPublished(),
                     d.As<ColumnPart>().Sort,
                     d.As<TitlePart>().Title,
-                    Count = GetArticleCount(d.Id),
+                    Count = ArticleService.GetArticlesCountByColumnId(d.Id),
                     _parentId = d.As<ColumnPart>().ParentId == 0 ? null : d.As<ColumnPart>().ParentId.ToString()
                 })
 
@@ -467,18 +469,6 @@ namespace ArticleManage.Controllers
 
 
 
-
-
-
-
-
-
-
-        private int GetArticleCount(int columnId)
-        {
-            var temp = ArticleService.GetArticles(VersionOptions.Latest).Where<ArticlePartRecord>(d => d.ColumnPartRecordId == columnId);
-            return temp.Count();
-        }
 
 
 

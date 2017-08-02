@@ -236,7 +236,7 @@ namespace Tomelt.Modules.Controllers
                 .ToList();
             if (!string.IsNullOrWhiteSpace(name))
             {
-                features = features.Where(d => d.Descriptor.Name.Contains(name));
+                features = features.Where(d => d.Descriptor.Name.ToLower().Contains(name.ToLower()));
             }
             var rows = features.Select(d => new
             {

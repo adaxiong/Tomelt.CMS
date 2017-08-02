@@ -879,6 +879,7 @@
     <Content Include="Styles\EasyUI\icons\ok.png" />
     <Content Include="Styles\EasyUI\icons\page.png" />
     <Content Include="Styles\EasyUI\icons\html.png" />
+    <Content Include="Styles\EasyUI\icons\copy.png" />
     <Content Include="Styles\EasyUI\icons\pencil.png" />
     <Content Include="Styles\EasyUI\icons\print.png" />
     <Content Include="Styles\EasyUI\icons\redo.png" />

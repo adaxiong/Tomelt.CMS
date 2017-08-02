@@ -14,6 +14,34 @@ $.fn.serializeObject = function () {
     });
     return o;
 };
+$.extend($.fn.textbox.methods, {
+    addClearBtn: function (jq, iconCls) {
+        return jq.each(function () {
+            var t = $(this);
+            var opts = t.textbox('options');
+            opts.icons = opts.icons || [];
+            opts.icons.unshift({
+                iconCls: iconCls,
+                handler: function (e) {
+                    $(e.data.target).textbox('clear').textbox('textbox').focus();
+                    $(this).css('visibility', 'hidden');
+                }
+            });
+            t.textbox();
+            if (!t.textbox('getText')) {
+                t.textbox('getIcon', 0).css('visibility', 'hidden');
+            }
+            t.textbox('textbox').bind('keyup', function () {
+                var icon = t.textbox('getIcon', 0);
+                if ($(this).val()) {
+                    icon.css('visibility', 'visible');
+                } else {
+                    icon.css('visibility', 'hidden');
+                }
+            });
+        });
+    }
+});
 $.extend($.fn.datagrid.methods, {
     autoMergeCells: function (jq, fields) {
         return jq.each(function () {
@@ -141,7 +169,24 @@ function deleteData(url,isTree) {
         return;
     }
 }
-
+//复制
+function copyData(url, isTree) {
+    var rows = $('#dataGrid').datagrid('getSelections');//获取所选择的行
+    if (rows.length == 1) {
+        xAjax(url, "post", { id: rows[0].Id }, function (data) {
+            if (data.State == 1) {
+                $.messager.alert("消息", data.Msg, "info", function () {
+                    reloadData(isTree);
+                });
+            } else {
+                $.messager.alert("提示", data.Msg, "error");
+            }
+        });
+    } else {
+        $.messager.alert("提示", "请选择要一条要复制的数据", "warning");
+        return;
+    }
+}
 
 
 

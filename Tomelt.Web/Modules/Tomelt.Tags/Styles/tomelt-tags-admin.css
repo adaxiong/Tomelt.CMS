@@ -1,0 +1,11 @@
+﻿.tomelt-tags #main .manage form {
+    margin:0;   
+}
+.tomelt-tags .manage fieldset {
+    display:inline;
+    margin:0;
+    padding:0;
+}
+.tomelt-tags .manage label[for=TagName] {
+    display:none;
+}

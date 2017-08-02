@@ -1,0 +1,147 @@
+﻿
+@using UEditor.Settings
+@model UEditor.Fields.FilePickField
+
+@{
+    var settings = Model.PartFieldDefinition.Settings.GetModel<FilePickSettings>();
+    Script.Require("UEditorConfig");
+    Script.Require("UEditor");
+}
+<div class="col-xs-12">
+    <div class="form-group">
+
+        <input class="easyui-textbox" id="@Html.FieldIdFor(m => m.Path)"  name="@Html.FieldNameFor(m => m.Path)" value="@Model.Path" data-options="@if (!string.IsNullOrWhiteSpace(settings.Width)){<text>width:'@settings.Width',</text>}else
+                                                                                                            {
+                                                                                                                <text>width:'80%',</text>
+                                                                                                            }
+           @if (settings.Height>0)
+           {
+               <text>height:@settings.Height,</text>
+           }
+           @if (!string.IsNullOrWhiteSpace(settings.Prompt))
+           {
+               <text>prompt:'@settings.Prompt',</text>
+           }
+
+           @if (!string.IsNullOrWhiteSpace(settings.LabelPosition))
+           {
+               <text>labelPosition:'@settings.LabelPosition',</text>
+           }
+           @if (!string.IsNullOrWhiteSpace(settings.LabelAlign))
+           {
+               <text>labelAlign:'@settings.LabelAlign',</text>
+           }
+           @if (settings.Required)
+           {
+               <text> required:@settings.Required.ToString().ToLower(),</text>
+           }
+           label:'@Model.DisplayName',buttonText:'浏览',onClickButton:onClickButton,editable:false,icons:[
+                                        {
+                                        iconCls:'icon-clear',
+                                        handler: function(e){
+                                            $(e.data.target).textbox('clear');
+                                            }
+                                        },
+                                        {
+                                        iconCls:'icon-search',
+                                        handler: function(e){
+                                            var v = $(e.data.target).textbox('getValue');
+                                            if (v) {
+                                                preview(v);
+                                            }
+                                        }
+                                        
+                                    }]" />
+
+
+
+        @Html.ValidationMessageFor(m => m.Path)
+
+    </div>
+
+    <textarea id="path" class="hidden"></textarea>
+    
+</div>
+<div id="chooseFile"></div>
+@using (Script.Foot())
+{
+    <script type="text/javascript">
+        var editor = UE.getEditor('path', {
+            toolbars: [
+                []
+            ]
+        });
+        @*$(function() {
+            $("#@Html.FieldIdFor(m => m.Path)").textbox('addClearBtn', 'icon-clear');
+        });*@
+        function onClickButton() {
+            var dialog = createUeModal(editor);
+            UE.registerUI('insertimage', dialog);
+            //渲染dialog
+            dialog.render();
+            dialog.open();
+        }
+
+        function createUeModal(editor) {
+            //创建dialog
+            var dialog = new UE.ui.Dialog({
+                //指定弹出层中页面的路径，这里只能支持页面,因为跟addCustomizeDialog.js相同目录，所以无需加路径
+                iframeUrl: editor.options.UEDITOR_HOME_URL + "dialogs/image/image.html",
+                //需要指定当前的编辑器实例
+                editor: editor,
+                //指定dialog的名字
+                name: "insertimage",
+                //dialog的标题
+                title: "选择图片",
+                //指定dialog的外围样式
+                cssRules: "width:650px;height:400px;",
+                //如果给出了buttons就代表dialog有确定和取消
+                buttons: [
+                    {
+                        className: 'edui-okbutton',
+                        label: '确定',
+                        onclick: function () {
+                            editor.setContent("");
+                            dialog.close(true);
+                            if (editor.hasContents) {
+                                var content = $(editor.getContent());
+                                var imgs = content.find("img");
+                                if (imgs[0]) {
+                                    $("#@Html.FieldIdFor(m => m.Path)").textbox("setValue", $(imgs[0]).attr("src"));
+                                }
+                            }
+                        }
+                    },
+                    {
+                        className: 'edui-cancelbutton',
+                        label: '取消',
+                        onclick: function () {
+                            //option.cancel();
+                            dialog.close(false);
+                        }
+                    }
+                ]
+            }
+            );
+
+            return dialog;
+        }
+        //预览
+        function preview(path) {
+            parent.window.parent.window.$('#popupWin').window({    
+                width:800,    
+                height:600, 
+                title: "图片预览",
+                //noheader: true,
+                border: false,
+                minimizable: false,
+                collapsible:false,
+                plain: true,
+                draggable:false,
+                modal: true,
+                resizable:false,
+                content: "<img src='" + path + "' class='img-responsive'/>"
+            });  
+        }
+    </script>
+}

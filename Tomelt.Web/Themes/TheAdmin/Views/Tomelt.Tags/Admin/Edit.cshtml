@@ -1,0 +1,97 @@
+﻿@model Tomelt.Tags.ViewModels.TagsAdminEditViewModel
+@using Tomelt.ContentManagement;
+@using Tomelt.Utility.Extensions;
+@{ Layout.Title = T("编辑标签: {0}", Model.TagName).ToString(); }
+@using (Html.BeginFormAntiForgeryPost(Url.Action("EditAJAX", "Admin", new { id = Model.Id })))
+{
+    @Html.ValidationSummary()
+    <div class="mt05"></div>
+    <div class="col-xs-12">
+        <div class="form-group">
+            @Html.EasyUIFor(m => m.TagName, "easyui-textbox", new
+       {
+           label = T("标签名称"),
+           required = true,
+           width = "80%"
+       })
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.Id)
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button class="easyui-linkbutton c6" type="submit" data-options="iconCls:'icon-save'">@T("保存提交")</button>
+            <button class="easyui-linkbutton c5" type="button" data-options="iconCls:'icon-cancel'" onclick="window.parent.window.closeWin();">@T("关闭返回")</button>
+        </div>
+    </div>
+}
+<h4 class="text-center">@T("含有标签“{0}”的内容", Model.TagName)</h4>
+<hr />
+@if (ViewData["ContentItems"] == null)
+{
+    <p>@T("There is nothing tagged with {0}", Model.TagName)</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-condensed">
+            <colgroup>
+                <col id="Col1" />
+                <col id="Col2" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th scope="col">@T("内容类型")</th>
+                    <th scope="co2">@T("名称")</th>
+                </tr>
+            </thead>
+            @foreach (IContent content in (IEnumerable<IContent>)ViewData["ContentItems"])
+            {
+                <tr>
+                    <td>@content.ContentItem.ContentType.CamelFriendly()</td>
+                    <td>@Html.ItemEditLink(content.ContentItem)</td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+@using (Script.Foot())
+{
+
+    <script type="text/javascript">
+        $(function () {
+            $('form').form({
+                url: this.action,
+                onSubmit: function () {
+                    var isValid = $(this).form('validate');
+                    $.messager.progress();	// 显示进度条
+                    if (!isValid) {
+                        $.messager.progress('close');	// 如果表单是无效的则隐藏进度条
+                    }
+                    return isValid;	// 返回false终止表单提交
+                },
+                success: function (data) {
+                    var result = JSON.parse(data);
+                    if (result.State == 1) {
+                        //刷新表单
+                        window.parent.window.reloadData();
+                        if ($.messager) {
+                            $.messager.defaults.ok = "继续";
+                            $.messager.defaults.cancel = "返回";
+                            $.messager.confirm("操作提示", result.Msg, function (r) {
+                                if (!r) {
+                                    //关闭窗口
+                                    window.parent.window.closeWin();
+                                }
+                            });
+                        }
+                    } else {
+                        $.messager.alert('错误', result.Msg, 'error');
+                    }
+                    $.messager.progress('close');	// 如果提交成功则隐藏进度条
+                }
+            });
+        });
+
+    </script>
+}

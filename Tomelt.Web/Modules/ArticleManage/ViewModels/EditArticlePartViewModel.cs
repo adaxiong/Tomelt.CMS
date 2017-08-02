@@ -4,12 +4,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using ArticleManage.Models;
+using Tomelt.UI.Navigation;
 
 namespace ArticleManage.ViewModels
 {
-    public class EditArticlePartViewModel
+    public class EditArticlePartViewModel: DatagridPagerParameters
     {
-        [Display(Name = "副标题")]
+        [Display(Name = "标题")]
         public string Title { get; set; }
 
         [Display(Name = "副标题")]
@@ -24,7 +25,7 @@ namespace ArticleManage.ViewModels
         public int ColumnPartRecordId { get; set; }
         [Display(Name = "排序")]
         public int Sort { get; set; }
-        [Display(Name = "幻灯片")]
+        [Display(Name = "轮播")]
         public bool IsSlide { get; set; }
         [Display(Name = "置顶")]
         public bool IsTop { get; set; }

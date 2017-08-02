@@ -1,0 +1,22 @@
+﻿Name: Tags
+AntiForgery: enabled
+Author: The Tomelt Team
+Website: http://www.tomelt.com
+Version: 1.10.2
+TomeltVersion: 1.9
+Features:
+    Tomelt.Tags:
+        Name: Tags
+        Description: The tags module is providing basic tagging for arbitrary content types. 
+        Dependencies: Settings, Tomelt.Resources
+        Category: Navigation
+    Tomelt.Tags.Feeds:
+        Name: Tags Feeds
+        Description: Adds tags to the RSS feeds. 
+        Dependencies: Tomelt.Tags, Feeds
+        Category: Syndication
+    Tomelt.Tags.TagCloud:
+        Name: Tag Cloud
+        Description: Adds a tag cloud widget. 
+        Dependencies: Tomelt.Tags, Tomelt.Autoroute
+        Category: Navigation

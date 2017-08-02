@@ -18,7 +18,7 @@ namespace ArticleManage.Models {
         public virtual int ColumnPartRecordId { get; set; }
         [Display(Name = "排序")]
         public virtual int Sort { get; set; }
-        [Display(Name = "幻灯片")]
+        [Display(Name = "轮播")]
         public virtual bool IsSlide { get; set; }
         [Display(Name = "置顶")]
         public virtual bool IsTop { get; set; }
@@ -34,5 +34,33 @@ namespace ArticleManage.Models {
         public virtual string Author { get; set; }
         [Display(Name = "人气值")]
         public virtual int ClickNum { get; set; }
+
+
+        //public static ColumnPartRecord DeserializeColumnPartRecord(string rawStateRecord)
+        //{
+        //    if (rawStateRecord == null)
+        //    {
+        //        return new ColumnPartRecord();
+        //    }
+
+        //    var stateRecordArray = rawStateRecord.Split(new[] { ',' });
+
+        //    return new ColumnPartRecord()
+        //    {
+        //        Id = string.IsNullOrEmpty(stateRecordArray[0]) ? 0 : int.Parse(stateRecordArray[0]),
+        //        Code = stateRecordArray[1],
+        //        Name = stateRecordArray[2]
+        //    };
+        //}
+
+        //public static string SerializeColumnPartRecord(ColumnPartRecord stateRecord)
+        //{
+        //    if (stateRecord == null)
+        //    {
+        //        return "";
+        //    }
+
+        //    return string.Join(",", stateRecord.Id, stateRecord.Code, stateRecord.Name);
+        //}
     }
 }

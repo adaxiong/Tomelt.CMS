@@ -35,7 +35,7 @@ namespace ArticleManage.Models {
             get { return Record.Sort; }
             set { Record.Sort = value; }
         }
-        [Display(Name = "幻灯片")]
+        [Display(Name = "轮播")]
         public bool IsSlide
         {
             get { return Record.IsSlide; }

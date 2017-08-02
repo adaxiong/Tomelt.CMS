@@ -46,7 +46,7 @@ namespace ArticleManage {
             );
 
             ContentDefinitionManager.AlterPartDefinition("ArticlePart", part => part
-                .WithDescription("文章内容元件"));
+                .WithDescription("文章内容元件").Attachable());
             ContentDefinitionManager.AlterPartDefinition("ColumnPart", part => part
                 .WithDescription("文章栏目元件"));
 
@@ -59,6 +59,15 @@ namespace ArticleManage {
                 .WithPart("BodyPart").WithPart("TitlePart").WithPart("ColumnPart").DisplayedAs("文章栏目").Creatable().Draftable()
             );
             return 1;
+        }
+        public int UpdateFrom1()
+        {
+            ContentDefinitionManager.AlterPartDefinition("ArticlePart", part => part
+                .WithDescription("文章内容元件").Attachable());
+            ContentDefinitionManager.AlterPartDefinition("ColumnPart", part => part
+                .WithDescription("文章栏目元件").Attachable());
+
+            return 2;
         }
     }
 }

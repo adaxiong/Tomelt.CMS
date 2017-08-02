@@ -1,0 +1,8 @@
+﻿<Placement>
+  <!-- TextBox -->
+  <Place Fields_FilePick_Edit="Content:2.4"/>
+  <Place Fields_FilePick="Content:after"/>
+
+
+
+</Placement>

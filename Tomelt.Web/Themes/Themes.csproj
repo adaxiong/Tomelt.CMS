@@ -125,6 +125,10 @@
       <Project>{b7f316f5-b73d-4b82-89c6-5cd70bcc32a6}</Project>
       <Name>Tomelt.Layouts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\Tomelt.Tags\Tomelt.Tags.csproj">
+      <Project>{F8B2B455-AB64-41E6-AFB8-34D07CAC6AAD}</Project>
+      <Name>Tomelt.Tags</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="SafeMode\Content\Web.config" />
@@ -338,7 +342,13 @@
     <Content Include="TheAdmin\Views\EditorTemplates\Parts.Common.Container.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TheAdmin\Views\DefinitionTemplates\BodyTabEditorSettings.cshtml" />
+    <Content Include="TheAdmin\Views\Tomelt.Tags\Admin\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\Tomelt.Tags\Admin\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TheAdmin\Views\EditorTemplates\Parts\Tags.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

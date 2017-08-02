@@ -12,6 +12,7 @@ using Tomelt.ContentManagement.MetaData.Models;
 using Tomelt.ContentManagement.Records;
 using Tomelt.Core.Common.Models;
 using Tomelt.Core.Contents.Settings;
+using Tomelt.Core.Title.Models;
 using Tomelt.Data;
 using Tomelt.Settings;
 using Tomelt.UI.Navigation;
@@ -22,18 +23,21 @@ namespace ArticleManage.Services
     {
         private const string ContentTypeName = "Article";
         public IRepository<ColumnPartRecord> ColumnRepository { get; set; }
+        public IRepository<ArticlePartRecord> ArticleRepository { get; set; }
         public ITomeltServices TomeltServices { get; set; }
         public IContentDefinitionManager ContentDefinitionManager { get; set; }
         public ISiteService SiteService { get; set; }
         public ArticleService(ITomeltServices tomeltServices,
             IRepository<ColumnPartRecord> columnRepository, 
             IContentDefinitionManager contentDefinitionManager,
-            ISiteService siteService)
+            ISiteService siteService,
+            IRepository<ArticlePartRecord> articleRepository)
         {
             TomeltServices = tomeltServices;
             ColumnRepository = columnRepository;
             ContentDefinitionManager = contentDefinitionManager;
             SiteService = siteService;
+            ArticleRepository = articleRepository;
         }
         public IContentQuery<ContentItem> GetArticles(VersionOptions versionOptions)
         {
@@ -50,13 +54,14 @@ namespace ArticleManage.Services
                 articlePart.Summary = string.IsNullOrWhiteSpace(articlePart.Summary) ? Utity.DropHtml(bodyPart.Text, 255) : articlePart.Summary;
             }
             articlePart.ColumnPartRecord = ColumnRepository.Get(d => d.Id == articlePart.ColumnPartRecordId);
+            ArticleRepository.Flush();
         }
 
-        public IEnumerable<ContentItem> GetArticlesPro(DatagridPagerParameters pagerParameters)
+        public IEnumerable<ContentItem> GetArticlesPro(EditArticlePartViewModel search)
         {
             //内容状态
             VersionOptions versionOptions;
-            switch (pagerParameters.contentStatus)
+            switch (search.contentStatus)
             {
                 case "Published":
                     versionOptions = VersionOptions.Published;
@@ -73,8 +78,20 @@ namespace ArticleManage.Services
             }
             var query = TomeltServices.ContentManager.Query(versionOptions, GetCreatableTypes(false).Select(ctd => ctd.Name).ToArray());
             query = query.ForType(ContentTypeName);
+            if (search.ColumnPartRecordId>0)
+            {
+                var columnIds = ColumnRepository.Fetch(d => d.TreePath.Contains("," + search.ColumnPartRecordId + ","))
+                    .Select(d => d.Id).ToList();
+                query = query.Where<ArticlePartRecord>(d=>columnIds.Contains(d.ColumnPartRecordId));
+            }
+            if (!string.IsNullOrWhiteSpace(search.Title))
+            {
+                query = query.Where<TitlePartRecord>(d => d.Title.Contains(search.Title));
+            }
+
+
             //升降序
-            switch (pagerParameters.order)
+            switch (search.order)
             {
                 case "asc":
                     query = query.OrderBy<CommonPartRecord>(cr => cr.CreatedUtc);
@@ -84,17 +101,17 @@ namespace ArticleManage.Services
                     break;
             }
             //查看自己的数据
-            if (pagerParameters.contentStatus == "Owner")
+            if (search.contentStatus == "Owner")
             {
                 query = query.Where<CommonPartRecord>(cr => cr.OwnerId == TomeltServices.WorkContext.CurrentUser.Id);
             }
-            pagerParameters.total = query.Count();
+            search.total = query.Count();
             //分页
-            int pageSize = pagerParameters.rows ?? 10;
+            int pageSize = search.rows ?? 10;
             var maxPagedCount = SiteService.GetSiteSettings().MaxPagedCount;
             if (maxPagedCount > 0 && pageSize > maxPagedCount)
                 pageSize = maxPagedCount;
-            int page = pagerParameters.page ?? 1;
+            int page = search.page ?? 1;
             return query.Slice((page - 1) * pageSize, pageSize).ToList();
         }
         private IEnumerable<ContentTypeDefinition> GetCreatableTypes(bool andContainable)
@@ -104,6 +121,14 @@ namespace ArticleManage.Services
                 ctd.Name == ContentTypeName &&
                 ctd.Settings.GetModel<ContentTypeSettings>().Creatable &&
                 (!andContainable || ctd.Parts.Any(p => p.PartDefinition.Name == "ContainablePart")));
+        }
+
+        public int GetArticlesCountByColumnId(int columnId)
+        {
+            if (columnId <= 0) return columnId;
+            var columnIds = ColumnRepository.Fetch(d => d.TreePath.Contains("," + columnId + ","))
+                .Select(d => d.Id).ToList();
+            return TomeltServices.ContentManager.Query(VersionOptions.Latest).Where<ArticlePartRecord>(d => columnIds.Contains(d.ColumnPartRecordId)).Count();
         }
     }
 }

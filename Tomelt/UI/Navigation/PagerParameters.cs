@@ -28,10 +28,10 @@
         /// 升降序
         /// </summary>
         public string order { get; set; }
-        /// <summary>
-        /// 排序字段
-        /// </summary>
-        public string sort { get; set; }
+        ///// <summary>
+        ///// 排序字段
+        ///// </summary>
+        //public string sort { get; set; }
         /// <summary>
         /// 内容状态
         /// </summary>

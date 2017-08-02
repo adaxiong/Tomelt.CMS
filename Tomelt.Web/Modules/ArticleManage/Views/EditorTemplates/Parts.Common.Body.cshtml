@@ -1,9 +1,0 @@
-﻿@model BodyEditorViewModel
-@using Tomelt.Core.Common.ViewModels;
-<div class="col-xs-12">
-    <div class="form-group">
-        <label>@T("自定义主题内容")</label>
-        @Display.Body_Editor(Text: Model.Text, EditorFlavor: Model.EditorFlavor, Required: false, AutoFocus: false, ContentItem: Model.BodyPart.ContentItem)
-        @Html.ValidationMessageFor(m => m.Text)
-    </div>
-</div>

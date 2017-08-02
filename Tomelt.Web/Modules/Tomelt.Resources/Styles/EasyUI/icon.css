@@ -104,7 +104,9 @@
 .icon-collapse {
     background: url('icons/collapse-all.gif') no-repeat center center;
 }
-
+.icon-copy {
+    background: url('icons/copy.png') no-repeat center center;
+}
 
 
 

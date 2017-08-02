@@ -19,6 +19,7 @@ namespace ArticleManage.Services
 
         IContentQuery<ContentItem> GetArticles(VersionOptions versionOptions);
 
-        IEnumerable<ContentItem> GetArticlesPro(DatagridPagerParameters pagerParameters);
+        IEnumerable<ContentItem> GetArticlesPro(EditArticlePartViewModel search);
+        int GetArticlesCountByColumnId(int columnId);
     }
 }
