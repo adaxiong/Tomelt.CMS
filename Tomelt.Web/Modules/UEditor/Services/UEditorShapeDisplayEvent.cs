@@ -7,7 +7,7 @@ using Tomelt.DisplayManagement.Implementation;
 using Tomelt.FileSystems.VirtualPath;
 
 namespace UEditor.Services {
-    public class TinyMceShapeDisplayEvent : ShapeDisplayEvents {
+    public class UEditorShapeDisplayEvent : ShapeDisplayEvents {
 
         public override void Displaying(ShapeDisplayingContext context) {
             if (String.CompareOrdinal(context.ShapeMetadata.Type, "Body_Editor") != 0) {

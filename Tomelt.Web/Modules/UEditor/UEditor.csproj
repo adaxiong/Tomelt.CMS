@@ -90,6 +90,10 @@
     <Compile Include="Controllers\UEditorController.cs" />
     <Compile Include="Drivers\FilePickFieldDriver.cs" />
     <Compile Include="Fields\FilePickField.cs" />
+    <Compile Include="Migrations.cs" />
+    <Compile Include="Models\AlbumPart.cs" />
+    <Compile Include="Models\AlbumPartRecord.cs" />
+    <Compile Include="Models\ContentAlbumRecord.cs" />
     <Compile Include="Models\Crawler.cs" />
     <Compile Include="Models\PathFormatter.cs" />
     <Compile Include="Models\UEditorConfig.cs" />
@@ -97,12 +101,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
+    <Compile Include="Services\IAlbumService.cs" />
     <Compile Include="Services\UEditorShapeDisplayEvent.cs" />
     <Compile Include="Settings\FilePickSettings.cs" />
     <Compile Include="Settings\FilePickSettingsEvents.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets.json" />
     <Content Include="Scripts\dialogs\anchor\anchor.html" />
     <Content Include="Scripts\dialogs\attachment\attachment.css" />
     <Content Include="Scripts\dialogs\attachment\attachment.html" />

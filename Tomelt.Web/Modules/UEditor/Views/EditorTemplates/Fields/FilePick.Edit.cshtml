@@ -59,14 +59,14 @@
 
     </div>
 
-    <textarea id="path" class="hidden"></textarea>
+    <textarea id="filepick_path" class="hidden"></textarea>
     
 </div>
 <div id="chooseFile"></div>
 @using (Script.Foot())
 {
     <script type="text/javascript">
-        var editor = UE.getEditor('path', {
+        var filepick_editor = UE.getEditor('filepick_path', {
             toolbars: [
                 []
             ]
@@ -75,7 +75,7 @@
             $("#@Html.FieldIdFor(m => m.Path)").textbox('addClearBtn', 'icon-clear');
         });*@
         function onClickButton() {
-            var dialog = createUeModal(editor);
+            var dialog = createUeModal(filepick_editor);
             UE.registerUI('insertimage', dialog);
             //渲染dialog
             dialog.render();
