@@ -311,7 +311,23 @@ function openWin(url, title, width, height) {
 function closeWin() {
     $("#popupWin").dialog('close');
 }
-
+//预览
+function preview(path) {
+    parent.window.parent.window.$('#popupWin').window({
+        width: 800,
+        height: 600,
+        title: "图片预览",
+        //noheader: true,
+        border: false,
+        minimizable: false,
+        collapsible: false,
+        plain: true,
+        draggable: false,
+        modal: true,
+        resizable: false,
+        content: "<img src='" + path + "' class='img-responsive'/>"
+    });
+}
 //全选反选(树控件)
 //参数:selected:传入this,表示当前点击的组件
 //treeMenu:要操作的tree的id；如：id="userTree"

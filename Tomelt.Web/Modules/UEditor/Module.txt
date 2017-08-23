@@ -4,6 +4,19 @@ Author: AdaXiong
 Website: http://www.tomelt.com
 Version: 1.0
 TomeltVersion: 1.0
-Description: 百度编辑器
-Category: Input Editor
-Dependencies: Tomelt.Resources
+Features:
+    UEditor:
+        Name: UEditor
+        Description: 百度富文编辑器. 
+        Dependencies: Tomelt.Resources
+        Category: Input Editor
+    UEditor.ImagePickField:
+        Name: ImagePickField
+        Description: 图片选择字段. 
+        Dependencies: UEditor
+        Category: Fields
+    UEditor.Album:
+        Name: AlbumPhoto
+        Description: 内容相册. 
+        Dependencies: UEditor
+        Category: Media

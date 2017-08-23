@@ -90,10 +90,12 @@
     <Compile Include="Controllers\UEditorController.cs" />
     <Compile Include="Drivers\FilePickFieldDriver.cs" />
     <Compile Include="Fields\FilePickField.cs" />
+    <Compile Include="Drivers\AlbumDrivers.cs" />
+    <Compile Include="Handlers\AlbumHandler.cs" />
     <Compile Include="Migrations.cs" />
     <Compile Include="Models\AlbumPart.cs" />
     <Compile Include="Models\AlbumPartRecord.cs" />
-    <Compile Include="Models\ContentAlbumRecord.cs" />
+    <Compile Include="Models\AlbumRecord.cs" />
     <Compile Include="Models\Crawler.cs" />
     <Compile Include="Models\PathFormatter.cs" />
     <Compile Include="Models\UEditorConfig.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="Services\UEditorShapeDisplayEvent.cs" />
     <Compile Include="Settings\FilePickSettings.cs" />
     <Compile Include="Settings\FilePickSettingsEvents.cs" />
+    <Compile Include="ViewModels\EditAlbumViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\dialogs\anchor\anchor.html" />
@@ -422,6 +425,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Placement.info" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EditorTemplates\Parts\Album.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

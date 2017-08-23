@@ -8,11 +8,6 @@ namespace UEditor.Models
 {
     public class AlbumPartRecord:ContentPartRecord
     {
-        public AlbumPartRecord()
-        {
-            ContentAlbumRecords = new List<ContentAlbumRecord>();
-        }
-
-        public virtual IList<ContentAlbumRecord> ContentAlbumRecords { get; set; }
+        
     }
 }

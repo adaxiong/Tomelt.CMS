@@ -62,7 +62,6 @@
     <textarea id="filepick_path" class="hidden"></textarea>
     
 </div>
-<div id="chooseFile"></div>
 @using (Script.Foot())
 {
     <script type="text/javascript">
@@ -126,22 +125,6 @@
 
             return dialog;
         }
-        //预览
-        function preview(path) {
-            parent.window.parent.window.$('#popupWin').window({    
-                width:800,    
-                height:600, 
-                title: "图片预览",
-                //noheader: true,
-                border: false,
-                minimizable: false,
-                collapsible:false,
-                plain: true,
-                draggable:false,
-                modal: true,
-                resizable:false,
-                content: "<img src='" + path + "' class='img-responsive'/>"
-            });  
-        }
+
     </script>
 }
